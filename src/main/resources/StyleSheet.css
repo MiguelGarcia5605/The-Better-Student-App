@@ -1,0 +1,214 @@
+.view-pane {
+    -fx-padding: 20;
+}
+
+.left-container {
+    -fx-alignment: top-left;
+    -fx-spacing: 10;
+}
+
+.task-panel {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+    -fx-alignment: top-left;
+}
+
+.task {
+    -fx-padding: 1em 0em 1em 0em;
+}
+
+.task > .box {
+    -fx-padding: 0.5em;
+}
+
+.task > .box > .mark {
+    -fx-padding: 0.5em;
+}
+
+.task-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: -color-fg-default;
+    -fx-prompt-text-fill: -color-fg-subtle;
+    -fx-padding: 1em 0em 1em 0em;
+}
+
+.add-task-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 1.4em;
+    -fx-cursor: hand;
+    -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.display-panel {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+    -fx-alignment: center;
+}
+
+.display-panel-label {
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.quote-label {
+    -fx-font-size: 3em;
+    -fx-font-family: "Georgia";
+    -fx-font-style: italic;
+    -fx-text-fill: -color-fg-default;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-max-width: infinity;
+}
+
+.card-list-panel {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+    -fx-alignment: top-left;
+    -fx-max-width: infinity;
+}
+
+.course-card {
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-accent-emphasis;
+    -fx-border-width: 0 0 0 4;
+    -fx-padding: 0.8em;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.course-card-name {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+
+.course-card-detail {
+    -fx-font-size: 0.9em;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.nav-bar {
+    -fx-background-color: -color-bg-default;
+    -fx-padding: 0.8em 1em 0.8em 1em;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+    -fx-spacing: 10;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+    -fx-padding: 0.4em 1em 0.4em 1em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.nav-button:hover {
+    -fx-background-color: -color-bg-subtle;
+    -fx-text-fill: -color-fg-default;
+}
+
+.setup-label {
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-padding: 0.5em 0 0.5em 0.5em;
+}
+
+.setup-form-row {
+    -fx-padding: 0.8em;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-background-color: -color-bg-subtle;
+}
+
+.setup-field {
+    -fx-pref-width: 160;
+}
+
+.setup-button-row {
+    -fx-padding: 1em;
+    -fx-alignment: center-left;
+}
+
+.setup-error-label {
+    -fx-text-fill: -color-danger-fg;
+    -fx-font-size: 0.9em;
+}
+
+.save-button {
+    -fx-background-color: -color-accent-emphasis;
+    -fx-text-fill: white;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+    -fx-padding: 0.4em 1.2em 0.4em 1.2em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-danger-fg;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+    -fx-padding: 0.4em 0.6em 0.4em 0.6em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.delete-button:hover {
+    -fx-background-color: -color-danger-subtle;
+}
+
+.daily-tasks-label {
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-border-color: transparent transparent -color-accent-emphasis transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0 0 0.5em 0;
+    -fx-max-width: infinity;
+    -fx-alignment: center;
+}
+
+.setup-list {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.style-mode-button {
+    -fx-background-color: -color-bg-subtle;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+    -fx-padding: 0.4em 1.2em 0.4em 1.2em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+}
+
+.style-mode-button:hover {
+    -fx-background-color: -color-bg-default;
+    -fx-text-fill: -color-fg-default;
+}
