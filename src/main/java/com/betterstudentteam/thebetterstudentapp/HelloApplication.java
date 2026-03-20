@@ -69,8 +69,4 @@ public class HelloApplication extends Application {
         stage2.setX(600);
         stage2.show();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
 }
