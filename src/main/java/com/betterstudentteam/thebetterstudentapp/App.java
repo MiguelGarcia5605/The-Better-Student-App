@@ -2,34 +2,35 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class App extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
+    private static final int SCREEN_WIDTH = 600;
+    private static final int SCREEN_HEIGHT = 400;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view.fxml"));
+        fxmlLoader.setController(new ViewController());
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
         primaryStage.setTitle("The Better Student App");
-        Group root = new Group();
-        Scene scene = new Scene(root);
-
-        scene.setFill(Color.BLACK);
+        Scene scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
 
         primaryStage.setScene(scene);
-        primaryStage.setWidth(bounds.getMaxX());
-        primaryStage.setHeight(bounds.getMaxY());
         primaryStage.show();
     }
 }
