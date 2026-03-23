@@ -2,5 +2,5 @@ package com.betterstudentteam.thebetterstudentapp;
 
 public class Quote {
 
-    "This is a test Jack Wrote"
+    private String q1= "This is a test Jack Wrote";
 }
