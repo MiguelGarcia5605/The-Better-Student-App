@@ -28,9 +28,13 @@ public class App extends Application {
         Rectangle2D bounds = screen.getVisualBounds();
 
         primaryStage.setTitle("The Better Student App");
-        Scene scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
+        Scene scene = new Scene(fxmlLoader.load(), bounds.getWidth(), bounds.getHeight());
 
         primaryStage.setScene(scene);
+        primaryStage.setX(bounds.getMinX());
+        primaryStage.setY(bounds.getMinY());
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
         primaryStage.show();
     }
 }
