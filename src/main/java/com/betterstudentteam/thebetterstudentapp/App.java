@@ -20,15 +20,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view.fxml"));
-        fxmlLoader.setController(new ViewController());
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
         primaryStage.setTitle("The Better Student App");
-        Scene scene = new Scene(fxmlLoader.load(), bounds.getWidth(), bounds.getHeight());
+        Scene scene = new Scene(new Group());
 
         primaryStage.setScene(scene);
         primaryStage.setX(bounds.getMinX());
