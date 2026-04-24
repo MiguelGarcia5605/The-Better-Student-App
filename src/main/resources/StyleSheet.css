@@ -31,3 +31,21 @@
     -fx-prompt-text-fill: -color-fg-subtle;
     -fx-padding: 1em 0em 1em 0em;
 }
+
+.quote-container {
+    -fx-alignment: center;
+    -fx-padding: 1em;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+}
+
+.quote-label {
+    -fx-font-size: 2em;
+    -fx-font-family: "Georgia";
+    -fx-font-style: italic;
+    -fx-text-fill: -color-fg-default;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
