@@ -4,6 +4,7 @@ import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -20,7 +21,9 @@ public class App extends Application {
 
     private ArrayList<CheckBox> mUserTasks = new ArrayList<>();
     private VBox mDailyTaskBox;
+    private VBox mLeftContainer;
     private VBox mQuoteContainer;
+    private VBox mCourseViewContainer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -39,18 +42,30 @@ public class App extends Application {
             mDailyTaskBox.getChildren().add(task);
         }
 
-
         Label textArea = new Label();
         textArea.setWrapText(true);
         textArea.setText("Be more than motivated, be more than driven, become literally obsessed to the point where people think you're fucking nuts.");
         textArea.setMaxWidth(Double.MAX_VALUE);
 
+        mCourseViewContainer = new VBox();
+        mCourseViewContainer.setAlignment(Pos.BOTTOM_LEFT);
+        mCourseViewContainer.setPrefHeight(bounds.getHeight() * (3.0 / 4.0));
+        mCourseViewContainer.setMaxHeight(bounds.getHeight() * (3.0 / 4.0));
+        mCourseViewContainer.getStyleClass().add("course-view-container");
+
         textArea.getStyleClass().add("quote-label");
         mQuoteContainer = new VBox(textArea);
         mQuoteContainer.setAlignment(Pos.TOP_CENTER);
-        mQuoteContainer.setMaxHeight(bounds.getHeight() / 8);
+        mQuoteContainer.setPrefHeight(bounds.getHeight() / 5);
+        mQuoteContainer.setMaxHeight(bounds.getHeight() / 5);
         mQuoteContainer.getStyleClass().add("quote-container");
         mQuoteContainer.setMaxWidth(bounds.getWidth() * (2.0 / 3.0));
+
+        mLeftContainer = new VBox();
+        mLeftContainer.getChildren().add(mQuoteContainer);
+        mLeftContainer.getChildren().add(mCourseViewContainer);
+        mLeftContainer.setAlignment(Pos.TOP_LEFT);
+        mLeftContainer.setSpacing(10);
 
         TextField textInput = new TextField();
         textInput.setPromptText("Add task...");
@@ -75,10 +90,26 @@ public class App extends Application {
         HBox addTaskRow = new HBox(addTaskButton, textInput);
         mDailyTaskBox.getChildren().add(addTaskRow);
 
+        // course card example
+        Label courseLabel = new Label("ENG 110");
+        Label assignmentLabel = new Label("Next: Research paper due Friday, May 1st");
+        Label gradeLabel = new Label("A - 99.76%");
+
+        courseLabel.getStyleClass().add("course-card-name");
+        assignmentLabel.getStyleClass().add("course-card-assignment");
+        gradeLabel.getStyleClass().add("course-card-assignment");
+
+        VBox courseCard = new VBox(courseLabel, assignmentLabel, gradeLabel);
+        courseCard.getStyleClass().add("course-card");
+
+        mCourseViewContainer.getChildren().add(courseCard);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(mDailyTaskBox);
-        borderPane.setLeft(mQuoteContainer);
-        mDailyTaskBox.setMinWidth(bounds.getWidth()/3);
+        borderPane.setLeft(mLeftContainer);
+        borderPane.setPadding(new Insets(20));
+        BorderPane.setMargin(mDailyTaskBox, new Insets(0, 40, 0, 10));
+        mDailyTaskBox.setMinWidth((bounds.getWidth() / 3) - 40);
         Scene scene = new Scene(borderPane);
 
         scene.getStylesheets().add("StyleSheet.css");
