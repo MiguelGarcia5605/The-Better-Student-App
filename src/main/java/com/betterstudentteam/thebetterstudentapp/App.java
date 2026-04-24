@@ -90,6 +90,20 @@ public class App extends Application {
         HBox addTaskRow = new HBox(addTaskButton, textInput);
         mDailyTaskBox.getChildren().add(addTaskRow);
 
+        // course card example
+        Label courseLabel = new Label("ENG 110");
+        Label assignmentLabel = new Label("Next: Research paper due Friday, May 1st");
+        Label gradeLabel = new Label("A - 99.76%");
+
+        courseLabel.getStyleClass().add("course-card-name");
+        assignmentLabel.getStyleClass().add("course-card-assignment");
+        gradeLabel.getStyleClass().add("course-card-assignment");
+
+        VBox courseCard = new VBox(courseLabel, assignmentLabel, gradeLabel);
+        courseCard.getStyleClass().add("course-card");
+
+        mCourseViewContainer.getChildren().add(courseCard);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(mDailyTaskBox);
         borderPane.setLeft(mLeftContainer);

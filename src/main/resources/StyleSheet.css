@@ -58,3 +58,23 @@
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
 }
+
+.course-card {
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-accent-emphasis;
+    -fx-border-width: 0 0 0 4;
+    -fx-padding: 0.8em;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+.course-card-name {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+
+.course-card-assignment {
+    -fx-font-size: 0.9em;
+    -fx-text-fill: -color-fg-muted;
+}
