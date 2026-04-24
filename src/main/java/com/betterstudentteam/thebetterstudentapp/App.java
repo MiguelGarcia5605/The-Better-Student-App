@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class App extends Application {
 
-    private ArrayList<CheckBox> mUserTasks = new ArrayList<>();
-    private VBox mDailyTaskBox;
-    private VBox mLeftContainer;
+    private ArrayList<CheckBox> mUserTaskList = new ArrayList<>();
+    private VBox mDailyTasksContainer;
+    private VBox mDailyQuoteAndCourseViewContainer;
     private VBox mQuoteContainer;
     private VBox mCourseViewContainer;
 
@@ -35,12 +35,8 @@ public class App extends Application {
         primaryStage.setTitle("The Better Student App");
 
         Label dailyToDoHeader = new Label("Daily To-Do");
-        mDailyTaskBox = new VBox(dailyToDoHeader);
-        mDailyTaskBox.getStyleClass().add("vbox");
-
-        for (CheckBox task: mUserTasks) {
-            mDailyTaskBox.getChildren().add(task);
-        }
+        mDailyTasksContainer = new VBox(dailyToDoHeader);
+        mDailyTasksContainer.getStyleClass().add("vbox");
 
         Label textArea = new Label();
         textArea.setWrapText(true);
@@ -61,11 +57,11 @@ public class App extends Application {
         mQuoteContainer.getStyleClass().add("quote-container");
         mQuoteContainer.setMaxWidth(bounds.getWidth() * (2.0 / 3.0));
 
-        mLeftContainer = new VBox();
-        mLeftContainer.getChildren().add(mQuoteContainer);
-        mLeftContainer.getChildren().add(mCourseViewContainer);
-        mLeftContainer.setAlignment(Pos.TOP_LEFT);
-        mLeftContainer.setSpacing(10);
+        mDailyQuoteAndCourseViewContainer = new VBox();
+        mDailyQuoteAndCourseViewContainer.getChildren().add(mQuoteContainer);
+        mDailyQuoteAndCourseViewContainer.getChildren().add(mCourseViewContainer);
+        mDailyQuoteAndCourseViewContainer.setAlignment(Pos.TOP_LEFT);
+        mDailyQuoteAndCourseViewContainer.setSpacing(10);
 
         TextField textInput = new TextField();
         textInput.setPromptText("Add task...");
@@ -73,14 +69,14 @@ public class App extends Application {
 
         Button addTaskButton = new Button("+");
         addTaskButton.getStyleClass().add("add-task-button");
-        mDailyTaskBox.getChildren().add(addTaskButton);
+        mDailyTasksContainer.getChildren().add(addTaskButton);
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
                 CheckBox task = createDailyTask(textInput.getText());
-                mUserTasks.add(task);
-                mDailyTaskBox.getChildren().add(mDailyTaskBox.getChildren().size() - 1, task);
+                mUserTaskList.add(task);
+                mDailyTasksContainer.getChildren().add(mDailyTasksContainer.getChildren().size() - 1, task);
                 textInput.setText("");
             }
         };
@@ -88,7 +84,7 @@ public class App extends Application {
         addTaskButton.setOnAction(event);
 
         HBox addTaskRow = new HBox(addTaskButton, textInput);
-        mDailyTaskBox.getChildren().add(addTaskRow);
+        mDailyTasksContainer.getChildren().add(addTaskRow);
 
         // course card example
         Label courseLabel = new Label("ENG 110");
@@ -105,11 +101,11 @@ public class App extends Application {
         mCourseViewContainer.getChildren().add(courseCard);
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setRight(mDailyTaskBox);
-        borderPane.setLeft(mLeftContainer);
+        borderPane.setRight(mDailyTasksContainer);
+        borderPane.setLeft(mDailyQuoteAndCourseViewContainer);
         borderPane.setPadding(new Insets(20));
-        BorderPane.setMargin(mDailyTaskBox, new Insets(0, 40, 0, 10));
-        mDailyTaskBox.setMinWidth((bounds.getWidth() / 3) - 40);
+        BorderPane.setMargin(mDailyTasksContainer, new Insets(0, 40, 0, 10));
+        mDailyTasksContainer.setMinWidth((bounds.getWidth() / 3) - 40);
         Scene scene = new Scene(borderPane);
 
         scene.getStylesheets().add("StyleSheet.css");
@@ -124,7 +120,7 @@ public class App extends Application {
 
     private CheckBox createDailyTask(String taskName) {
         CheckBox task = new CheckBox(taskName);
-        //task.getStyleClass().add("task");
+        task.getStyleClass().add("task");
         return task;
     }
 }
