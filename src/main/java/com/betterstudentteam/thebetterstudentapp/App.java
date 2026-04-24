@@ -4,12 +4,10 @@ import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +21,7 @@ public class App extends Application {
 
     private ArrayList<CheckBox> mUserTasks = new ArrayList<>();
     private VBox mDailyTaskBox;
+    private VBox mQuoteContainer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -40,6 +39,17 @@ public class App extends Application {
         for (CheckBox task: mUserTasks) {
             mDailyTaskBox.getChildren().add(task);
         }
+
+
+        Label textArea = new Label();
+        textArea.setWrapText(true);
+        textArea.setText("Be more than motivated, be more than driven, become literally obsessed to the point where people think you're fucking nuts.");
+
+        textArea.getStyleClass().add("quote-label");
+        mQuoteContainer = new VBox(textArea);
+        mQuoteContainer.setAlignment(Pos.TOP_CENTER);
+        mQuoteContainer.setMaxHeight(bounds.getHeight() / 3);
+        mQuoteContainer.getStyleClass().add("quote-container");
 
         TextField textInput = new TextField();
         textInput.setPromptText("Add task...");
@@ -66,6 +76,7 @@ public class App extends Application {
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(mDailyTaskBox);
+        borderPane.setLeft(mQuoteContainer);
         mDailyTaskBox.setMinWidth(bounds.getWidth()/3);
         Scene scene = new Scene(borderPane);
 
