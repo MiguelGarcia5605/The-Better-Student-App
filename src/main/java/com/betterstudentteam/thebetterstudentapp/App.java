@@ -28,7 +28,7 @@ public class App extends Application {
 
         primaryStage.setTitle(APP_NAME);
 
-        Scene scene = new Scene(new HomePageView());
+        Scene scene = new Scene(new TaskView());
         scene.getStylesheets().add("StyleSheet.css");
 
         primaryStage.setScene(scene);
