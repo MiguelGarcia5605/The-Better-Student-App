@@ -4,7 +4,6 @@
 .task > .box > .mark {
     -fx-padding: 0.5em;
 }
-
 .task {
     -fx-padding: 1em 0em 1em 0em;
 }
@@ -15,7 +14,6 @@
     -fx-background-color: -color-bg-subtle;
     -fx-padding: 1em;
 }
-
 .add-task-button {
     -fx-background-color: transparent;
     -fx-text-fill: -color-fg-muted;
@@ -23,7 +21,6 @@
     -fx-cursor: hand;
     -fx-padding: 0.2em 0.5em 0.2em 0.5em;
 }
-
 .task-field {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -32,16 +29,14 @@
     -fx-prompt-text-fill: -color-fg-subtle;
     -fx-padding: 1em 0em 1em 0em;
 }
-
 .quote-container {
-    -fx-alignment: center;
+    -fx-alignment: top-center;
     -fx-padding: 1em;
     -fx-border-color: -color-border-default;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
 }
-
 .quote-label {
     -fx-font-size: 2em;
     -fx-font-family: "Georgia";
@@ -50,16 +45,18 @@
     -fx-wrap-text: true;
     -fx-text-alignment: center;
 }
-
 .course-view-container {
-    -fx-alignment: top-center;
+    -fx-alignment: top-left;
     -fx-padding: 1em;
     -fx-border-color: -color-border-default;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
 }
-
+.left-container {
+    -fx-alignment: top-left;
+    -fx-spacing: 10;
+}
 .course-card {
     -fx-background-color: -color-bg-default;
     -fx-border-color: -color-accent-emphasis;
@@ -68,14 +65,16 @@
     -fx-background-radius: 6;
     -fx-border-radius: 6;
 }
-
 .course-card-name {
     -fx-font-size: 1.1em;
     -fx-font-weight: bold;
     -fx-text-fill: -color-fg-default;
 }
-
 .course-card-assignment {
     -fx-font-size: 0.9em;
     -fx-text-fill: -color-fg-muted;
+}
+
+.home-page-pane {
+    -fx-padding: 20;
 }
