@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -44,12 +43,14 @@ public class App extends Application {
         Label textArea = new Label();
         textArea.setWrapText(true);
         textArea.setText("Be more than motivated, be more than driven, become literally obsessed to the point where people think you're fucking nuts.");
+        textArea.setMaxWidth(Double.MAX_VALUE);
 
         textArea.getStyleClass().add("quote-label");
         mQuoteContainer = new VBox(textArea);
         mQuoteContainer.setAlignment(Pos.TOP_CENTER);
-        mQuoteContainer.setMaxHeight(bounds.getHeight() / 3);
+        mQuoteContainer.setMaxHeight(bounds.getHeight() / 8);
         mQuoteContainer.getStyleClass().add("quote-container");
+        mQuoteContainer.setMaxWidth(bounds.getWidth() * (2.0 / 3.0));
 
         TextField textInput = new TextField();
         textInput.setPromptText("Add task...");
