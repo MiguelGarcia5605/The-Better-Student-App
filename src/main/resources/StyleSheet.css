@@ -49,3 +49,12 @@
     -fx-wrap-text: true;
     -fx-text-alignment: center;
 }
+
+.course-view-container {
+    -fx-alignment: top-center;
+    -fx-padding: 1em;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+}
