@@ -1,0 +1,33 @@
+.task > .box {
+    -fx-padding: 2em 2em 3em 3em;
+}
+.task > .box > .mark {
+    -fx-padding: 5em 5em 6em 6em;
+}
+.task {
+    -fx-padding: 1em 0em 1em 0em;
+}
+.vbox {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+}
+
+.add-task-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 1.4em;
+    -fx-cursor: hand;
+    -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.task-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: -color-fg-default;
+    -fx-prompt-text-fill: -color-fg-subtle;
+    -fx-padding: 1em 0em 1em 0em;
+}
