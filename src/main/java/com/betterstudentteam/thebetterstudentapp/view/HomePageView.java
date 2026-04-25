@@ -1,19 +1,11 @@
-package com.betterstudentteam.thebetterstudentapp;
+package com.betterstudentteam.thebetterstudentapp.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.betterstudentteam.thebetterstudentapp.view.panels.CourseViewPanel;
+import com.betterstudentteam.thebetterstudentapp.view.panels.QuotePanel;
+import com.betterstudentteam.thebetterstudentapp.view.panels.TaskPanel;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
-
-import java.util.ArrayList;
 
 public class HomePageView extends BorderPane {
 
@@ -35,7 +27,7 @@ public class HomePageView extends BorderPane {
         mDailyQuoteAndCourseViewsContainer.getChildren().add(mCourseViewPanel);
         mDailyQuoteAndCourseViewsContainer.getStyleClass().add("left-container");
 
-        mTaskPanel = new TaskPanel();
+        mTaskPanel = new TaskPanel("Daily To-Do");
 
         // Course card
         mCourseViewPanel.addCourseCard("ENG 110",

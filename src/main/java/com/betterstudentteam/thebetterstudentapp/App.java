@@ -1,14 +1,12 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
+import com.betterstudentteam.thebetterstudentapp.view.TaskView;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class App extends Application {
 
@@ -22,7 +20,7 @@ public class App extends Application {
 
         primaryStage.setTitle(APP_NAME);
 
-        Scene scene = new Scene(new HomePageView());
+        Scene scene = new Scene(new TaskView());
         scene.getStylesheets().add("StyleSheet.css");
 
         primaryStage.setScene(scene);

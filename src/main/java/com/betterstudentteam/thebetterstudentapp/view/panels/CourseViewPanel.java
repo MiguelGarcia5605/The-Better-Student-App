@@ -1,19 +1,16 @@
-package com.betterstudentteam.thebetterstudentapp;
+package com.betterstudentteam.thebetterstudentapp.view.panels;
 
-import javafx.geometry.Rectangle2D;
+import com.betterstudentteam.thebetterstudentapp.util.Display;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 
 public class CourseViewPanel extends VBox {
 
-    private static final Screen SCREEN = Screen.getPrimary();
-    private static final Rectangle2D SCREEN_BOUNDS = SCREEN.getVisualBounds();
-
     public CourseViewPanel() {
         // Course view panel
-        this.setPrefHeight(SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
-        this.setMaxHeight(SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
+        this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
+        this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
+        this.setSpacing(10);
         this.getStyleClass().add("course-view-container");
     }
 
