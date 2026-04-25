@@ -1,6 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
+import com.betterstudentteam.thebetterstudentapp.view.CourseView;
 import com.betterstudentteam.thebetterstudentapp.view.TaskView;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -20,7 +21,7 @@ public class App extends Application {
 
         primaryStage.setTitle(APP_NAME);
 
-        Scene scene = new Scene(new TaskView());
+        Scene scene = new Scene(new CourseView());
         scene.getStylesheets().add("StyleSheet.css");
 
         primaryStage.setScene(scene);
