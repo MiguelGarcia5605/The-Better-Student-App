@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane style="-fx-border-radius: 20; -fx-border-color: #fff;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" textAlignment="CENTER" wrappingWidth="200.0" />
+            <VBox>
+               <children>
+                  <CheckBox mnemonicParsing="false" text="task here" />
+                  <CheckBox mnemonicParsing="false" text="task here" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" textAlignment="CENTER" wrappingWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the better student app!" textAlignment="CENTER" wrappingWidth="200.0" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
