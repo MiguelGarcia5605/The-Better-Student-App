@@ -1,7 +1,7 @@
-package com.betterstudentteam.thebetterstudentapp.HomePage;
+package com.betterstudentteam.thebetterstudentapp.home_page;
 
-import com.betterstudentteam.thebetterstudentapp.Assignments.AssignmentManager;
-import DailyQuote.QuoteService;
+import com.betterstudentteam.thebetterstudentapp.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.daily_quote.QuoteService;
 
 public class HomePageManager {
 

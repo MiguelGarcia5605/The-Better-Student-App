@@ -2,9 +2,9 @@
 //controller.finishSetup(setupData, courseRequests);
 
 
-package com.betterstudentteam.thebetterstudentapp.Usersetup;
+package com.betterstudentteam.thebetterstudentapp.user_setup;
 
-import com.betterstudentteam.thebetterstudentapp.Courses.CourseManager;
+import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
 import java.util.List;
 
 public class UserSetupController {

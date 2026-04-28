@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.Usersetup;
+package com.betterstudentteam.thebetterstudentapp.user_setup;
 
 import java.util.Map;
 

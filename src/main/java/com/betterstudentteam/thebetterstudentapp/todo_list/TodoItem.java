@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.ToDoList;
+package com.betterstudentteam.thebetterstudentapp.todo_list;
 
 import java.time.LocalDate;
 

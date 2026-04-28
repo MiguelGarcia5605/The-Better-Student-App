@@ -1,6 +1,6 @@
 
 // PLACE THIS CODE IN VIEWCONTROLLER: userSetupManager.initializeUserCourses(setupData, courseRequests);
-package com.betterstudentteam.thebetterstudentapp.Usersetup;
+package com.betterstudentteam.thebetterstudentapp.user_setup;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

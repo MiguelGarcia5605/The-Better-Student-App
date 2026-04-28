@@ -1,8 +1,8 @@
 
-package com.betterstudentteam.thebetterstudentapp.HomePage;
+package com.betterstudentteam.thebetterstudentapp.home_page;
 
 
-import com.betterstudentteam.thebetterstudentapp.Assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.assignments.Assignment;
 import java.util.List;
 
 
