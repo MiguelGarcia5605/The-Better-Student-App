@@ -2,7 +2,7 @@
 //  courseDetailsManager.loadCourseDetails(courseId);
 //
 
-package com.betterstudentteam.thebetterstudentapp.Courses;
+package com.betterstudentteam.thebetterstudentapp.courses;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -19,7 +19,6 @@ public class Course {
     private LocalTime endTime;
 
     private double currentGrade;  // this is calculated from Assignments
-
 
     public Course(String id, String name, String instructor, List<DayOfWeek> meetingDays, LocalTime startTime, LocalTime endTime) {
 

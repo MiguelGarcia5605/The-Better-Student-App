@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.Assignments;
+package com.betterstudentteam.thebetterstudentapp.assignments;
 
 import java.time.LocalDate;
 
@@ -14,7 +14,6 @@ public class Assignment {
     private Double gradeReceived; // will be null most times until actually graded
 
     public Assignment(String id, String title, String courseId, LocalDate dueDate, String type, String description) {
-
         this.id = id;
         this.title = title;
         this.courseId = courseId;
