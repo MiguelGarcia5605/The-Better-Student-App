@@ -1,7 +1,7 @@
-package com.betterstudentteam.thebetterstudentapp.Courses;
+package com.betterstudentteam.thebetterstudentapp.courses;
 
-import com.betterstudentteam.thebetterstudentapp.Assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.Assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.assignments.AssignmentManager;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -32,9 +32,9 @@ public class CourseManager {
                 .orElse(null);
     }
 
-//    ASssingments for a specific course
+//    Assingments for a specific course
     public List<Assignment> getAssignmentForCourse(String courseId) {
-        return assignmentManager.getAssignmentByCourse(courseId);
+        return assignmentManager.getAssignmentsByCourse(courseId);
     }
 
 //    Does this Course meet today?

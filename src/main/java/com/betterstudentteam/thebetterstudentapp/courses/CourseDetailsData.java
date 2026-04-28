@@ -1,6 +1,6 @@
-package com.betterstudentteam.thebetterstudentapp.Courses;
+package com.betterstudentteam.thebetterstudentapp.courses;
 
-import com.betterstudentteam.thebetterstudentapp.Assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.assignments.Assignment;
 import java.util.List;
 
 public class CourseDetailsData {
@@ -10,7 +10,6 @@ public class CourseDetailsData {
     private boolean hasClassToday;
 
     public CourseDetailsData(Course course, List<Assignment> assignments, boolean hasClassToday) {
-
         this.course = course;
         this.assignments = assignments;
         this.hasClassToday = hasClassToday;
@@ -19,7 +18,7 @@ public class CourseDetailsData {
     public Course getCourse() {
         return course;
     }
-    public List<Assignments> getAssignments() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
     public boolean isHasClassToday() {

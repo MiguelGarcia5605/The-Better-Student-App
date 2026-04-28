@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.Courses;
+package com.betterstudentteam.thebetterstudentapp.courses;
 
 public class CourseDetailsManager {
 

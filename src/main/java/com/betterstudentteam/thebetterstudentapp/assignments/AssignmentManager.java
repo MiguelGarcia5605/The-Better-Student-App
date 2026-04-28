@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.Assignments;
+package com.betterstudentteam.thebetterstudentapp.assignments;
 
 import java.time.LocalDate;
 import java.util.*;
