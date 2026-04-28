@@ -1,5 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.view;
 
+import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.view.panels.CourseViewPanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.QuotePanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.TaskPanel;

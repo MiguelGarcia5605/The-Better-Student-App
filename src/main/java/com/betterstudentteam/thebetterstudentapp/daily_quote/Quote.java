@@ -1,4 +1,4 @@
-package DailyQuote;
+package com.betterstudentteam.thebetterstudentapp.daily_quote;
 
 public class Quote {
 
@@ -18,5 +18,4 @@ public class Quote {
 
     public void setText( String text) { this.text = text;}
     public void setAuthors(String author) { this.author = author; }
-
 }
