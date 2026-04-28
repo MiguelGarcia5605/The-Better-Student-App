@@ -13,11 +13,11 @@ public class ImportantDatePanel extends VBox {
     public ImportantDatePanel() {
         mDate = new Label();
         mDate.setText(IMPORTANT_DATE);
-        mDate.getStyleClass().add("quote-label");
+        mDate.getStyleClass().add("display-panel-label");
         this.getChildren().add(mDate);
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() / 5);
-        this.getStyleClass().add("quote-container");
+        this.getStyleClass().add("display-panel");
     }
 }

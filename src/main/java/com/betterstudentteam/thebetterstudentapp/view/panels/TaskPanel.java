@@ -34,7 +34,7 @@ public class TaskPanel extends VBox{
         this.getChildren().add(mDailyTasks);
         this.setMinWidth((Display.SCREEN_BOUNDS.getWidth() / 3 - 60));
         this.getChildren().add(mDailyNewTaskContainer);
-        this.getStyleClass().add("vbox");
+        this.getStyleClass().add("task-panel");
 
         EventHandler<ActionEvent> dailyEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
