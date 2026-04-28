@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp;
+package com.betterstudentteam.thebetterstudentapp.attendance_and_grading;
 
 class Course {
     String name;
