@@ -1,36 +1,34 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
+import com.betterstudentteam.thebetterstudentapp.view.CourseView;
+import com.betterstudentteam.thebetterstudentapp.view.HomePageView;
+import com.betterstudentteam.thebetterstudentapp.view.TaskView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
-
 public class App extends Application {
-    private static final int SCREEN_WIDTH = 600;
-    private static final int SCREEN_HEIGHT = 400;
+    private static final String APP_NAME = "The Better Student App";
+    private static final Screen SCREEN = Screen.getPrimary();
+    private static final Rectangle2D SCREEN_BOUNDS = SCREEN.getVisualBounds();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view.fxml"));
-        fxmlLoader.setController(new ViewController());
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        primaryStage.setTitle(APP_NAME);
 
-        primaryStage.setTitle("The Better Student App");
-        Scene scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
+        Scene scene = new Scene(new TaskView());
+        scene.getStylesheets().add("StyleSheet.css");
 
         primaryStage.setScene(scene);
+        primaryStage.setX(SCREEN_BOUNDS.getMinX());
+        primaryStage.setY(SCREEN_BOUNDS.getMinY());
+        primaryStage.setWidth(SCREEN_BOUNDS.getWidth());
+        primaryStage.setHeight(SCREEN_BOUNDS.getHeight());
         primaryStage.show();
     }
 }
