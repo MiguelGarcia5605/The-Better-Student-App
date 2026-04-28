@@ -1,25 +1,33 @@
-.task > .box {
-    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+/* =====================
+   LAYOUT
+   ===================== */
+.view-pane {
+    -fx-padding: 20;
 }
-.task > .box > .mark {
-    -fx-padding: 0.5em;
+.left-container {
+    -fx-alignment: top-left;
+    -fx-spacing: 10;
 }
-.task {
-    -fx-padding: 1em 0em 1em 0em;
-}
-.vbox {
+
+/* =====================
+   TASK PANEL
+   ===================== */
+.task-panel {
     -fx-border-color: -color-border-default;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
     -fx-padding: 1em;
+    -fx-alignment: top-left;
 }
-.add-task-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: -color-fg-muted;
-    -fx-font-size: 1.4em;
-    -fx-cursor: hand;
-    -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+.task {
+    -fx-padding: 1em 0em 1em 0em;
+}
+.task > .box {
+    -fx-padding: 0.5em;
+}
+.task > .box > .mark {
+    -fx-padding: 0.5em;
 }
 .task-field {
     -fx-background-color: transparent;
@@ -29,13 +37,24 @@
     -fx-prompt-text-fill: -color-fg-subtle;
     -fx-padding: 1em 0em 1em 0em;
 }
-.quote-container {
-    -fx-alignment: top-center;
-    -fx-padding: 1em;
+.add-task-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 1.4em;
+    -fx-cursor: hand;
+    -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+/* =====================
+   QUOTE PANEL
+   ===================== */
+.quote-panel {
     -fx-border-color: -color-border-default;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+    -fx-alignment: top-center;
 }
 .quote-label {
     -fx-font-size: 2em;
@@ -45,17 +64,34 @@
     -fx-wrap-text: true;
     -fx-text-alignment: center;
 }
-.course-view-container {
-    -fx-alignment: top-left;
-    -fx-padding: 1em;
+
+/* =====================
+   DISPLAY PANEL
+   ===================== */
+.display-panel {
     -fx-border-color: -color-border-default;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-background-color: -color-bg-subtle;
-}
-.left-container {
+    -fx-padding: 1em;
     -fx-alignment: top-left;
-    -fx-spacing: 10;
+}
+.display-panel-label {
+    -fx-font-size: 1.4em;
+    -fx-text-fill: -color-fg-default;
+    -fx-wrap-text: true;
+}
+
+/* =====================
+   CARD LIST PANEL
+   ===================== */
+.card-list-panel {
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 1em;
+    -fx-alignment: top-left;
 }
 .course-card {
     -fx-background-color: -color-bg-default;
@@ -70,11 +106,7 @@
     -fx-font-weight: bold;
     -fx-text-fill: -color-fg-default;
 }
-.course-card-assignment {
+.course-card-detail {
     -fx-font-size: 0.9em;
     -fx-text-fill: -color-fg-muted;
-}
-
-.home-page-pane {
-    -fx-padding: 20;
 }

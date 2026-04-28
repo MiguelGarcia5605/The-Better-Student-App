@@ -21,6 +21,6 @@ public class QuotePanel extends VBox {
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() / 5);
         this.setMaxWidth(Display.SCREEN_BOUNDS.getWidth() * (2.0 / 3.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() / 5);
-        this.getStyleClass().add("quote-container");
+        this.getStyleClass().add("quote-panel");
     }
 }

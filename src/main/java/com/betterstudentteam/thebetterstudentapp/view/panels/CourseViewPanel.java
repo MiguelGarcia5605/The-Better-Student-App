@@ -11,7 +11,7 @@ public class CourseViewPanel extends VBox {
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setSpacing(10);
-        this.getStyleClass().add("course-view-container");
+        this.getStyleClass().add("card-list-panel");
     }
 
     public void addCourseCard(String course, String assignment, String grade) {

@@ -2,6 +2,7 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.view.CourseView;
+import com.betterstudentteam.thebetterstudentapp.view.HomePageView;
 import com.betterstudentteam.thebetterstudentapp.view.TaskView;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -10,7 +11,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class App extends Application {
-
     private static final String APP_NAME = "The Better Student App";
     private static final Screen SCREEN = Screen.getPrimary();
     private static final Rectangle2D SCREEN_BOUNDS = SCREEN.getVisualBounds();
@@ -21,7 +21,7 @@ public class App extends Application {
 
         primaryStage.setTitle(APP_NAME);
 
-        Scene scene = new Scene(new CourseView());
+        Scene scene = new Scene(new TaskView());
         scene.getStylesheets().add("StyleSheet.css");
 
         primaryStage.setScene(scene);
