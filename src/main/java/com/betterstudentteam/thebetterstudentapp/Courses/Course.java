@@ -1,4 +1,6 @@
-
+// USE CODE IN VIEWCONTROLLER  courseManager.getAllCourses();
+//  courseDetailsManager.loadCourseDetails(courseId);
+//
 
 package com.betterstudentteam.thebetterstudentapp.Courses;
 
