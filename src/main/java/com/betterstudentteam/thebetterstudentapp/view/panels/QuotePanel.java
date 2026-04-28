@@ -1,19 +1,20 @@
 package com.betterstudentteam.thebetterstudentapp.view.panels;
 
+import com.betterstudentteam.thebetterstudentapp.daily_quote.QuoteService;
 import com.betterstudentteam.thebetterstudentapp.util.Display;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class QuotePanel extends VBox {
 
-    private static final String DAILY_QUOTE = "Be more than motivated, be more than driven, become literally obsessed to the point where people think you're fucking nuts.";
-
     private Label mDailyQuote;
+    private QuoteService mQuoteService;
 
     public QuotePanel() {
         // Daily quote panel
+        mQuoteService = new QuoteService();
         mDailyQuote = new Label();
-        mDailyQuote.setText(DAILY_QUOTE);
+        mDailyQuote.setText(mQuoteService.getQuoteOfTheDay().getText());
         mDailyQuote.setWrapText(true);
         mDailyQuote.setMaxWidth(Double.MAX_VALUE);
         mDailyQuote.getStyleClass().add("quote-label");
