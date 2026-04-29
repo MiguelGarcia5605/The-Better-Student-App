@@ -50,4 +50,8 @@ public class TodoManager {
                 .toList();
     }
 
+    public void loadTodo(TodoItem item) {
+        todos.add(item);
+    }
+
 }

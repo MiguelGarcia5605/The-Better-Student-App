@@ -21,6 +21,7 @@ public class QuotePanel extends VBox {
         this.getChildren().add(mDailyQuote);
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() / 5);
         this.setMaxWidth(Display.SCREEN_BOUNDS.getWidth() * (2.0 / 3.0));
+        //this.setMaxWidth(Double.MAX_VALUE);
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() / 5);
         this.getStyleClass().add("quote-panel");
     }

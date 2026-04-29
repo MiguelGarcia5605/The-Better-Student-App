@@ -1,12 +1,17 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
-import com.betterstudentteam.thebetterstudentapp.view.CourseView;
+import com.betterstudentteam.thebetterstudentapp.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
+import com.betterstudentteam.thebetterstudentapp.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.user_setup.UserSetupManager;
+import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.view.HomePageView;
-import com.betterstudentteam.thebetterstudentapp.view.TaskView;
+import com.betterstudentteam.thebetterstudentapp.view.navigation.NavBar;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -18,11 +23,31 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
-
         primaryStage.setTitle(APP_NAME);
 
-        Scene scene = new Scene(new HomePageView());
+        // Create backend
+        AssignmentManager assignmentManager = new AssignmentManager();
+        CourseManager courseManager = new CourseManager(assignmentManager);
+        UserSetupManager setupManager = new UserSetupManager(courseManager);
+        TodoManager dailyTodos = new TodoManager();
+        TodoManager backlogTodos = new TodoManager();
+        TodoManager allTodos = new TodoManager();
+        SaveManager saveManager = new SaveManager(courseManager, assignmentManager, dailyTodos, backlogTodos, allTodos);
+
+        // Load saved data
+        saveManager.load();
+
+        // Build wrapper
+        BorderPane wrapper = new BorderPane();
+        NavBar navBar = new NavBar(wrapper, courseManager, dailyTodos, backlogTodos, allTodos, setupManager, saveManager);
+        wrapper.setCenter(new HomePageView(courseManager, dailyTodos, saveManager));
+        wrapper.setTop(navBar);
+
+        Scene scene = new Scene(wrapper);
         scene.getStylesheets().add("StyleSheet.css");
+
+        // Save on close
+        primaryStage.setOnCloseRequest(e -> saveManager.save());
 
         primaryStage.setScene(scene);
         primaryStage.setX(SCREEN_BOUNDS.getMinX());

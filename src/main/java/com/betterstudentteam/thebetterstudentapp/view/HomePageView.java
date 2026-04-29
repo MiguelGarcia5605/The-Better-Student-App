@@ -1,12 +1,19 @@
 package com.betterstudentteam.thebetterstudentapp.view;
 
+import com.betterstudentteam.thebetterstudentapp.assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
+import com.betterstudentteam.thebetterstudentapp.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.util.Display;
+import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.view.panels.CourseViewPanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.QuotePanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class HomePageView extends BorderPane {
 
@@ -18,9 +25,23 @@ public class HomePageView extends BorderPane {
 
     private TaskPanel mTaskPanel;
 
-    public HomePageView() {
+    public HomePageView(CourseManager courseManager, TodoManager todoManager, SaveManager saveManager) {
         mQuotePanel = new QuotePanel();
         mCourseViewPanel = new CourseViewPanel();
+
+        for (Course course: courseManager.getAllCourses()) {
+            String nextAssignment = "No upcoming assignments";
+            List<Assignment> assignments = courseManager.getAssignmentForCourse(course.getId());
+            if (!assignments.isEmpty()) {
+                nextAssignment = "Next: " + assignments.getFirst().getTitle()
+                        + " - " + assignments.getFirst().getDueDate();
+            }
+            mCourseViewPanel.addCourseCard(
+                    course.getName(),
+                    nextAssignment,
+                    "Grade: " + course.getCurrentGrade() + "%"
+            );
+        }
 
         // Daily quote and course views container
         mDailyQuoteAndCourseViewsContainer = new VBox();
@@ -28,12 +49,13 @@ public class HomePageView extends BorderPane {
         mDailyQuoteAndCourseViewsContainer.getChildren().add(mCourseViewPanel);
         mDailyQuoteAndCourseViewsContainer.getStyleClass().add("left-container");
 
-        mTaskPanel = new TaskPanel("Daily To-Do");
+        mDailyQuoteAndCourseViewsContainer.setMaxWidth(Double.MAX_VALUE);
+        mDailyQuoteAndCourseViewsContainer.setPrefWidth(Display.SCREEN_BOUNDS.getWidth() * (2.0 / 3.0));
 
-        // Course card
-        mCourseViewPanel.addCourseCard("ENG 110",
-                "Next: Research paper due Friday, May 1st",
-                "A - 99.76%");
+        mQuotePanel.setMaxWidth(Double.MAX_VALUE);
+        mCourseViewPanel.setMaxWidth(Double.MAX_VALUE);
+
+        mTaskPanel = new TaskPanel("Daily To-Do", todoManager, saveManager);
 
         this.setLeft(mDailyQuoteAndCourseViewsContainer);
         this.setRight(mTaskPanel);
