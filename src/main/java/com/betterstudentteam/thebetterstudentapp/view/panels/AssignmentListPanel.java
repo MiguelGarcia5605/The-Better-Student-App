@@ -36,7 +36,6 @@ public class AssignmentListPanel extends VBox {
         this.setSpacing(10);
         this.getStyleClass().add("card-list-panel");
 
-        // Add assignment form
         mAssignmentNameField = new TextField();
         mAssignmentNameField.setPromptText("Assignment name");
         mAssignmentNameField.getStyleClass().add("task-field");
@@ -96,22 +95,52 @@ public class AssignmentListPanel extends VBox {
         );
 
         mCourseManager.addAssignment(assignment);
-        displayAssignment(name, dueDateText);
+        displayAssignment(assignment);
         mAssignmentNameField.clear();
         mAssignmentDueDateField.clear();
         mSaveManager.save();
     }
 
-    public void displayAssignment(String name, String dueDate) {
-        Label nameLabel = new Label(name);
-        Label dueDateLabel = new Label(dueDate);
+    public void displayAssignment(Assignment assignment) {
+        Label nameLabel = new Label(assignment.getTitle());
+        Label dueDateLabel = new Label(assignment.getDueDate().toString());
 
         nameLabel.getStyleClass().add("course-card-detail");
         dueDateLabel.getStyleClass().add("course-card-detail");
 
-        VBox assignment = new VBox(nameLabel, dueDateLabel);
-        assignment.getStyleClass().add("course-card");
+        Button deleteButton = new Button("✕");
+        deleteButton.getStyleClass().add("delete-button");
 
-        this.getChildren().add(this.getChildren().size() - 2, assignment);
+        VBox info = new VBox(nameLabel, dueDateLabel);
+        HBox assignmentCard = new HBox(info, deleteButton);
+        assignmentCard.getStyleClass().add("course-card");
+
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                mCourseManager.getAssignmentForCourse(mCourseId)
+                        .stream()
+                        .filter(a -> a.getId().equals(assignment.getId()))
+                        .findFirst()
+                        .ifPresent(a -> {
+                            mCourseManager.deleteAssignment(a.getId());
+                            AssignmentListPanel.this.getChildren().remove(assignmentCard);
+                            mSaveManager.save();
+                        });
+            }
+        });
+
+        this.getChildren().add(this.getChildren().size() - 2, assignmentCard);
+    }
+
+    public void displayAssignment(String name, String dueDate) {
+        Assignment dummy = new Assignment(
+                AssignmentManager.generateId(),
+                name,
+                mCourseId,
+                LocalDate.parse(dueDate),
+                "Homework",
+                ""
+        );
+        displayAssignment(dummy);
     }
 }

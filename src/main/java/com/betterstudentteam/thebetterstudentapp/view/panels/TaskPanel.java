@@ -45,13 +45,13 @@ public class TaskPanel extends VBox {
         this.getChildren().add(mDailyNewTaskContainer);
         this.getStyleClass().add("task-panel");
 
-        // Load existing todos
         for (TodoItem item : todoManager.getAllTodos()) {
             CheckBox task = new CheckBox(item.getTitle());
             task.setSelected(item.isCompleted());
             task.getStyleClass().add("task");
             mUserTaskList.add(task);
             this.getChildren().add(this.getChildren().size() - 1, task);
+            wireDeleteOnCheck(task, item.getId());
         }
 
         mDailyNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -63,12 +63,26 @@ public class TaskPanel extends VBox {
 
     public void addTask(String taskName) {
         if (taskName.isEmpty()) return;
-        mTodoManager.addTodo(taskName, LocalDate.now());
+        TodoItem item = mTodoManager.addTodo(taskName, LocalDate.now());
         CheckBox task = new CheckBox(taskName);
         task.getStyleClass().add("task");
         mUserTaskList.add(task);
         this.getChildren().add(this.getChildren().size() - 1, task);
         mDailyNewTaskField.setText("");
+        wireDeleteOnCheck(task, item.getId());
         mSaveManager.save();
+    }
+
+    private void wireDeleteOnCheck(CheckBox task, String id) {
+        task.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                if (task.isSelected()) {
+                    mTodoManager.deleteTodo(id);
+                    mUserTaskList.remove(task);
+                    TaskPanel.this.getChildren().remove(task);
+                    mSaveManager.save();
+                }
+            }
+        });
     }
 }

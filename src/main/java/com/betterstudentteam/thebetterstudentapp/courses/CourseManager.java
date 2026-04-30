@@ -51,4 +51,8 @@ public class CourseManager {
         assignmentManager.addAssignment(assignment);
     }
 
+    public void deleteAssignment(String id) {
+        assignmentManager.deleteAssignment(id);
+    }
+
 }
