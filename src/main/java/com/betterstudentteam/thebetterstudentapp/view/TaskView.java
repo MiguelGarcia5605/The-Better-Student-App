@@ -1,5 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.view;
 
+import com.betterstudentteam.thebetterstudentapp.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.view.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
@@ -10,10 +12,10 @@ public class TaskView extends BorderPane {
     private TaskPanel mBacklogTasksPanel;
     private TaskPanel mDailyTasksPanel;
 
-    public TaskView() {
-        mDailyTasksPanel = new TaskPanel("Daily To-Do");
-        mBacklogTasksPanel = new TaskPanel("Backlog To-Do");
-        mAllTasksPanel = new TaskPanel("All Tasks");
+    public TaskView(TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos, SaveManager saveManager) {
+        mDailyTasksPanel = new TaskPanel("Daily To-Do", dailyTodos, saveManager);
+        mBacklogTasksPanel = new TaskPanel("Backlog To-Do", backlogTodos, saveManager);
+        mAllTasksPanel = new TaskPanel("All Tasks", allTodos, saveManager);
 
         this.setLeft(mAllTasksPanel);
         this.setCenter(mBacklogTasksPanel);

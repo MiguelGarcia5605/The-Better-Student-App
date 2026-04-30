@@ -6,13 +6,10 @@ import javafx.scene.layout.VBox;
 
 public class AttendancePanel extends VBox {
 
-    private static final String ATTENDANCE_STRING = "0/0 Classes Attended";
-
     private Label mAttendance;
 
-    public AttendancePanel() {
-        mAttendance = new Label();
-        mAttendance.setText(ATTENDANCE_STRING);
+    public AttendancePanel(String text) {
+        mAttendance = new Label(text);
         mAttendance.getStyleClass().add("display-panel-label");
         this.getChildren().add(mAttendance);
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0));

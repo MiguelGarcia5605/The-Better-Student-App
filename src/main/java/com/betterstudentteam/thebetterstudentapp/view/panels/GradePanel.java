@@ -6,13 +6,10 @@ import javafx.scene.layout.VBox;
 
 public class GradePanel extends VBox {
 
-    private static final String GRADE_STRING = "Cumulative Grade: 97.6%";
-
     private Label mGrade;
 
-    public GradePanel() {
-        mGrade = new Label();
-        mGrade.setText(GRADE_STRING);
+    public GradePanel(String text) {
+        mGrade = new Label(text);
         mGrade.getStyleClass().add("display-panel-label");
         this.getChildren().add(mGrade);
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0));
