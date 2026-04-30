@@ -1,13 +1,14 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
-import com.betterstudentteam.thebetterstudentapp.assignments.AssignmentManager;
-import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
-import com.betterstudentteam.thebetterstudentapp.todo_list.TodoManager;
-import com.betterstudentteam.thebetterstudentapp.user_setup.UserSetupManager;
-import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
-import com.betterstudentteam.thebetterstudentapp.view.HomePageView;
-import com.betterstudentteam.thebetterstudentapp.view.navigation.NavBar;
+import atlantafx.base.theme.PrimerLight;
+import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
+import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
+import com.betterstudentteam.thebetterstudentapp.frontend.components.NavBar;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
