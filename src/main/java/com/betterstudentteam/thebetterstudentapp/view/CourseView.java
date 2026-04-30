@@ -4,6 +4,7 @@ import com.betterstudentteam.thebetterstudentapp.assignments.Assignment;
 import com.betterstudentteam.thebetterstudentapp.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.util.Display;
+import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.view.panels.AssignmentListPanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.AttendancePanel;
 import com.betterstudentteam.thebetterstudentapp.view.panels.GradePanel;
@@ -21,7 +22,7 @@ public class CourseView extends BorderPane {
     AssignmentListPanel mAssignmentListPanel;
     GradePanel mGradePanel;
 
-    public CourseView(Course course, CourseManager courseManager) {
+    public CourseView(Course course, CourseManager courseManager, SaveManager saveManager) {
         mImportantDatePanel = new ImportantDatePanel(
                 course.getMeetingDays().toString() + " " +
                         course.getStartTime() + " - " + course.getEndTime()
@@ -35,13 +36,11 @@ public class CourseView extends BorderPane {
                 "Grade: " + course.getCurrentGrade() + "%"
         );
 
-        mAssignmentListPanel = new AssignmentListPanel();
+        mAssignmentListPanel = new AssignmentListPanel(course.getId(), courseManager, saveManager);
 
         for (Assignment assignment : courseManager.getAssignmentForCourse(course.getId())) {
-            mAssignmentListPanel.addAssignment(assignment.getTitle(), assignment.getDueDate().toString());
+            mAssignmentListPanel.displayAssignment(assignment.getTitle(), assignment.getDueDate().toString());
         }
-
-        mAssignmentListPanel.addAssignment("Code", "April 16, 2026");
 
         mLeftContainer = new VBox();
         mRightContainer = new VBox();

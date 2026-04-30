@@ -38,7 +38,7 @@ public class NavBar extends HBox {
 
         mHomeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new HomePageView(courseManager, dailyTodos, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, courseManager, dailyTodos, saveManager));
             }
         });
 

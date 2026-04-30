@@ -40,7 +40,7 @@ public class App extends Application {
         // Build wrapper
         BorderPane wrapper = new BorderPane();
         NavBar navBar = new NavBar(wrapper, courseManager, dailyTodos, backlogTodos, allTodos, setupManager, saveManager);
-        wrapper.setCenter(new HomePageView(courseManager, dailyTodos, saveManager));
+        wrapper.setCenter(new HomePageView(wrapper, courseManager, dailyTodos, saveManager));
         wrapper.setTop(navBar);
 
         Scene scene = new Scene(wrapper);

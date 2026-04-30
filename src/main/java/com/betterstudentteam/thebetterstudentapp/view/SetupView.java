@@ -1,12 +1,12 @@
 package com.betterstudentteam.thebetterstudentapp.view;
 
+import com.betterstudentteam.thebetterstudentapp.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.todo_list.TodoManager;
 import com.betterstudentteam.thebetterstudentapp.user_setup.CourseSetupRequest;
 import com.betterstudentteam.thebetterstudentapp.user_setup.UserSetupData;
 import com.betterstudentteam.thebetterstudentapp.user_setup.UserSetupManager;
 import com.betterstudentteam.thebetterstudentapp.util.SaveManager;
-import com.betterstudentteam.thebetterstudentapp.view.HomePageView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -29,25 +29,32 @@ public class SetupView extends BorderPane {
 
     public SetupView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, UserSetupManager setupManager, SaveManager saveManager) {
 
-        // Header
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
 
-        // Form list inside scroll pane
         mCourseFormList = new VBox();
         mCourseFormList.setSpacing(10);
-        mCourseFormList.getChildren().add(new CourseFormRow());
+
+        // Load existing courses into form rows
+        List<Course> existingCourses = courseManager.getAllCourses();
+        if (existingCourses.isEmpty()) {
+            mCourseFormList.getChildren().add(new CourseFormRow(mCourseFormList));
+        } else {
+            for (Course course : existingCourses) {
+                CourseFormRow row = new CourseFormRow(mCourseFormList);
+                row.loadCourse(course);
+                mCourseFormList.getChildren().add(row);
+            }
+        }
 
         ScrollPane scrollPane = new ScrollPane(mCourseFormList);
         scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("setup-scroll");
 
-        // Error label
         mErrorLabel = new Label();
         mErrorLabel.getStyleClass().add("setup-error-label");
         mErrorLabel.setVisible(false);
 
-        // Buttons
         mAddCourseButton = new Button("+ Add Course");
         mAddCourseButton.getStyleClass().add("nav-button");
 
@@ -56,7 +63,7 @@ public class SetupView extends BorderPane {
 
         mAddCourseButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mCourseFormList.getChildren().add(new CourseFormRow());
+                mCourseFormList.getChildren().add(new CourseFormRow(mCourseFormList));
             }
         });
 
@@ -75,6 +82,9 @@ public class SetupView extends BorderPane {
                     courseRequests.add(request);
                 }
 
+                // Clear existing courses before re-adding
+                courseManager.clearCourses();
+
                 UserSetupData setupData = new UserSetupData(
                         courseRequests.size(),
                         new HashMap<>(),
@@ -83,7 +93,7 @@ public class SetupView extends BorderPane {
 
                 setupManager.initializeUserCourses(setupData, courseRequests);
                 saveManager.save();
-                wrapper.setCenter(new HomePageView(courseManager, todoManager, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, courseManager, todoManager, saveManager));
             }
         });
 

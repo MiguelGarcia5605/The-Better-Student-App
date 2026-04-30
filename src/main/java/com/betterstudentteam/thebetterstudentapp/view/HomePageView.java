@@ -18,18 +18,15 @@ import java.util.List;
 public class HomePageView extends BorderPane {
 
     private VBox mDailyQuoteAndCourseViewsContainer;
-
     private QuotePanel mQuotePanel;
-
     private CourseViewPanel mCourseViewPanel;
-
     private TaskPanel mTaskPanel;
 
-    public HomePageView(CourseManager courseManager, TodoManager todoManager, SaveManager saveManager) {
+    public HomePageView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, SaveManager saveManager) {
         mQuotePanel = new QuotePanel();
-        mCourseViewPanel = new CourseViewPanel();
+        mCourseViewPanel = new CourseViewPanel(wrapper, courseManager, saveManager);
 
-        for (Course course: courseManager.getAllCourses()) {
+        for (Course course : courseManager.getAllCourses()) {
             String nextAssignment = "No upcoming assignments";
             List<Assignment> assignments = courseManager.getAssignmentForCourse(course.getId());
             if (!assignments.isEmpty()) {
@@ -37,13 +34,12 @@ public class HomePageView extends BorderPane {
                         + " - " + assignments.getFirst().getDueDate();
             }
             mCourseViewPanel.addCourseCard(
-                    course.getName(),
+                    course,
                     nextAssignment,
                     "Grade: " + course.getCurrentGrade() + "%"
             );
         }
 
-        // Daily quote and course views container
         mDailyQuoteAndCourseViewsContainer = new VBox();
         mDailyQuoteAndCourseViewsContainer.getChildren().add(mQuotePanel);
         mDailyQuoteAndCourseViewsContainer.getChildren().add(mCourseViewPanel);
@@ -63,5 +59,4 @@ public class HomePageView extends BorderPane {
 
         BorderPane.setMargin(mTaskPanel, new Insets(0, 40, 0, 10));
     }
-
 }

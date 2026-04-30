@@ -2,6 +2,7 @@ module com.betterstudentteam.thebetterstudentapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires atlantafx.base;
+    requires java.sql;
 
 
     opens com.betterstudentteam.thebetterstudentapp to javafx.fxml;

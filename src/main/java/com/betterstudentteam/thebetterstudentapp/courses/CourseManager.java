@@ -43,4 +43,12 @@ public class CourseManager {
         return course.getMeetingDays().contains(today);
     }
 
+    public void clearCourses() {
+        courses.clear();
+    }
+
+    public void addAssignment(Assignment assignment) {
+        assignmentManager.addAssignment(assignment);
+    }
+
 }

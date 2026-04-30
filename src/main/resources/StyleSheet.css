@@ -173,3 +173,16 @@
     -fx-text-fill: -color-danger-fg;
     -fx-font-size: 0.9em;
 }
+
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-danger-fg;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+    -fx-padding: 0.4em 0.6em 0.4em 0.6em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.delete-button:hover {
+    -fx-background-color: -color-danger-subtle;
+}
