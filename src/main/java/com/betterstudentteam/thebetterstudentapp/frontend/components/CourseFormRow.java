@@ -119,6 +119,10 @@ public class CourseFormRow extends HBox {
         this.getStyleClass().add("setup-form-row");
     }
 
+    /**
+     * Loads existing course data into fields
+     * @param course
+     */
     public void loadCourse(Course course) {
         mCourseName.setText(course.getName());
         mInstructor.setText(course.getInstructor());
@@ -130,6 +134,10 @@ public class CourseFormRow extends HBox {
         }
     }
 
+    /**
+     * Gets the current course from the filled in information
+     * @return Course
+     */
     public Course getCourse() {
         if (mCourseName.getText().isEmpty() ||
                 mInstructor.getText().isEmpty() ||

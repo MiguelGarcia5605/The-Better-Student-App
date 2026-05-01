@@ -3,7 +3,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.backend.util.ID;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,11 +27,11 @@ public class AssignmentListPanel extends VBox {
     private TextField mAssignmentDueDateField;
     private Button mAddAssignmentButton;
     private Course mCourse;
-    private SaveManager mSaveManager;
+    private SaveHandler mSaveHandler;
 
-    public AssignmentListPanel(Course course, SaveManager saveManager) {
+    public AssignmentListPanel(Course course, SaveHandler saveHandler) {
         mCourse = course;
-        mSaveManager = saveManager;
+        mSaveHandler = saveHandler;
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -61,14 +61,14 @@ public class AssignmentListPanel extends VBox {
 
         mAddAssignmentButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                addAssignment();
+                createAssignment();
             }
         });
 
         mAssignmentNameField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 if (e.getCode() == KeyCode.ENTER) {
-                    addAssignment();
+                    createAssignment();
                 }
             }
         });
@@ -76,13 +76,14 @@ public class AssignmentListPanel extends VBox {
         mAssignmentDueDateField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 if (e.getCode() == KeyCode.ENTER) {
-                    addAssignment();
+                    createAssignment();
                 }
             }
         });
     }
 
-    private void addAssignment() {
+    // Creates a new assignment from the given fields
+    private void createAssignment() {
         String name = mAssignmentNameField.getText();
         String dueDateText = mAssignmentDueDateField.getText();
 
@@ -112,13 +113,14 @@ public class AssignmentListPanel extends VBox {
         );
 
         mCourse.getAssignmentList().add(assignment);
-        displayAssignment(assignment);
+        renderAssignment(assignment);
         mAssignmentNameField.clear();
         mAssignmentDueDateField.clear();
-        mSaveManager.save();
+        mSaveHandler.save();
     }
 
-    public void displayAssignment(Assignment assignment) {
+    // Displays an assignment on screen
+    public void renderAssignment(Assignment assignment) {
         Label nameLabel = new Label(assignment.getName());
         Label dueDateLabel = new Label(assignment.getDueDate().toString());
 
@@ -136,7 +138,7 @@ public class AssignmentListPanel extends VBox {
             public void handle(ActionEvent e) {
                 mCourse.getAssignmentList().remove(assignment.getID());
                 AssignmentListPanel.this.getChildren().remove(assignmentCard);
-                mSaveManager.save();
+                mSaveHandler.save();
             }
         });
 

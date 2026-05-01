@@ -1,9 +1,8 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
-import atlantafx.base.theme.CupertinoLight;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.TaskView;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.SetupView;
@@ -23,9 +22,9 @@ public class NavBar extends HBox {
     private Button mStyleModeButton;
 
     private BorderPane mWrapper;
-    private SaveManager mSaveManager;
+    private SaveHandler mSaveHandler;
 
-    public NavBar(BorderPane wrapper, SaveManager saveManager) {
+    public NavBar(BorderPane wrapper, SaveHandler saveHandler) {
         mHomeButton = new Button("Home");
         mTaskButton = new Button("Tasks");
         mSetupButton = new Button("Setup");
@@ -34,7 +33,7 @@ public class NavBar extends HBox {
         mStyleModeButton.getStyleClass().add("style-mode-button");
 
         mWrapper = wrapper;
-        mSaveManager = saveManager;
+        mSaveHandler = saveHandler;
 
         mHomeButton.getStyleClass().add("nav-button");
         mTaskButton.getStyleClass().add("nav-button");
@@ -42,19 +41,19 @@ public class NavBar extends HBox {
 
         mHomeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mWrapper.setCenter(new HomePageView(mWrapper, mSaveManager));
+                mWrapper.setCenter(new HomePageView(mWrapper, mSaveHandler));
             }
         });
 
         mTaskButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mWrapper.setCenter(new TaskView(mSaveManager));
+                mWrapper.setCenter(new TaskView(mSaveHandler));
             }
         });
 
         mSetupButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mWrapper.setCenter(new SetupView(mWrapper, mSaveManager));
+                mWrapper.setCenter(new SetupView(mWrapper, mSaveHandler));
             }
         });
 

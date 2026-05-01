@@ -2,7 +2,7 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.NavBar;
@@ -27,13 +27,13 @@ public class App extends Application {
         TodoList dailyTodos = new TodoList();
         TodoList backlogTodos = new TodoList();
         TodoList allTodos = new TodoList();
-        SaveManager saveManager = new SaveManager(courseList, dailyTodos, backlogTodos, allTodos);
+        SaveHandler saveHandler = new SaveHandler(courseList, dailyTodos, backlogTodos, allTodos);
 
-        saveManager.load();
+        saveHandler.load();
 
         BorderPane wrapper = new BorderPane();
-        NavBar navBar = new NavBar(wrapper, saveManager);
-        wrapper.setCenter(new HomePageView(wrapper, saveManager));
+        NavBar navBar = new NavBar(wrapper, saveHandler);
+        wrapper.setCenter(new HomePageView(wrapper, saveHandler));
         wrapper.setTop(navBar);
 
         Scene scene = new Scene(wrapper);
@@ -41,7 +41,7 @@ public class App extends Application {
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
-                saveManager.save();
+                saveHandler.save();
             }
         });
 

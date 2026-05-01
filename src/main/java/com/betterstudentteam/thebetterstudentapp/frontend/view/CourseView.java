@@ -3,7 +3,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.*;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
@@ -18,7 +18,7 @@ public class CourseView extends BorderPane {
     DisplayPanel mGradePanel;
     AssignmentListPanel mAssignmentListPanel;
 
-    public CourseView(Course course, SaveManager saveManager) {
+    public CourseView(Course course, SaveHandler saveHandler) {
         mInstructorPanel = new DisplayPanel(
                 "Instructor: " + course.getInstructor(),
                 Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
@@ -47,10 +47,11 @@ public class CourseView extends BorderPane {
                 "display-panel"
         );
 
-        mAssignmentListPanel = new AssignmentListPanel(course, saveManager);
+        mAssignmentListPanel = new AssignmentListPanel(course, saveHandler);
 
+        // render assignments
         for (Assignment assignment : course.getAssignmentList().getList()) {
-            mAssignmentListPanel.displayAssignment(assignment);
+            mAssignmentListPanel.renderAssignment(assignment);
         }
 
         mLeftContainer = new VBox();

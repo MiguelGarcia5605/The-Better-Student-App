@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveManager {
+public class SaveHandler {
 
     private static final String SAVE_FILE_PATH = System.getProperty("user.home") + "/save.txt";
     private static final String REGEX = "|";
@@ -22,7 +22,7 @@ public class SaveManager {
     private TodoList mBacklogTodos;
     private TodoList mAllTodos;
 
-    public SaveManager(ArrayList<Course> courseList, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos) {
+    public SaveHandler(ArrayList<Course> courseList, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos) {
         mCourseList = courseList;
         mDailyTodos = dailyTodos;
         mBacklogTodos = backlogTodos;
