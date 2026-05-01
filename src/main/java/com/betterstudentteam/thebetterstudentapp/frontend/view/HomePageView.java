@@ -2,11 +2,12 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.quote.QuoteService;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.CourseViewPanel;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.QuotePanel;
+import com.betterstudentteam.thebetterstudentapp.frontend.panels.DisplayPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
@@ -16,15 +17,22 @@ import java.util.ArrayList;
 public class HomePageView extends BorderPane {
 
     private VBox mDailyQuoteAndCourseViewsContainer;
-    private QuotePanel mQuotePanel;
+    private DisplayPanel mQuotePanel;
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
     private ArrayList<Course> mCourseList;
     private SaveManager mSaveManager;
     private TodoList mDailyTodos;
+    private QuoteService mQuoteService = new QuoteService();
 
     public HomePageView(BorderPane wrapper, SaveManager saveManager) {
-        mQuotePanel = new QuotePanel();
+        mQuotePanel = new DisplayPanel(
+                mQuoteService.getQuoteOfTheDay().getText(),
+                Display.SCREEN_BOUNDS.getHeight() / 5,
+                Display.SCREEN_BOUNDS.getHeight() / 5,
+                Double.MAX_VALUE
+        );
+
         mSaveManager = saveManager;
         mCourseViewPanel = new CourseViewPanel(wrapper, mSaveManager);
         mCourseList = mSaveManager.getCourseList();
