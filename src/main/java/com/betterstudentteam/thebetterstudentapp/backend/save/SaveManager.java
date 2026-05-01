@@ -171,4 +171,20 @@ public class SaveManager {
             System.err.println("Failed to load data: " + e.getMessage());
         }
     }
+
+    public ArrayList<Course> getCourseList() {
+        return mCourseList;
+    }
+
+    public TodoList getDailyTodos() {
+        return mDailyTodos;
+    }
+
+    public TodoList getBacklogTodos() {
+        return mBacklogTodos;
+    }
+
+    public TodoList getAllTodos() {
+        return mAllTodos;
+    }
 }

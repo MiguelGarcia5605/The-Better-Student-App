@@ -19,12 +19,18 @@ public class HomePageView extends BorderPane {
     private QuotePanel mQuotePanel;
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
+    private ArrayList<Course> mCourseList;
+    private SaveManager mSaveManager;
+    private TodoList mDailyTodos;
 
-    public HomePageView(BorderPane wrapper, ArrayList<Course> courseList, TodoList todoList, SaveManager saveManager) {
+    public HomePageView(BorderPane wrapper, SaveManager saveManager) {
         mQuotePanel = new QuotePanel();
-        mCourseViewPanel = new CourseViewPanel(wrapper, courseList, saveManager);
+        mSaveManager = saveManager;
+        mCourseViewPanel = new CourseViewPanel(wrapper, mSaveManager);
+        mCourseList = mSaveManager.getCourseList();
+        mDailyTodos = mSaveManager.getDailyTodos();
 
-        for (Course course : courseList) {
+        for (Course course : mCourseList) {
             String nextAssignment = "No upcoming assignments";
             if (!course.getAssignmentList().getList().isEmpty()) {
                 Assignment first = course.getAssignmentList().getList().getFirst();
@@ -48,7 +54,7 @@ public class HomePageView extends BorderPane {
         mQuotePanel.setMaxWidth(Double.MAX_VALUE);
         mCourseViewPanel.setMaxWidth(Double.MAX_VALUE);
 
-        mTaskPanel = new TaskPanel("Daily To-Do", todoList, saveManager);
+        mTaskPanel = new TaskPanel("Daily To-Do", mDailyTodos, mSaveManager);
 
         this.setLeft(mDailyQuoteAndCourseViewsContainer);
         this.setRight(mTaskPanel);

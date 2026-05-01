@@ -18,10 +18,10 @@ public class CourseViewPanel extends VBox {
     private ArrayList<Course> mCourseList;
     private SaveManager mSaveManager;
 
-    public CourseViewPanel(BorderPane wrapper, ArrayList<Course> courseList, SaveManager saveManager) {
+    public CourseViewPanel(BorderPane wrapper, SaveManager saveManager) {
         mWrapper = wrapper;
-        mCourseList = courseList;
         mSaveManager = saveManager;
+        mCourseList = saveManager.getCourseList();
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -44,7 +44,7 @@ public class CourseViewPanel extends VBox {
 
         courseCard.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                mWrapper.setCenter(new CourseView(mWrapper, course, mCourseList, mSaveManager));
+                mWrapper.setCenter(new CourseView(course, mSaveManager));
             }
         });
 

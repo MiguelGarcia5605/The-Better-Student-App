@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.util.ArrayList;
 
 public class App extends Application {
@@ -33,8 +32,8 @@ public class App extends Application {
         saveManager.load();
 
         BorderPane wrapper = new BorderPane();
-        NavBar navBar = new NavBar(wrapper, courseList, dailyTodos, backlogTodos, allTodos, saveManager);
-        wrapper.setCenter(new HomePageView(wrapper, courseList, dailyTodos, saveManager));
+        NavBar navBar = new NavBar(wrapper, saveManager);
+        wrapper.setCenter(new HomePageView(wrapper, saveManager));
         wrapper.setTop(navBar);
 
         Scene scene = new Scene(wrapper);

@@ -1,6 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.util.ID;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -134,7 +135,7 @@ public class CourseFormRow extends HBox {
         }
 
         return new Course(
-                UUID.randomUUID().toString(),
+                ID.generateID(),
                 mCourseName.getText(),
                 mInstructor.getText(),
                 new ArrayList<>(mMeetingDays.getSelectionModel().getSelectedItems()),

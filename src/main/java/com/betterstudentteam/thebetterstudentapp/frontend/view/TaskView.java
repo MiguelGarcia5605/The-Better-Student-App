@@ -12,10 +12,22 @@ public class TaskView extends BorderPane {
     private TaskPanel mBacklogTasksPanel;
     private TaskPanel mDailyTasksPanel;
 
-    public TaskView(TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos, SaveManager saveManager) {
-        mDailyTasksPanel = new TaskPanel("Daily To-Do", dailyTodos, saveManager);
-        mBacklogTasksPanel = new TaskPanel("Backlog To-Do", backlogTodos, saveManager);
-        mAllTasksPanel = new TaskPanel("All Tasks", allTodos, saveManager);
+    private TodoList mDailyTodos;
+    private TodoList mBacklogTodos;
+    private TodoList mAllTodos;
+
+    private SaveManager mSaveManager;
+
+    public TaskView(SaveManager saveManager) {
+        mSaveManager = saveManager;
+
+        mDailyTodos = mSaveManager.getDailyTodos();
+        mBacklogTodos = mSaveManager.getBacklogTodos();
+        mAllTodos = mSaveManager.getAllTodos();
+
+        mDailyTasksPanel = new TaskPanel("Daily To-Do", mDailyTodos, saveManager);
+        mBacklogTasksPanel = new TaskPanel("Backlog To-Do", mBacklogTodos, saveManager);
+        mAllTasksPanel = new TaskPanel("All Tasks", mAllTodos, saveManager);
 
         this.setLeft(mAllTasksPanel);
         this.setCenter(mBacklogTasksPanel);

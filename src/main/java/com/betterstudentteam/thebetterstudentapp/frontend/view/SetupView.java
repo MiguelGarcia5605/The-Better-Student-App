@@ -22,7 +22,14 @@ public class SetupView extends BorderPane {
     private Button mAddCourseButton;
     private Button mSaveButton;
 
-    public SetupView(BorderPane wrapper, ArrayList<Course> courseList, TodoList todoList, SaveManager saveManager) {
+    private ArrayList<Course> mCourseList;
+
+    private SaveManager mSaveManager;
+
+    public SetupView(BorderPane wrapper, SaveManager saveManager) {
+        mSaveManager = saveManager;
+
+        mCourseList = mSaveManager.getCourseList();
 
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
@@ -30,10 +37,10 @@ public class SetupView extends BorderPane {
         mCourseFormList = new VBox();
         mCourseFormList.setSpacing(10);
 
-        if (courseList.isEmpty()) {
+        if (mCourseList.isEmpty()) {
             mCourseFormList.getChildren().add(new CourseFormRow(mCourseFormList));
         } else {
-            for (Course course : courseList) {
+            for (Course course : mCourseList) {
                 CourseFormRow row = new CourseFormRow(mCourseFormList);
                 row.loadCourse(course);
                 mCourseFormList.getChildren().add(row);
@@ -75,10 +82,10 @@ public class SetupView extends BorderPane {
                     newCourses.add(course);
                 }
 
-                courseList.clear();
-                courseList.addAll(newCourses);
+                mCourseList.clear();
+                mCourseList.addAll(newCourses);
                 saveManager.save();
-                wrapper.setCenter(new HomePageView(wrapper, courseList, todoList, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, saveManager));
             }
         });
 

@@ -5,6 +5,7 @@ import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentLi
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.util.ID;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -84,8 +84,7 @@ public class AssignmentListPanel extends VBox {
         mErrorLabel.setVisible(false);
 
         Assignment assignment = new Assignment(
-                AssignmentList.generateID(),
-                "Homework",
+                ID.generateID(),
                 name,
                 dueDate
         );

@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-
 import java.util.ArrayList;
 
 public class NavBar extends HBox {
@@ -24,14 +23,23 @@ public class NavBar extends HBox {
     private TodoList mBacklogTodos;
     private TodoList mAllTodos;
 
-    public NavBar(BorderPane wrapper, ArrayList<Course> courseList, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos, SaveManager saveManager) {
+    private ArrayList<Course> mCourseList;
+
+    private BorderPane mWrapper;
+    private SaveManager mSaveManager;
+
+    public NavBar(BorderPane wrapper, SaveManager saveManager) {
         mHomeButton = new Button("Home");
         mTaskButton = new Button("Tasks");
         mSetupButton = new Button("Setup");
 
-        mDailyTodos = dailyTodos;
-        mBacklogTodos = backlogTodos;
-        mAllTodos = allTodos;
+        mWrapper = wrapper;
+        mSaveManager = saveManager;
+
+        mDailyTodos = mSaveManager.getDailyTodos();
+        mBacklogTodos = mSaveManager.getBacklogTodos();
+        mAllTodos = mSaveManager.getAllTodos();
+        mCourseList = mSaveManager.getCourseList();
 
         mHomeButton.getStyleClass().add("nav-button");
         mTaskButton.getStyleClass().add("nav-button");
@@ -39,19 +47,19 @@ public class NavBar extends HBox {
 
         mHomeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new HomePageView(wrapper, courseList, dailyTodos, saveManager));
+                mWrapper.setCenter(new HomePageView(mWrapper, mSaveManager));
             }
         });
 
         mTaskButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new TaskView(dailyTodos, backlogTodos, allTodos, saveManager));
+                mWrapper.setCenter(new TaskView(mSaveManager));
             }
         });
 
         mSetupButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new SetupView(wrapper, courseList, dailyTodos, saveManager));
+                mWrapper.setCenter(new SetupView(mWrapper, mSaveManager));
             }
         });
 

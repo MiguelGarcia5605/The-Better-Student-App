@@ -24,7 +24,7 @@ public class CourseView extends BorderPane {
     AssignmentListPanel mAssignmentListPanel;
     GradePanel mGradePanel;
 
-    public CourseView(BorderPane wrapper, Course course, ArrayList<Course> courseList, SaveManager saveManager) {
+    public CourseView(Course course, SaveManager saveManager) {
         mImportantDatePanel = new ImportantDatePanel(
                 course.getMeetingDays().toString() + " " +
                         course.getStartTime() + " - " + course.getEndTime()
