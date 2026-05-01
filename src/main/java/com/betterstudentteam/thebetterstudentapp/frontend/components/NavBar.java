@@ -1,6 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
@@ -18,11 +18,11 @@ public class NavBar extends HBox {
     private Button mTaskButton;
     private Button mSetupButton;
 
-    private TodoManager mDailyTodos;
-    private TodoManager mBacklogTodos;
-    private TodoManager mAllTodos;
+    private TodoList mDailyTodos;
+    private TodoList mBacklogTodos;
+    private TodoList mAllTodos;
 
-    public NavBar(BorderPane wrapper, CourseManager courseManager, TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos, UserSetupManager setupManager, SaveManager saveManager) {
+    public NavBar(BorderPane wrapper, CourseManager courseManager, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos, UserSetupManager setupManager, SaveManager saveManager) {
         mHomeButton = new Button("Home");
         mTaskButton = new Button("Tasks");
         mSetupButton = new Button("Setup");

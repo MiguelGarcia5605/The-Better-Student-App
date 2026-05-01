@@ -3,8 +3,8 @@ package com.betterstudentteam.thebetterstudentapp.backend.util;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoItem;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.Todo;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
 
 import java.io.*;
 import java.time.DayOfWeek;
@@ -19,13 +19,13 @@ public class SaveManager {
 
     private CourseManager mCourseManager;
     private AssignmentList mAssignmentList;
-    private TodoManager mTodoManager;
+    private TodoList mTodoList;
 
-    private TodoManager mDailyTodos;
-    private TodoManager mBacklogTodos;
-    private TodoManager mAllTodos;
+    private TodoList mDailyTodos;
+    private TodoList mBacklogTodos;
+    private TodoList mAllTodos;
 
-    public SaveManager(CourseManager courseManager, AssignmentList assignmentList, TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos) {
+    public SaveManager(CourseManager courseManager, AssignmentList assignmentList, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos) {
         mCourseManager = courseManager;
         mAssignmentList = assignmentList;
         mDailyTodos = dailyTodos;
@@ -67,19 +67,19 @@ public class SaveManager {
             }
 
             // Daily tasks
-            for (TodoItem todo : mDailyTodos.getAllTodos()) {
+            for (Todo todo : mDailyTodos.getList()) {
                 writer.write("TASK_DAILY|" + todo.getId() + "|" + todo.getTitle() + "|" + todo.getDueDate() + "|" + todo.isCompleted());
                 writer.newLine();
             }
 
             // Backlog tasks
-            for (TodoItem todo : mBacklogTodos.getAllTodos()) {
+            for (Todo todo : mBacklogTodos.getList()) {
                 writer.write("TASK_BACKLOG|" + todo.getId() + "|" + todo.getTitle() + "|" + todo.getDueDate() + "|" + todo.isCompleted());
                 writer.newLine();
             }
 
             // All tasks
-            for (TodoItem todo : mAllTodos.getAllTodos()) {
+            for (Todo todo : mAllTodos.getList()) {
                 writer.write("TASK_ALL|" + todo.getId() + "|" + todo.getTitle() + "|" + todo.getDueDate() + "|" + todo.isCompleted());
                 writer.newLine();
             }
@@ -127,19 +127,19 @@ public class SaveManager {
                     mAssignmentList.add(assignment);
 
                 } else if (parts[0].equals("TASK_DAILY")) {
-                    TodoItem todo = new TodoItem(parts[1], parts[2], LocalDate.parse(parts[3]));
+                    Todo todo = new Todo(parts[1], parts[2], LocalDate.parse(parts[3]));
                     todo.setCompleted(Boolean.parseBoolean(parts[4]));
-                    mDailyTodos.loadTodo(todo);
+                    mDailyTodos.add(todo);
 
                 } else if (parts[0].equals("TASK_BACKLOG")) {
-                    TodoItem todo = new TodoItem(parts[1], parts[2], LocalDate.parse(parts[3]));
+                    Todo todo = new Todo(parts[1], parts[2], LocalDate.parse(parts[3]));
                     todo.setCompleted(Boolean.parseBoolean(parts[4]));
-                    mBacklogTodos.loadTodo(todo);
+                    mBacklogTodos.add(todo);
 
                 } else if (parts[0].equals("TASK_ALL")) {
-                    TodoItem todo = new TodoItem(parts[1], parts[2], LocalDate.parse(parts[3]));
+                    Todo todo = new Todo(parts[1], parts[2], LocalDate.parse(parts[3]));
                     todo.setCompleted(Boolean.parseBoolean(parts[4]));
-                    mAllTodos.loadTodo(todo);
+                    mAllTodos.add(todo);
                 }
             }
 

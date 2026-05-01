@@ -2,7 +2,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.CourseViewPanel;
@@ -21,7 +21,7 @@ public class HomePageView extends BorderPane {
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
 
-    public HomePageView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, SaveManager saveManager) {
+    public HomePageView(BorderPane wrapper, CourseManager courseManager, TodoList todoList, SaveManager saveManager) {
         mQuotePanel = new QuotePanel();
         mCourseViewPanel = new CourseViewPanel(wrapper, courseManager, saveManager);
 
@@ -50,7 +50,7 @@ public class HomePageView extends BorderPane {
         mQuotePanel.setMaxWidth(Double.MAX_VALUE);
         mCourseViewPanel.setMaxWidth(Double.MAX_VALUE);
 
-        mTaskPanel = new TaskPanel("Daily To-Do", todoManager, saveManager);
+        mTaskPanel = new TaskPanel("Daily To-Do", todoList, saveManager);
 
         this.setLeft(mDailyQuoteAndCourseViewsContainer);
         this.setRight(mTaskPanel);

@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupData;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
@@ -27,7 +27,7 @@ public class SetupView extends BorderPane {
     private Button mAddCourseButton;
     private Button mSaveButton;
 
-    public SetupView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, UserSetupManager setupManager, SaveManager saveManager) {
+    public SetupView(BorderPane wrapper, CourseManager courseManager, TodoList todoList, UserSetupManager setupManager, SaveManager saveManager) {
 
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
@@ -93,7 +93,7 @@ public class SetupView extends BorderPane {
 
                 setupManager.initializeUserCourses(setupData, courseRequests);
                 saveManager.save();
-                wrapper.setCenter(new HomePageView(wrapper, courseManager, todoManager, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, courseManager, todoList, saveManager));
             }
         });
 

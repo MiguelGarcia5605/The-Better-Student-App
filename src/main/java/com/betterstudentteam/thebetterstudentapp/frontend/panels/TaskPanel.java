@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoItem;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.Todo;
+import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
 import javafx.event.ActionEvent;
@@ -25,11 +25,11 @@ public class TaskPanel extends VBox {
     private Button mDailyNewTaskButton;
 
     private SaveManager mSaveManager;
-    private TodoManager mTodoManager;
+    private TodoList mTodoList;
 
-    public TaskPanel(String title, TodoManager todoManager, SaveManager saveManager) {
+    public TaskPanel(String title, TodoList todoList, SaveManager saveManager) {
         mSaveManager = saveManager;
-        mTodoManager = todoManager;
+        mTodoList = todoList;
 
         mDailyTasks = new Label(title);
         mDailyTasks.getStyleClass().add("daily-tasks-label");
@@ -45,7 +45,7 @@ public class TaskPanel extends VBox {
         this.getChildren().add(mDailyNewTaskContainer);
         this.getStyleClass().add("task-panel");
 
-        for (TodoItem item : todoManager.getAllTodos()) {
+        for (Todo item : todoList.getList()) {
             CheckBox task = new CheckBox(item.getTitle());
             task.setSelected(item.isCompleted());
             task.getStyleClass().add("task");
@@ -63,7 +63,7 @@ public class TaskPanel extends VBox {
 
     public void addTask(String taskName) {
         if (taskName.isEmpty()) return;
-        TodoItem item = mTodoManager.addTodo(taskName, LocalDate.now());
+        Todo item = mTodoList.addTodo(taskName, LocalDate.now());
         CheckBox task = new CheckBox(taskName);
         task.getStyleClass().add("task");
         mUserTaskList.add(task);
@@ -77,7 +77,7 @@ public class TaskPanel extends VBox {
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (task.isSelected()) {
-                    mTodoManager.deleteTodo(id);
+                    mTodoList.deleteTodo(id);
                     mUserTaskList.remove(task);
                     TaskPanel.this.getChildren().remove(task);
                     mSaveManager.save();
