@@ -1,6 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
@@ -36,7 +36,7 @@ public class HomePageView extends BorderPane {
             mCourseViewPanel.addCourseCard(
                     course,
                     nextAssignment,
-                    "Grade: " + course.getCurrentGrade() + "%"
+                    "Grade: " + course.getmGrade() + "%"
             );
         }
 

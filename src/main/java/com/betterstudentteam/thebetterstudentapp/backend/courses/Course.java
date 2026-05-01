@@ -1,7 +1,3 @@
-// USE CODE IN VIEWCONTROLLER  courseManager.getAllCourses();
-//  courseDetailsManager.loadCourseDetails(courseId);
-//
-
 package com.betterstudentteam.thebetterstudentapp.backend.courses;
 
 import java.time.DayOfWeek;
@@ -11,55 +7,64 @@ import java.util.List;
 
 public class Course {
 
-    private String id;
-    private String name;
-    private String instructor;
-    private List<DayOfWeek> meetingDays;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private String mID;
+    private String mName;
+    private String mInstructor;
+    private List<DayOfWeek> mMeetingDays;
+    private LocalTime mStartTime;
+    private LocalTime mEndTime;
 
-    private double currentGrade;  // this is calculated from Assignments
+    private double mGrade;
 
-    public Course(String id, String name, String instructor, List<DayOfWeek> meetingDays, LocalTime startTime, LocalTime endTime) {
-
-        this.id = id;
-        this.name = name;
-        this.instructor = instructor;
-        this.meetingDays = meetingDays;
-        this.startTime = startTime;
-        this.endTime = endTime;
-
-        this.currentGrade = 0.0; // placeholder until Grade Calculator is merged
-
+    public Course(String ID, String name, String instructor, List<DayOfWeek> meetingDays, LocalTime startTime, LocalTime endTime, double grade) {
+        mID = ID;
+        mName = name;
+        mInstructor = instructor;
+        mMeetingDays = meetingDays;
+        mStartTime = startTime;
+        mEndTime = endTime;
+        mGrade = grade;
     }
 
-//    Getters
-    public String getId() {
-        return id;
+    public String getID() {
+        return mID;
     }
     public String getName() {
-        return name;
+        return mName;
     }
     public String getInstructor() {
-        return instructor;
+        return mInstructor;
     }
     public List<DayOfWeek> getMeetingDays() {
-        return meetingDays;
+        return mMeetingDays;
     }
     public LocalTime getStartTime() {
-        return startTime;
+        return mStartTime;
     }
     public LocalTime getEndTime() {
-        return endTime;
+        return mEndTime;
     }
-    public double getCurrentGrade() {
-        return currentGrade;
-    }
-
-//    Setters
-    public void setCurrentGrade(double currentGrade) {
-        this.currentGrade = currentGrade;
+    public double getGrade() {
+        return mGrade;
     }
 
-    
+    public void setID(String ID) {mID = ID;}
+    public void setName(String name) {
+        mName = name;
+    }
+    public void setInstructor(String instructor) {
+        mInstructor = instructor;
+    }
+    public void setMeetingDays(List<DayOfWeek> meetingDays) {
+        mMeetingDays = meetingDays;
+    }
+    public void setStartTime(LocalTime startTime) {
+        mStartTime = startTime;
+    }
+    public void setEndTime(LocalTime endTime) {
+        mEndTime = endTime;
+    }
+    public void setGrade(double grade) {
+        mGrade = grade;
+    }
 }

@@ -2,7 +2,7 @@
 package com.betterstudentteam.thebetterstudentapp.backend.home_page;
 
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import java.util.List;
 
 

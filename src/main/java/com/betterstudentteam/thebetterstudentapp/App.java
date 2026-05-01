@@ -1,8 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
-import atlantafx.base.theme.PrimerLight;
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
@@ -27,13 +26,13 @@ public class App extends Application {
         primaryStage.setTitle(APP_NAME);
 
         // Create backend
-        AssignmentManager assignmentManager = new AssignmentManager();
-        CourseManager courseManager = new CourseManager(assignmentManager);
+        AssignmentList assignmentList = new AssignmentList();
+        CourseManager courseManager = new CourseManager(assignmentList);
         UserSetupManager setupManager = new UserSetupManager(courseManager);
         TodoManager dailyTodos = new TodoManager();
         TodoManager backlogTodos = new TodoManager();
         TodoManager allTodos = new TodoManager();
-        SaveManager saveManager = new SaveManager(courseManager, assignmentManager, dailyTodos, backlogTodos, allTodos);
+        SaveManager saveManager = new SaveManager(courseManager, assignmentList, dailyTodos, backlogTodos, allTodos);
 
         // Load saved data
         saveManager.load();

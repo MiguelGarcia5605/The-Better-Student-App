@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
@@ -86,7 +86,7 @@ public class AssignmentListPanel extends VBox {
         mErrorLabel.setVisible(false);
 
         Assignment assignment = new Assignment(
-                AssignmentManager.generateId(),
+                AssignmentList.generateId(),
                 name,
                 mCourseId,
                 dueDate,
@@ -119,10 +119,10 @@ public class AssignmentListPanel extends VBox {
             public void handle(ActionEvent e) {
                 mCourseManager.getAssignmentForCourse(mCourseId)
                         .stream()
-                        .filter(a -> a.getId().equals(assignment.getId()))
+                        .filter(a -> a.getmID().equals(assignment.getmID()))
                         .findFirst()
                         .ifPresent(a -> {
-                            mCourseManager.deleteAssignment(a.getId());
+                            mCourseManager.deleteAssignment(a.getmID());
                             AssignmentListPanel.this.getChildren().remove(assignmentCard);
                             mSaveManager.save();
                         });
@@ -134,7 +134,7 @@ public class AssignmentListPanel extends VBox {
 
     public void displayAssignment(String name, String dueDate) {
         Assignment dummy = new Assignment(
-                AssignmentManager.generateId(),
+                AssignmentList.generateId(),
                 name,
                 mCourseId,
                 LocalDate.parse(dueDate),

@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.backend.util;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoItem;
@@ -19,16 +19,16 @@ public class SaveManager {
     private static final String SAVE_FILE = System.getProperty("user.home") + "/betterstudent_data.txt";
 
     private CourseManager mCourseManager;
-    private AssignmentManager mAssignmentManager;
+    private AssignmentList mAssignmentList;
     private TodoManager mTodoManager;
 
     private TodoManager mDailyTodos;
     private TodoManager mBacklogTodos;
     private TodoManager mAllTodos;
 
-    public SaveManager(CourseManager courseManager, AssignmentManager assignmentManager, TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos) {
+    public SaveManager(CourseManager courseManager, AssignmentList assignmentList, TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos) {
         mCourseManager = courseManager;
-        mAssignmentManager = assignmentManager;
+        mAssignmentList = assignmentList;
         mDailyTodos = dailyTodos;
         mBacklogTodos = backlogTodos;
         mAllTodos = allTodos;
@@ -55,9 +55,9 @@ public class SaveManager {
             }
 
             // Save assignments
-            for (Assignment assignment : mAssignmentManager.getAllAssignments()) {
+            for (Assignment assignment : mAssignmentList.getList()) {
                 writer.write("ASSIGNMENT|" +
-                        assignment.getId() + "|" +
+                        assignment.getmID() + "|" +
                         assignment.getCourseId() + "|" +
                         assignment.getTitle() + "|" +
                         assignment.getDueDate() + "|" +
@@ -125,7 +125,7 @@ public class SaveManager {
 
                     Assignment assignment = new Assignment(id, title, courseId, dueDate, type, description);
                     assignment.setCompleted(completed);
-                    mAssignmentManager.addAssignment(assignment);
+                    mAssignmentList.add(assignment);
 
                 } else if (parts[0].equals("TASK_DAILY")) {
                     TodoItem todo = new TodoItem(parts[1], parts[2], LocalDate.parse(parts[3]));

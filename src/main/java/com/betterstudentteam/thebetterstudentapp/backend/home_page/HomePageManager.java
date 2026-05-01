@@ -1,22 +1,22 @@
 package com.betterstudentteam.thebetterstudentapp.backend.home_page;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.daily_quote.QuoteService;
 
 public class HomePageManager {
 
-    private AssignmentManager assignmentManager;
+    private AssignmentList assignmentList;
     private QuoteService quoteService;
 
-    public HomePageManager(AssignmentManager assignment, QuoteService quoteService) {
+    public HomePageManager(AssignmentList assignment, QuoteService quoteService) {
 
-        this.assignmentManager = assignmentManager;
+        this.assignmentList = assignmentList;
         this.quoteService = quoteService;
     }
 
     public HomePageData loadHomePage() {
 
-        return new HomePageData( assignmentManager.getUpcomingAssignments(), assignmentManager.getOverdueAssignments(), quoteService.getQuoteOfTheDay().getText());
+        return new HomePageData( assignmentList.getUpcomingAssignments(), assignmentList.getOverdueAssignments(), quoteService.getQuoteOfTheDay().getText());
     }
 
 }

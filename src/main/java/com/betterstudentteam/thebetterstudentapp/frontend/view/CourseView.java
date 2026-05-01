@@ -1,6 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
@@ -33,7 +33,7 @@ public class CourseView extends BorderPane {
         );
 
         mGradePanel = new GradePanel(
-                "Grade: " + course.getCurrentGrade() + "%"
+                "Grade: " + course.getmGrade() + "%"
         );
 
         mAssignmentListPanel = new AssignmentListPanel(course.getId(), courseManager, saveManager);

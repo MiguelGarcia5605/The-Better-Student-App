@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.backend.courses;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,10 +11,10 @@ import java.util.List;
 public class CourseManager {
 
     private List<Course> courses = new ArrayList<>();
-    private AssignmentManager assignmentManager;
+    private AssignmentList assignmentList;
 
-    public CourseManager(AssignmentManager assignmentManager) {
-        this.assignmentManager = assignmentManager;
+    public CourseManager(AssignmentList assignmentList) {
+        this.assignmentList = assignmentList;
     }
 
     public void addCourse(Course course) {
@@ -34,7 +34,7 @@ public class CourseManager {
 
 //    Assingments for a specific course
     public List<Assignment> getAssignmentForCourse(String courseId) {
-        return assignmentManager.getAssignmentsByCourse(courseId);
+        return assignmentList.getAssignmentsByCourse(courseId);
     }
 
 //    Does this Course meet today?
@@ -48,11 +48,11 @@ public class CourseManager {
     }
 
     public void addAssignment(Assignment assignment) {
-        assignmentManager.addAssignment(assignment);
+        assignmentList.add(assignment);
     }
 
     public void deleteAssignment(String id) {
-        assignmentManager.deleteAssignment(id);
+        assignmentList.deleteAssignment(id);
     }
 
 }
