@@ -3,7 +3,6 @@ package com.betterstudentteam.thebetterstudentapp;
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.NavBar;
