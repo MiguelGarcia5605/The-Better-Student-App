@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.backend.daily_quote;
+package com.betterstudentteam.thebetterstudentapp.backend.quote;
 
 public class Quote {
     private String mText;

@@ -1,6 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupData;

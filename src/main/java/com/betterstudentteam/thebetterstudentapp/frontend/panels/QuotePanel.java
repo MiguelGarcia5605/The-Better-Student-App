@@ -1,6 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.daily_quote.QuoteService;
+import com.betterstudentteam.thebetterstudentapp.backend.quote.QuoteService;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

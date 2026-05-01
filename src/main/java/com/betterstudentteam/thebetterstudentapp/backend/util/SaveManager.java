@@ -2,7 +2,7 @@ package com.betterstudentteam.thebetterstudentapp.backend.util;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoItem;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
 

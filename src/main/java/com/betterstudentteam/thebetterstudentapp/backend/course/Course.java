@@ -1,10 +1,9 @@
-package com.betterstudentteam.thebetterstudentapp.backend.courses;
+package com.betterstudentteam.thebetterstudentapp.backend.course;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 

@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
