@@ -2,40 +2,43 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.AssignmentListPanel;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.AttendancePanel;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.GradePanel;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.ImportantDatePanel;
+import com.betterstudentteam.thebetterstudentapp.frontend.panels.*;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
 
 public class CourseView extends BorderPane {
     VBox mLeftContainer;
     VBox mRightContainer;
 
-    ImportantDatePanel mImportantDatePanel;
-    AttendancePanel mAttendancePanel;
+    DisplayPanel mSchedulePanel;
+    DisplayPanel mInstructorPanel;
+    DisplayPanel mGradePanel;
     AssignmentListPanel mAssignmentListPanel;
-    GradePanel mGradePanel;
 
     public CourseView(Course course, SaveManager saveManager) {
-        mImportantDatePanel = new ImportantDatePanel(
+        mInstructorPanel = new DisplayPanel(
+                "Instructor: " + course.getInstructor(),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
+                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
+        );
+
+        mGradePanel = new DisplayPanel(
+                "Grade: " + course.getGrade() + "%",
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
+                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
+        );
+
+        mSchedulePanel = new DisplayPanel(
                 course.getMeetingDays().toString() + " " +
-                        course.getStartTime() + " - " + course.getEndTime()
-        );
-
-        mAttendancePanel = new AttendancePanel(
-                "Instructor: " + course.getInstructor()
-        );
-
-        mGradePanel = new GradePanel(
-                "Grade: " + course.getGrade() + "%"
+                        course.getStartTime() + " - " + course.getEndTime(),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0),
+                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
         );
 
         mAssignmentListPanel = new AssignmentListPanel(course, saveManager);
@@ -53,9 +56,9 @@ public class CourseView extends BorderPane {
         mRightContainer.setPrefWidth(Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0));
         mRightContainer.setSpacing(10);
 
-        mLeftContainer.getChildren().add(mImportantDatePanel);
+        mLeftContainer.getChildren().add(mSchedulePanel);
         mLeftContainer.getChildren().add(mAssignmentListPanel);
-        mRightContainer.getChildren().add(mAttendancePanel);
+        mRightContainer.getChildren().add(mInstructorPanel);
         mRightContainer.getChildren().add(mGradePanel);
 
         this.setLeft(mLeftContainer);

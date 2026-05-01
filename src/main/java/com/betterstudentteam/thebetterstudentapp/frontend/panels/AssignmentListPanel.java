@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
@@ -16,6 +15,9 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A panel that displays course assignments
+ */
 public class AssignmentListPanel extends VBox {
 
     private Label mErrorLabel;
@@ -39,7 +41,7 @@ public class AssignmentListPanel extends VBox {
         mAssignmentNameField.getStyleClass().add("task-field");
 
         mAssignmentDueDateField = new TextField();
-        mAssignmentDueDateField.setPromptText("Due date (e.g. 2026-05-01)");
+        mAssignmentDueDateField.setPromptText("yyyy-mm-dd");
         mAssignmentDueDateField.getStyleClass().add("task-field");
 
         mAddAssignmentButton = new Button("+");
@@ -66,12 +68,14 @@ public class AssignmentListPanel extends VBox {
         String name = mAssignmentNameField.getText();
         String dueDateText = mAssignmentDueDateField.getText();
 
+        // Check if fields are empty
         if (name.isEmpty() || dueDateText.isEmpty()) {
             mErrorLabel.setText("Please fill in all fields.");
             mErrorLabel.setVisible(true);
             return;
         }
 
+        // Check to make sure date is formatted correctly
         LocalDate dueDate;
         try {
             dueDate = LocalDate.parse(dueDateText);
@@ -103,7 +107,7 @@ public class AssignmentListPanel extends VBox {
         nameLabel.getStyleClass().add("course-card-detail");
         dueDateLabel.getStyleClass().add("course-card-detail");
 
-        Button deleteButton = new Button("✕");
+        Button deleteButton = new Button("x");
         deleteButton.getStyleClass().add("delete-button");
 
         VBox info = new VBox(nameLabel, dueDateLabel);

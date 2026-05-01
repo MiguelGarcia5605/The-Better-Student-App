@@ -4,6 +4,9 @@ import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * A panel that diplays attendance
+ */
 public class AttendancePanel extends VBox {
 
     private Label mAttendance;
