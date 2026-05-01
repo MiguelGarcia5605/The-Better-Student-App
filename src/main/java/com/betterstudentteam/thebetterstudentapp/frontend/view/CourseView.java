@@ -23,22 +23,28 @@ public class CourseView extends BorderPane {
                 "Instructor: " + course.getInstructor(),
                 Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
                 Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
-                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
+                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0) - 60,
+                "display-panel-label",
+                "display-panel"
         );
 
         mGradePanel = new DisplayPanel(
                 "Grade: " + course.getGrade() + "%",
                 Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
                 Display.SCREEN_BOUNDS.getHeight() * (1.0 / 2.0),
-                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
+                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0) - 60,
+                "display-panel-label",
+                "display-panel"
         );
 
         mSchedulePanel = new DisplayPanel(
                 course.getMeetingDays().toString() + " " +
                         course.getStartTime() + " - " + course.getEndTime(),
-                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0),
-                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 6.0),
-                Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0)
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 4.0),
+                Display.SCREEN_BOUNDS.getHeight() * (1.0 / 4.0),
+                Display.SCREEN_BOUNDS.getWidth() * (2.0 / 3.0),
+                "display-panel-label",
+                "display-panel"
         );
 
         mAssignmentListPanel = new AssignmentListPanel(course, saveManager);
@@ -53,7 +59,7 @@ public class CourseView extends BorderPane {
         mLeftContainer.setPrefWidth(Display.SCREEN_BOUNDS.getWidth() * (2.0 / 3.0));
         mLeftContainer.setSpacing(10);
 
-        mRightContainer.setPrefWidth(Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0));
+        mRightContainer.setPrefWidth(Display.SCREEN_BOUNDS.getWidth() * (1.0 / 3.0) - 40);
         mRightContainer.setSpacing(10);
 
         mLeftContainer.getChildren().add(mSchedulePanel);
@@ -64,7 +70,8 @@ public class CourseView extends BorderPane {
         this.setLeft(mLeftContainer);
         this.setRight(mRightContainer);
         this.setPadding(new Insets(20));
-        BorderPane.setMargin(mRightContainer, new Insets(0, 20, 0, 10));
-        this.getStyleClass().add("home-page-pane");
+        BorderPane.setMargin(mLeftContainer, new Insets(0, 10, 0, 0));
+        BorderPane.setMargin(mRightContainer, new Insets(0, 0, 0, 10));
+        this.getStyleClass().add("view-pane");
     }
 }

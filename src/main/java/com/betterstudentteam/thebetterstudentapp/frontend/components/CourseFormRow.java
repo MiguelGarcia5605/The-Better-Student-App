@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,9 +31,17 @@ public class CourseFormRow extends HBox {
     private Popup mDaysPopup;
     private TextField mStartTime;
     private TextField mEndTime;
+    private TextField mGrade;
     private Button mDeleteButton;
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
+    private static final DayOfWeek[] MEETING_TIME_SELECTION = {
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY
+    };
 
     public CourseFormRow(VBox parentList) {
         mCourseName = new TextField();
@@ -46,7 +55,7 @@ public class CourseFormRow extends HBox {
         mDaysButton = new Button("Day(s)");
         mDaysButton.getStyleClass().add("setup-field");
 
-        mMeetingDays = new ListView<>(FXCollections.observableArrayList(DayOfWeek.values()));
+        mMeetingDays = new ListView<>(FXCollections.observableArrayList(MEETING_TIME_SELECTION));
         mMeetingDays.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         mMeetingDays.setPrefHeight(180);
         mMeetingDays.setPrefWidth(150);
@@ -86,12 +95,16 @@ public class CourseFormRow extends HBox {
         });
 
         mStartTime = new TextField();
-        mStartTime.setPromptText("Start (e.g. 9:00)");
+        mStartTime.setPromptText("Start time");
         mStartTime.getStyleClass().add("setup-field");
 
         mEndTime = new TextField();
-        mEndTime.setPromptText("End (e.g. 10:30)");
+        mEndTime.setPromptText("End time");
         mEndTime.getStyleClass().add("setup-field");
+
+        mGrade = new TextField();
+        mGrade.setPromptText("Grade");
+        mGrade.getStyleClass().add("setup-field");
 
         mDeleteButton = new Button("✕");
         mDeleteButton.getStyleClass().add("delete-button");
@@ -101,7 +114,7 @@ public class CourseFormRow extends HBox {
             }
         });
 
-        this.getChildren().addAll(mCourseName, mInstructor, mDaysButton, mStartTime, mEndTime, mDeleteButton);
+        this.getChildren().addAll(mCourseName, mInstructor, mDaysButton, mStartTime, mEndTime, mGrade, mDeleteButton);
         this.setSpacing(10);
         this.getStyleClass().add("setup-form-row");
     }
@@ -111,6 +124,7 @@ public class CourseFormRow extends HBox {
         mInstructor.setText(course.getInstructor());
         mStartTime.setText(course.getStartTime().format(TIME_FORMATTER));
         mEndTime.setText(course.getEndTime().format(TIME_FORMATTER));
+        mGrade.setText(Double.toString(course.getGrade()));
         for (DayOfWeek day : course.getMeetingDays()) {
             mMeetingDays.getSelectionModel().select(day.ordinal());
         }
@@ -121,7 +135,8 @@ public class CourseFormRow extends HBox {
                 mInstructor.getText().isEmpty() ||
                 mMeetingDays.getSelectionModel().getSelectedItems().isEmpty() ||
                 mStartTime.getText().isEmpty() ||
-                mEndTime.getText().isEmpty()) {
+                mEndTime.getText().isEmpty() ||
+                mGrade.getText().isEmpty()) {
             return null;
         }
 
@@ -141,7 +156,7 @@ public class CourseFormRow extends HBox {
                 new ArrayList<>(mMeetingDays.getSelectionModel().getSelectedItems()),
                 startTime,
                 endTime,
-                0.0
+                Double.parseDouble(mGrade.getText())
         );
     }
 }

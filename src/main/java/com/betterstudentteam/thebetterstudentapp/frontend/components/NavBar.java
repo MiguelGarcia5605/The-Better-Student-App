@@ -1,17 +1,18 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
-import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
+import atlantafx.base.theme.CupertinoLight;
+import atlantafx.base.theme.PrimerDark;
+import atlantafx.base.theme.PrimerLight;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.TaskView;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.SetupView;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import java.util.ArrayList;
 
 public class NavBar extends HBox {
 
@@ -19,11 +20,7 @@ public class NavBar extends HBox {
     private Button mTaskButton;
     private Button mSetupButton;
 
-    private TodoList mDailyTodos;
-    private TodoList mBacklogTodos;
-    private TodoList mAllTodos;
-
-    private ArrayList<Course> mCourseList;
+    private Button mStyleModeButton;
 
     private BorderPane mWrapper;
     private SaveManager mSaveManager;
@@ -33,13 +30,11 @@ public class NavBar extends HBox {
         mTaskButton = new Button("Tasks");
         mSetupButton = new Button("Setup");
 
+        mStyleModeButton = new Button("[-]");
+        mStyleModeButton.getStyleClass().add("style-mode-button");
+
         mWrapper = wrapper;
         mSaveManager = saveManager;
-
-        mDailyTodos = mSaveManager.getDailyTodos();
-        mBacklogTodos = mSaveManager.getBacklogTodos();
-        mAllTodos = mSaveManager.getAllTodos();
-        mCourseList = mSaveManager.getCourseList();
 
         mHomeButton.getStyleClass().add("nav-button");
         mTaskButton.getStyleClass().add("nav-button");
@@ -63,7 +58,17 @@ public class NavBar extends HBox {
             }
         });
 
-        this.getChildren().addAll(mHomeButton, mTaskButton, mSetupButton);
+        mStyleModeButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                if (Application.getUserAgentStylesheet().equals(new PrimerDark().getUserAgentStylesheet())) {
+                    Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+                } else {
+                    Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+                }
+            }
+        });
+
+        this.getChildren().addAll(mHomeButton, mTaskButton, mSetupButton, mStyleModeButton);
         this.getStyleClass().add("nav-bar");
         this.setSpacing(10);
     }

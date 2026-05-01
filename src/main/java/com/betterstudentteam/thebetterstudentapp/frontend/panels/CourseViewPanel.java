@@ -10,18 +10,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-
 public class CourseViewPanel extends VBox {
 
     private BorderPane mWrapper;
-    private ArrayList<Course> mCourseList;
     private SaveManager mSaveManager;
 
     public CourseViewPanel(BorderPane wrapper, SaveManager saveManager) {
         mWrapper = wrapper;
         mSaveManager = saveManager;
-        mCourseList = saveManager.getCourseList();
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -40,8 +36,8 @@ public class CourseViewPanel extends VBox {
 
         VBox courseCard = new VBox(courseLabel, assignmentLabel, gradeLabel);
         courseCard.getStyleClass().add("course-card");
-        courseCard.setStyle("-fx-cursor: hand;");
 
+        // On click
         courseCard.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 mWrapper.setCenter(new CourseView(course, mSaveManager));

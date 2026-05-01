@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
@@ -60,6 +62,22 @@ public class AssignmentListPanel extends VBox {
         mAddAssignmentButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 addAssignment();
+            }
+        });
+
+        mAssignmentNameField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addAssignment();
+                }
+            }
+        });
+
+        mAssignmentDueDateField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addAssignment();
+                }
             }
         });
     }

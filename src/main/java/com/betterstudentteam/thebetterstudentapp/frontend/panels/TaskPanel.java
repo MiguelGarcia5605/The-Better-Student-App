@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
@@ -44,12 +46,30 @@ public class TaskPanel extends VBox {
         this.getChildren().add(mDailyNewTaskContainer);
         this.getStyleClass().add("task-panel");
 
+        mDailyNewTaskField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addTask(mDailyNewTaskField.getText());
+                }
+            }
+        });
+
         for (Todo item : todoList.getList()) {
             CheckBox task = new CheckBox(item.getTitle());
             task.getStyleClass().add("task");
             mUserTaskList.add(task);
             this.getChildren().add(this.getChildren().size() - 1, task);
-            wireDeleteOnCheck(task, item.getID());
+
+            task.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    if (task.isSelected()) {
+                        mTodoList.remove(item.getID());
+                        mUserTaskList.remove(task);
+                        TaskPanel.this.getChildren().remove(task);
+                        mSaveManager.save();
+                    }
+                }
+            });
         }
 
         mDailyNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -67,20 +87,18 @@ public class TaskPanel extends VBox {
         mUserTaskList.add(task);
         this.getChildren().add(this.getChildren().size() - 1, task);
         mDailyNewTaskField.setText("");
-        wireDeleteOnCheck(task, item.getID());
-        mSaveManager.save();
-    }
 
-    private void wireDeleteOnCheck(CheckBox task, String id) {
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (task.isSelected()) {
-                    mTodoList.remove(id);
+                    mTodoList.remove(item.getID());
                     mUserTaskList.remove(task);
                     TaskPanel.this.getChildren().remove(task);
                     mSaveManager.save();
                 }
             }
         });
+
+        mSaveManager.save();
     }
 }
