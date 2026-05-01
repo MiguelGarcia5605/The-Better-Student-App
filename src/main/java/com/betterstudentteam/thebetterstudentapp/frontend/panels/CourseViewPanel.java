@@ -2,7 +2,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.CourseView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -13,11 +13,11 @@ import javafx.scene.layout.VBox;
 public class CourseViewPanel extends VBox {
 
     private BorderPane mWrapper;
-    private SaveManager mSaveManager;
+    private SaveHandler mSaveHandler;
 
-    public CourseViewPanel(BorderPane wrapper, SaveManager saveManager) {
+    public CourseViewPanel(BorderPane wrapper, SaveHandler saveHandler) {
         mWrapper = wrapper;
-        mSaveManager = saveManager;
+        mSaveHandler = saveHandler;
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
         this.setMaxHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -40,7 +40,7 @@ public class CourseViewPanel extends VBox {
         // On click
         courseCard.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                mWrapper.setCenter(new CourseView(course, mSaveManager));
+                mWrapper.setCenter(new CourseView(course, mSaveHandler));
             }
         });
 

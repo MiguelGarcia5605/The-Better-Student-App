@@ -3,7 +3,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.Todo;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,36 +20,36 @@ import java.util.ArrayList;
 public class TaskPanel extends VBox {
     private ArrayList<CheckBox> mUserTaskList = new ArrayList<>();
 
-    private HBox mDailyNewTaskContainer;
-    private Label mDailyTasks;
-    private TextField mDailyNewTaskField;
-    private Button mDailyNewTaskButton;
+    private HBox mNewTaskContainer;
+    private Label mTasks;
+    private TextField mNewTaskField;
+    private Button mNewTaskButton;
 
-    private SaveManager mSaveManager;
+    private SaveHandler mSaveHandler;
     private TodoList mTodoList;
 
-    public TaskPanel(String title, TodoList todoList, SaveManager saveManager) {
-        mSaveManager = saveManager;
+    public TaskPanel(String title, TodoList todoList, SaveHandler saveHandler) {
+        mSaveHandler = saveHandler;
         mTodoList = todoList;
 
-        mDailyTasks = new Label(title);
-        mDailyTasks.getStyleClass().add("daily-tasks-label");
-        mDailyNewTaskField = new TextField();
-        mDailyNewTaskField.setPromptText("Add task...");
-        mDailyNewTaskField.getStyleClass().add("task-field");
-        mDailyNewTaskButton = new Button("+");
-        mDailyNewTaskButton.getStyleClass().add("add-task-button");
-        mDailyNewTaskContainer = new HBox(mDailyNewTaskButton, mDailyNewTaskField);
-        mDailyNewTaskButton.getStyleClass().add("new-task-container");
-        this.getChildren().add(mDailyTasks);
+        mTasks = new Label(title);
+        mTasks.getStyleClass().add("daily-tasks-label");
+        mNewTaskField = new TextField();
+        mNewTaskField.setPromptText("Add task...");
+        mNewTaskField.getStyleClass().add("task-field");
+        mNewTaskButton = new Button("+");
+        mNewTaskButton.getStyleClass().add("add-task-button");
+        mNewTaskContainer = new HBox(mNewTaskButton, mNewTaskField);
+        mNewTaskButton.getStyleClass().add("new-task-container");
+        this.getChildren().add(mTasks);
         this.setMinWidth((Display.SCREEN_BOUNDS.getWidth() / 3 - 60));
-        this.getChildren().add(mDailyNewTaskContainer);
+        this.getChildren().add(mNewTaskContainer);
         this.getStyleClass().add("task-panel");
 
-        mDailyNewTaskField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        mNewTaskField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 if (e.getCode() == KeyCode.ENTER) {
-                    addTask(mDailyNewTaskField.getText());
+                    addTask(mNewTaskField.getText());
                 }
             }
         });
@@ -66,15 +66,15 @@ public class TaskPanel extends VBox {
                         mTodoList.remove(item.getID());
                         mUserTaskList.remove(task);
                         TaskPanel.this.getChildren().remove(task);
-                        mSaveManager.save();
+                        mSaveHandler.save();
                     }
                 }
             });
         }
 
-        mDailyNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
+        mNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                addTask(mDailyNewTaskField.getText());
+                addTask(mNewTaskField.getText());
             }
         });
     }
@@ -86,7 +86,7 @@ public class TaskPanel extends VBox {
         task.getStyleClass().add("task");
         mUserTaskList.add(task);
         this.getChildren().add(this.getChildren().size() - 1, task);
-        mDailyNewTaskField.setText("");
+        mNewTaskField.setText("");
 
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -94,11 +94,11 @@ public class TaskPanel extends VBox {
                     mTodoList.remove(item.getID());
                     mUserTaskList.remove(task);
                     TaskPanel.this.getChildren().remove(task);
-                    mSaveManager.save();
+                    mSaveHandler.save();
                 }
             }
         });
 
-        mSaveManager.save();
+        mSaveHandler.save();
     }
 }

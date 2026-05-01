@@ -4,7 +4,7 @@ import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.quote.QuoteService;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.CourseViewPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.DisplayPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
@@ -19,19 +19,19 @@ public class HomePageView extends BorderPane {
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
 
-    public HomePageView(BorderPane wrapper, SaveManager saveManager) {
+    public HomePageView(BorderPane wrapper, SaveHandler saveHandler) {
         mQuotePanel = new DisplayPanel(
                 new QuoteService().getQuoteOfTheDay().getText(),
-                Display.SCREEN_BOUNDS.getHeight() / 5,
-                Display.SCREEN_BOUNDS.getHeight() / 5,
+                Display.SCREEN_BOUNDS.getHeight() / 5.0,
+                Display.SCREEN_BOUNDS.getHeight() / 5.0,
                 Double.MAX_VALUE,
                 "quote-label",
                 "display-panel"
         );
 
-        mCourseViewPanel = new CourseViewPanel(wrapper, saveManager);
+        mCourseViewPanel = new CourseViewPanel(wrapper, saveHandler);
 
-        for (Course course : saveManager.getCourseList()) {
+        for (Course course : saveHandler.getCourseList()) {
             String nextAssignment = "No upcoming assignments";
             if (!course.getAssignmentList().getList().isEmpty()) {
                 Assignment first = course.getAssignmentList().getList().getFirst();
@@ -55,7 +55,7 @@ public class HomePageView extends BorderPane {
         mQuotePanel.setMaxWidth(Double.MAX_VALUE);
         mCourseViewPanel.setMaxWidth(Double.MAX_VALUE);
 
-        mTaskPanel = new TaskPanel("Daily To-Do", saveManager.getDailyTodos(), saveManager);
+        mTaskPanel = new TaskPanel("Daily To-Do", saveHandler.getDailyTodos(), saveHandler);
 
         this.setLeft(mDailyQuoteAndCourseViewsContainer);
         this.setRight(mTaskPanel);

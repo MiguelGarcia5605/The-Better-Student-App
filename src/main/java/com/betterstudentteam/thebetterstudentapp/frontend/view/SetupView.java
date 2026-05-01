@@ -1,13 +1,11 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import atlantafx.base.theme.CupertinoLight;
-import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveHandler;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.CourseFormRow;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -25,12 +23,12 @@ public class SetupView extends BorderPane {
 
     private ArrayList<Course> mCourseList;
 
-    private SaveManager mSaveManager;
+    private SaveHandler mSaveHandler;
 
-    public SetupView(BorderPane wrapper, SaveManager saveManager) {
-        mSaveManager = saveManager;
+    public SetupView(BorderPane wrapper, SaveHandler saveHandler) {
+        mSaveHandler = saveHandler;
 
-        mCourseList = mSaveManager.getCourseList();
+        mCourseList = mSaveHandler.getCourseList();
 
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
@@ -72,9 +70,12 @@ public class SetupView extends BorderPane {
             public void handle(ActionEvent e) {
                 ArrayList<Course> newCourses = new ArrayList<>();
 
-                for (var child : mCourseFormList.getChildren()) {
-                    CourseFormRow row = (CourseFormRow) child;
+                // Iterate through nodes
+                for (Node node : mCourseFormList.getChildren()) {
+                    CourseFormRow row = (CourseFormRow) node;
                     Course course = row.getCourse();
+
+                    // Show error label if course is not valid
                     if (course == null) {
                         mErrorLabel.setText("Please fill in all fields.");
                         mErrorLabel.setVisible(true);
@@ -85,11 +86,12 @@ public class SetupView extends BorderPane {
 
                 mCourseList.clear();
                 mCourseList.addAll(newCourses);
-                saveManager.save();
-                wrapper.setCenter(new HomePageView(wrapper, saveManager));
+                saveHandler.save();
+                wrapper.setCenter(new HomePageView(wrapper, saveHandler));
             }
         });
 
+        // Add course box
         HBox mButtonRow = new HBox(mAddCourseButton, mSaveButton, mErrorLabel);
         mButtonRow.setSpacing(10);
         mButtonRow.getStyleClass().add("setup-button-row");
