@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;

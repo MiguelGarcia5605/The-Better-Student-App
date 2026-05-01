@@ -2,9 +2,9 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.CourseViewPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.QuotePanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;

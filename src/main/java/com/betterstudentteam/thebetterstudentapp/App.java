@@ -2,8 +2,8 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.NavBar;
 import javafx.application.Application;

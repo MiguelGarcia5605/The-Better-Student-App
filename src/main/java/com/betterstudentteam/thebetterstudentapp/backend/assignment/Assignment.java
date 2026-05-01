@@ -35,7 +35,6 @@ public class Assignment {
         return mDueDate;
     }
 
-
     public void setID(String ID) {
         mID = ID;
     }

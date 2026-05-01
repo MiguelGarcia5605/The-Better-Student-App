@@ -1,10 +1,10 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupData;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.CourseFormRow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

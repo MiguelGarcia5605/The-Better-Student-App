@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.backend.todo_list;
+package com.betterstudentteam.thebetterstudentapp.backend.todo;
 
 import java.time.LocalDate;
 

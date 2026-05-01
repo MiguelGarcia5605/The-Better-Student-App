@@ -1,9 +1,9 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.Todo;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.Todo;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

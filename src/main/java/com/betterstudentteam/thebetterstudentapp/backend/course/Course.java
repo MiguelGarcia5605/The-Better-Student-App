@@ -6,9 +6,8 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 
-
 public class Course {
-    private AssignmentList mAssignments = new AssignmentList();
+    private AssignmentList mAssignmentList = new AssignmentList();
 
     private String mID;
     private String mName;
@@ -29,6 +28,7 @@ public class Course {
         mGrade = grade;
     }
 
+    public AssignmentList getAssignmentList() {return mAssignmentList;}
     public String getID() {
         return mID;
     }

@@ -3,7 +3,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.AssignmentListPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.AttendancePanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.GradePanel;
