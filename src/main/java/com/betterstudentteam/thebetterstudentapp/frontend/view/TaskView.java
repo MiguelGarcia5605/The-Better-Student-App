@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
@@ -12,15 +11,15 @@ public class TaskView extends BorderPane {
     private TaskPanel mBacklogTasksPanel;
     private TaskPanel mDailyTasksPanel;
 
-    public TaskView(TodoManager dailyTodos, TodoManager backlogTodos, TodoManager allTodos, SaveManager saveManager) {
-        mDailyTasksPanel = new TaskPanel("Daily To-Do", dailyTodos, saveManager);
-        mBacklogTasksPanel = new TaskPanel("Backlog To-Do", backlogTodos, saveManager);
-        mAllTasksPanel = new TaskPanel("All Tasks", allTodos, saveManager);
+    public TaskView(SaveManager saveManager) {
+        mDailyTasksPanel = new TaskPanel("Daily To-Do", saveManager.getDailyTodos(), saveManager);
+        mBacklogTasksPanel = new TaskPanel("Backlog To-Do", saveManager.getBacklogTodos(), saveManager);
+        mAllTasksPanel = new TaskPanel("All Tasks", saveManager.getAllTodos(), saveManager);
 
         this.setLeft(mAllTasksPanel);
         this.setCenter(mBacklogTasksPanel);
         this.setRight(mDailyTasksPanel);
-        this.getStyleClass().add("home-page-pane");
+        this.getStyleClass().add("view-pane");
 
         BorderPane.setMargin(mAllTasksPanel, new Insets(0, 20, 0, 20));
         BorderPane.setMargin(mBacklogTasksPanel, new Insets(0, 20, 0, 20));

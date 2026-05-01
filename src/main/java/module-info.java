@@ -15,4 +15,6 @@ module com.betterstudentteam.thebetterstudentapp {
     opens com.betterstudentteam.thebetterstudentapp.backend.util to javafx.fxml;
     exports com.betterstudentteam.thebetterstudentapp.frontend.components;
     opens com.betterstudentteam.thebetterstudentapp.frontend.components to javafx.fxml;
+    exports com.betterstudentteam.thebetterstudentapp.backend.save;
+    opens com.betterstudentteam.thebetterstudentapp.backend.save to javafx.fxml;
 }

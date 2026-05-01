@@ -1,42 +1,46 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.quote.QuoteService;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.CourseViewPanel;
-import com.betterstudentteam.thebetterstudentapp.frontend.panels.QuotePanel;
+import com.betterstudentteam.thebetterstudentapp.frontend.panels.DisplayPanel;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import java.util.List;
-
 public class HomePageView extends BorderPane {
 
     private VBox mDailyQuoteAndCourseViewsContainer;
-    private QuotePanel mQuotePanel;
+    private DisplayPanel mQuotePanel;
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
 
-    public HomePageView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, SaveManager saveManager) {
-        mQuotePanel = new QuotePanel();
-        mCourseViewPanel = new CourseViewPanel(wrapper, courseManager, saveManager);
+    public HomePageView(BorderPane wrapper, SaveManager saveManager) {
+        mQuotePanel = new DisplayPanel(
+                new QuoteService().getQuoteOfTheDay().getText(),
+                Display.SCREEN_BOUNDS.getHeight() / 5,
+                Display.SCREEN_BOUNDS.getHeight() / 5,
+                Double.MAX_VALUE,
+                "quote-label",
+                "display-panel"
+        );
 
-        for (Course course : courseManager.getAllCourses()) {
+        mCourseViewPanel = new CourseViewPanel(wrapper, saveManager);
+
+        for (Course course : saveManager.getCourseList()) {
             String nextAssignment = "No upcoming assignments";
-            List<Assignment> assignments = courseManager.getAssignmentForCourse(course.getId());
-            if (!assignments.isEmpty()) {
-                nextAssignment = "Next: " + assignments.getFirst().getTitle()
-                        + " - " + assignments.getFirst().getDueDate();
+            if (!course.getAssignmentList().getList().isEmpty()) {
+                Assignment first = course.getAssignmentList().getList().getFirst();
+                nextAssignment = "Next: " + first.getName() + " - " + first.getDueDate();
             }
             mCourseViewPanel.addCourseCard(
                     course,
                     nextAssignment,
-                    "Grade: " + course.getCurrentGrade() + "%"
+                    "Grade: " + course.getGrade() + "%"
             );
         }
 
@@ -51,11 +55,11 @@ public class HomePageView extends BorderPane {
         mQuotePanel.setMaxWidth(Double.MAX_VALUE);
         mCourseViewPanel.setMaxWidth(Double.MAX_VALUE);
 
-        mTaskPanel = new TaskPanel("Daily To-Do", todoManager, saveManager);
+        mTaskPanel = new TaskPanel("Daily To-Do", saveManager.getDailyTodos(), saveManager);
 
         this.setLeft(mDailyQuoteAndCourseViewsContainer);
         this.setRight(mTaskPanel);
-        this.getStyleClass().add("home-page-pane");
+        this.getStyleClass().add("view-pane");
 
         BorderPane.setMargin(mTaskPanel, new Insets(0, 40, 0, 10));
     }

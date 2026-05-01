@@ -1,13 +1,11 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupData;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import atlantafx.base.theme.CupertinoLight;
+import atlantafx.base.theme.PrimerDark;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.CourseFormRow;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -16,10 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class SetupView extends BorderPane {
 
@@ -28,7 +23,14 @@ public class SetupView extends BorderPane {
     private Button mAddCourseButton;
     private Button mSaveButton;
 
-    public SetupView(BorderPane wrapper, CourseManager courseManager, TodoManager todoManager, UserSetupManager setupManager, SaveManager saveManager) {
+    private ArrayList<Course> mCourseList;
+
+    private SaveManager mSaveManager;
+
+    public SetupView(BorderPane wrapper, SaveManager saveManager) {
+        mSaveManager = saveManager;
+
+        mCourseList = mSaveManager.getCourseList();
 
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
@@ -36,12 +38,10 @@ public class SetupView extends BorderPane {
         mCourseFormList = new VBox();
         mCourseFormList.setSpacing(10);
 
-        // Load existing courses into form rows
-        List<Course> existingCourses = courseManager.getAllCourses();
-        if (existingCourses.isEmpty()) {
+        if (mCourseList.isEmpty()) {
             mCourseFormList.getChildren().add(new CourseFormRow(mCourseFormList));
         } else {
-            for (Course course : existingCourses) {
+            for (Course course : mCourseList) {
                 CourseFormRow row = new CourseFormRow(mCourseFormList);
                 row.loadCourse(course);
                 mCourseFormList.getChildren().add(row);
@@ -70,31 +70,23 @@ public class SetupView extends BorderPane {
 
         mSaveButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                List<CourseSetupRequest> courseRequests = new ArrayList<>();
+                ArrayList<Course> newCourses = new ArrayList<>();
 
                 for (var child : mCourseFormList.getChildren()) {
                     CourseFormRow row = (CourseFormRow) child;
-                    CourseSetupRequest request = row.getRequest();
-                    if (request == null) {
+                    Course course = row.getCourse();
+                    if (course == null) {
                         mErrorLabel.setText("Please fill in all fields.");
                         mErrorLabel.setVisible(true);
                         return;
                     }
-                    courseRequests.add(request);
+                    newCourses.add(course);
                 }
 
-                // Clear existing courses before re-adding
-                courseManager.clearCourses();
-
-                UserSetupData setupData = new UserSetupData(
-                        courseRequests.size(),
-                        new HashMap<>(),
-                        0.0
-                );
-
-                setupManager.initializeUserCourses(setupData, courseRequests);
+                mCourseList.clear();
+                mCourseList.addAll(newCourses);
                 saveManager.save();
-                wrapper.setCenter(new HomePageView(wrapper, courseManager, todoManager, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, saveManager));
             }
         });
 

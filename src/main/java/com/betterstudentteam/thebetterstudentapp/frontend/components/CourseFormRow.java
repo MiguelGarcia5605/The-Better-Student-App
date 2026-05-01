@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
-import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.util.ID;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +18,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CourseFormRow extends HBox {
 
@@ -29,9 +31,17 @@ public class CourseFormRow extends HBox {
     private Popup mDaysPopup;
     private TextField mStartTime;
     private TextField mEndTime;
+    private TextField mGrade;
     private Button mDeleteButton;
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
+    private static final DayOfWeek[] MEETING_TIME_SELECTION = {
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY
+    };
 
     public CourseFormRow(VBox parentList) {
         mCourseName = new TextField();
@@ -45,7 +55,7 @@ public class CourseFormRow extends HBox {
         mDaysButton = new Button("Day(s)");
         mDaysButton.getStyleClass().add("setup-field");
 
-        mMeetingDays = new ListView<>(FXCollections.observableArrayList(DayOfWeek.values()));
+        mMeetingDays = new ListView<>(FXCollections.observableArrayList(MEETING_TIME_SELECTION));
         mMeetingDays.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         mMeetingDays.setPrefHeight(180);
         mMeetingDays.setPrefWidth(150);
@@ -85,12 +95,16 @@ public class CourseFormRow extends HBox {
         });
 
         mStartTime = new TextField();
-        mStartTime.setPromptText("Start (e.g. 9:00)");
+        mStartTime.setPromptText("Start time");
         mStartTime.getStyleClass().add("setup-field");
 
         mEndTime = new TextField();
-        mEndTime.setPromptText("End (e.g. 10:30)");
+        mEndTime.setPromptText("End time");
         mEndTime.getStyleClass().add("setup-field");
+
+        mGrade = new TextField();
+        mGrade.setPromptText("Grade");
+        mGrade.getStyleClass().add("setup-field");
 
         mDeleteButton = new Button("✕");
         mDeleteButton.getStyleClass().add("delete-button");
@@ -100,7 +114,7 @@ public class CourseFormRow extends HBox {
             }
         });
 
-        this.getChildren().addAll(mCourseName, mInstructor, mDaysButton, mStartTime, mEndTime, mDeleteButton);
+        this.getChildren().addAll(mCourseName, mInstructor, mDaysButton, mStartTime, mEndTime, mGrade, mDeleteButton);
         this.setSpacing(10);
         this.getStyleClass().add("setup-form-row");
     }
@@ -110,19 +124,19 @@ public class CourseFormRow extends HBox {
         mInstructor.setText(course.getInstructor());
         mStartTime.setText(course.getStartTime().format(TIME_FORMATTER));
         mEndTime.setText(course.getEndTime().format(TIME_FORMATTER));
-
+        mGrade.setText(Double.toString(course.getGrade()));
         for (DayOfWeek day : course.getMeetingDays()) {
-            int index = day.ordinal();
-            mMeetingDays.getSelectionModel().select(index);
+            mMeetingDays.getSelectionModel().select(day.ordinal());
         }
     }
 
-    public CourseSetupRequest getRequest() {
+    public Course getCourse() {
         if (mCourseName.getText().isEmpty() ||
                 mInstructor.getText().isEmpty() ||
                 mMeetingDays.getSelectionModel().getSelectedItems().isEmpty() ||
                 mStartTime.getText().isEmpty() ||
-                mEndTime.getText().isEmpty()) {
+                mEndTime.getText().isEmpty() ||
+                mGrade.getText().isEmpty()) {
             return null;
         }
 
@@ -135,16 +149,14 @@ public class CourseFormRow extends HBox {
             return null;
         }
 
-        List<DayOfWeek> selectedDays = new ArrayList<>(
-                mMeetingDays.getSelectionModel().getSelectedItems()
-        );
-
-        return new CourseSetupRequest(
+        return new Course(
+                ID.generateID(),
                 mCourseName.getText(),
                 mInstructor.getText(),
-                selectedDays,
+                new ArrayList<>(mMeetingDays.getSelectionModel().getSelectedItems()),
                 startTime,
-                endTime
+                endTime,
+                Double.parseDouble(mGrade.getText())
         );
     }
 }

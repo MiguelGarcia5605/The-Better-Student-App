@@ -1,34 +1,36 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignments.AssignmentManager;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.util.ID;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A panel that displays course assignments
+ */
 public class AssignmentListPanel extends VBox {
 
     private Label mErrorLabel;
     private TextField mAssignmentNameField;
     private TextField mAssignmentDueDateField;
     private Button mAddAssignmentButton;
-    private String mCourseId;
-    private CourseManager mCourseManager;
+    private Course mCourse;
     private SaveManager mSaveManager;
 
-    public AssignmentListPanel(String courseId, CourseManager courseManager, SaveManager saveManager) {
-        mCourseId = courseId;
-        mCourseManager = courseManager;
+    public AssignmentListPanel(Course course, SaveManager saveManager) {
+        mCourse = course;
         mSaveManager = saveManager;
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -41,7 +43,7 @@ public class AssignmentListPanel extends VBox {
         mAssignmentNameField.getStyleClass().add("task-field");
 
         mAssignmentDueDateField = new TextField();
-        mAssignmentDueDateField.setPromptText("Due date (e.g. 2026-05-01)");
+        mAssignmentDueDateField.setPromptText("yyyy-mm-dd");
         mAssignmentDueDateField.getStyleClass().add("task-field");
 
         mAddAssignmentButton = new Button("+");
@@ -62,18 +64,36 @@ public class AssignmentListPanel extends VBox {
                 addAssignment();
             }
         });
+
+        mAssignmentNameField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addAssignment();
+                }
+            }
+        });
+
+        mAssignmentDueDateField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addAssignment();
+                }
+            }
+        });
     }
 
     private void addAssignment() {
         String name = mAssignmentNameField.getText();
         String dueDateText = mAssignmentDueDateField.getText();
 
+        // Check if fields are empty
         if (name.isEmpty() || dueDateText.isEmpty()) {
             mErrorLabel.setText("Please fill in all fields.");
             mErrorLabel.setVisible(true);
             return;
         }
 
+        // Check to make sure date is formatted correctly
         LocalDate dueDate;
         try {
             dueDate = LocalDate.parse(dueDateText);
@@ -86,15 +106,12 @@ public class AssignmentListPanel extends VBox {
         mErrorLabel.setVisible(false);
 
         Assignment assignment = new Assignment(
-                AssignmentManager.generateId(),
+                ID.generateID(),
                 name,
-                mCourseId,
-                dueDate,
-                "Homework",
-                ""
+                dueDate
         );
 
-        mCourseManager.addAssignment(assignment);
+        mCourse.getAssignmentList().add(assignment);
         displayAssignment(assignment);
         mAssignmentNameField.clear();
         mAssignmentDueDateField.clear();
@@ -102,13 +119,13 @@ public class AssignmentListPanel extends VBox {
     }
 
     public void displayAssignment(Assignment assignment) {
-        Label nameLabel = new Label(assignment.getTitle());
+        Label nameLabel = new Label(assignment.getName());
         Label dueDateLabel = new Label(assignment.getDueDate().toString());
 
         nameLabel.getStyleClass().add("course-card-detail");
         dueDateLabel.getStyleClass().add("course-card-detail");
 
-        Button deleteButton = new Button("✕");
+        Button deleteButton = new Button("x");
         deleteButton.getStyleClass().add("delete-button");
 
         VBox info = new VBox(nameLabel, dueDateLabel);
@@ -117,30 +134,12 @@ public class AssignmentListPanel extends VBox {
 
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mCourseManager.getAssignmentForCourse(mCourseId)
-                        .stream()
-                        .filter(a -> a.getId().equals(assignment.getId()))
-                        .findFirst()
-                        .ifPresent(a -> {
-                            mCourseManager.deleteAssignment(a.getId());
-                            AssignmentListPanel.this.getChildren().remove(assignmentCard);
-                            mSaveManager.save();
-                        });
+                mCourse.getAssignmentList().remove(assignment.getID());
+                AssignmentListPanel.this.getChildren().remove(assignmentCard);
+                mSaveManager.save();
             }
         });
 
         this.getChildren().add(this.getChildren().size() - 2, assignmentCard);
-    }
-
-    public void displayAssignment(String name, String dueDate) {
-        Assignment dummy = new Assignment(
-                AssignmentManager.generateId(),
-                name,
-                mCourseId,
-                LocalDate.parse(dueDate),
-                "Homework",
-                ""
-        );
-        displayAssignment(dummy);
     }
 }

@@ -1,18 +1,19 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoItem;
-import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.Todo;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,11 +26,11 @@ public class TaskPanel extends VBox {
     private Button mDailyNewTaskButton;
 
     private SaveManager mSaveManager;
-    private TodoManager mTodoManager;
+    private TodoList mTodoList;
 
-    public TaskPanel(String title, TodoManager todoManager, SaveManager saveManager) {
+    public TaskPanel(String title, TodoList todoList, SaveManager saveManager) {
         mSaveManager = saveManager;
-        mTodoManager = todoManager;
+        mTodoList = todoList;
 
         mDailyTasks = new Label(title);
         mDailyTasks.getStyleClass().add("daily-tasks-label");
@@ -45,13 +46,30 @@ public class TaskPanel extends VBox {
         this.getChildren().add(mDailyNewTaskContainer);
         this.getStyleClass().add("task-panel");
 
-        for (TodoItem item : todoManager.getAllTodos()) {
+        mDailyNewTaskField.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    addTask(mDailyNewTaskField.getText());
+                }
+            }
+        });
+
+        for (Todo item : todoList.getList()) {
             CheckBox task = new CheckBox(item.getTitle());
-            task.setSelected(item.isCompleted());
             task.getStyleClass().add("task");
             mUserTaskList.add(task);
             this.getChildren().add(this.getChildren().size() - 1, task);
-            wireDeleteOnCheck(task, item.getId());
+
+            task.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    if (task.isSelected()) {
+                        mTodoList.remove(item.getID());
+                        mUserTaskList.remove(task);
+                        TaskPanel.this.getChildren().remove(task);
+                        mSaveManager.save();
+                    }
+                }
+            });
         }
 
         mDailyNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -63,26 +81,24 @@ public class TaskPanel extends VBox {
 
     public void addTask(String taskName) {
         if (taskName.isEmpty()) return;
-        TodoItem item = mTodoManager.addTodo(taskName, LocalDate.now());
+        Todo item = mTodoList.addTodo(taskName, LocalDate.now());
         CheckBox task = new CheckBox(taskName);
         task.getStyleClass().add("task");
         mUserTaskList.add(task);
         this.getChildren().add(this.getChildren().size() - 1, task);
         mDailyNewTaskField.setText("");
-        wireDeleteOnCheck(task, item.getId());
-        mSaveManager.save();
-    }
 
-    private void wireDeleteOnCheck(CheckBox task, String id) {
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (task.isSelected()) {
-                    mTodoManager.deleteTodo(id);
+                    mTodoList.remove(item.getID());
                     mUserTaskList.remove(task);
                     TaskPanel.this.getChildren().remove(task);
                     mSaveManager.save();
                 }
             }
         });
+
+        mSaveManager.save();
     }
 }
