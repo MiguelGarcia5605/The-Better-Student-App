@@ -1,4 +1,3 @@
-
 package com.betterstudentteam.thebetterstudentapp.backend.home_page;
 
 

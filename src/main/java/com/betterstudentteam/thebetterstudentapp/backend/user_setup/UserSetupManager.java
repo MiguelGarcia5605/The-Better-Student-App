@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.backend.user_setup;
 
 import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 
 import java.util.List;
 import java.util.UUID;

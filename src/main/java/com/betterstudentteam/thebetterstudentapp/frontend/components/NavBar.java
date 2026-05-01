@@ -1,6 +1,5 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.todo_list.TodoManager;
 import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;

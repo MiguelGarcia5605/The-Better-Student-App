@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
 import com.betterstudentteam.thebetterstudentapp.backend.courses.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.courses.CourseManager;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.util.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.CourseView;

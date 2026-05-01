@@ -1,11 +1,15 @@
 package com.betterstudentteam.thebetterstudentapp.backend.courses;
 
+import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Course {
+    private AssignmentList mAssignments = new AssignmentList();
 
     private String mID;
     private String mName;
