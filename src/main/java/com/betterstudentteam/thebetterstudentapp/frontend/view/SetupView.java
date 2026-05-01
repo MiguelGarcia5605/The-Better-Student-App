@@ -2,8 +2,6 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.UserSetupData;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.CourseFormRow;
 import javafx.event.ActionEvent;
@@ -16,8 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class SetupView extends BorderPane {
 
@@ -26,7 +22,7 @@ public class SetupView extends BorderPane {
     private Button mAddCourseButton;
     private Button mSaveButton;
 
-    public SetupView(BorderPane wrapper, CourseManager courseManager, TodoList todoList, UserSetupManager setupManager, SaveManager saveManager) {
+    public SetupView(BorderPane wrapper, ArrayList<Course> courseList, TodoList todoList, SaveManager saveManager) {
 
         Label mHeader = new Label("Course Setup");
         mHeader.getStyleClass().add("setup-label");
@@ -34,12 +30,10 @@ public class SetupView extends BorderPane {
         mCourseFormList = new VBox();
         mCourseFormList.setSpacing(10);
 
-        // Load existing courses into form rows
-        List<Course> existingCourses = courseManager.getAllCourses();
-        if (existingCourses.isEmpty()) {
+        if (courseList.isEmpty()) {
             mCourseFormList.getChildren().add(new CourseFormRow(mCourseFormList));
         } else {
-            for (Course course : existingCourses) {
+            for (Course course : courseList) {
                 CourseFormRow row = new CourseFormRow(mCourseFormList);
                 row.loadCourse(course);
                 mCourseFormList.getChildren().add(row);
@@ -68,31 +62,23 @@ public class SetupView extends BorderPane {
 
         mSaveButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                List<CourseSetupRequest> courseRequests = new ArrayList<>();
+                ArrayList<Course> newCourses = new ArrayList<>();
 
                 for (var child : mCourseFormList.getChildren()) {
                     CourseFormRow row = (CourseFormRow) child;
-                    CourseSetupRequest request = row.getRequest();
-                    if (request == null) {
+                    Course course = row.getCourse();
+                    if (course == null) {
                         mErrorLabel.setText("Please fill in all fields.");
                         mErrorLabel.setVisible(true);
                         return;
                     }
-                    courseRequests.add(request);
+                    newCourses.add(course);
                 }
 
-                // Clear existing courses before re-adding
-                courseManager.clearCourses();
-
-                UserSetupData setupData = new UserSetupData(
-                        courseRequests.size(),
-                        new HashMap<>(),
-                        0.0
-                );
-
-                setupManager.initializeUserCourses(setupData, courseRequests);
+                courseList.clear();
+                courseList.addAll(newCourses);
                 saveManager.save();
-                wrapper.setCenter(new HomePageView(wrapper, courseManager, todoList, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, courseList, todoList, saveManager));
             }
         });
 

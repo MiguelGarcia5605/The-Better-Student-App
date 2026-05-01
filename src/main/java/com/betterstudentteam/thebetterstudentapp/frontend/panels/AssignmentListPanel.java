@@ -2,6 +2,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.panels;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import javafx.event.ActionEvent;
@@ -21,13 +22,11 @@ public class AssignmentListPanel extends VBox {
     private TextField mAssignmentNameField;
     private TextField mAssignmentDueDateField;
     private Button mAddAssignmentButton;
-    private String mCourseId;
-    private CourseManager mCourseManager;
+    private Course mCourse;
     private SaveManager mSaveManager;
 
-    public AssignmentListPanel(String courseId, CourseManager courseManager, SaveManager saveManager) {
-        mCourseId = courseId;
-        mCourseManager = courseManager;
+    public AssignmentListPanel(Course course, SaveManager saveManager) {
+        mCourse = course;
         mSaveManager = saveManager;
 
         this.setPrefHeight(Display.SCREEN_BOUNDS.getHeight() * (3.0 / 4.0));
@@ -85,15 +84,13 @@ public class AssignmentListPanel extends VBox {
         mErrorLabel.setVisible(false);
 
         Assignment assignment = new Assignment(
-                AssignmentList.generateId(),
-                name,
-                mCourseId,
-                dueDate,
+                AssignmentList.generateID(),
                 "Homework",
-                ""
+                name,
+                dueDate
         );
 
-        mCourseManager.addAssignment(assignment);
+        mCourse.getAssignmentList().add(assignment);
         displayAssignment(assignment);
         mAssignmentNameField.clear();
         mAssignmentDueDateField.clear();
@@ -101,7 +98,7 @@ public class AssignmentListPanel extends VBox {
     }
 
     public void displayAssignment(Assignment assignment) {
-        Label nameLabel = new Label(assignment.getTitle());
+        Label nameLabel = new Label(assignment.getName());
         Label dueDateLabel = new Label(assignment.getDueDate().toString());
 
         nameLabel.getStyleClass().add("course-card-detail");
@@ -116,30 +113,12 @@ public class AssignmentListPanel extends VBox {
 
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                mCourseManager.getAssignmentForCourse(mCourseId)
-                        .stream()
-                        .filter(a -> a.getmID().equals(assignment.getmID()))
-                        .findFirst()
-                        .ifPresent(a -> {
-                            mCourseManager.deleteAssignment(a.getmID());
-                            AssignmentListPanel.this.getChildren().remove(assignmentCard);
-                            mSaveManager.save();
-                        });
+                mCourse.getAssignmentList().remove(assignment.getID());
+                AssignmentListPanel.this.getChildren().remove(assignmentCard);
+                mSaveManager.save();
             }
         });
 
         this.getChildren().add(this.getChildren().size() - 2, assignmentCard);
-    }
-
-    public void displayAssignment(String name, String dueDate) {
-        Assignment dummy = new Assignment(
-                AssignmentList.generateId(),
-                name,
-                mCourseId,
-                LocalDate.parse(dueDate),
-                "Homework",
-                ""
-        );
-        displayAssignment(dummy);
     }
 }

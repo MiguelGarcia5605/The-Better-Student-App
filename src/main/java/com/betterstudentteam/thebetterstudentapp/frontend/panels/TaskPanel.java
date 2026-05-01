@@ -47,11 +47,10 @@ public class TaskPanel extends VBox {
 
         for (Todo item : todoList.getList()) {
             CheckBox task = new CheckBox(item.getTitle());
-            task.setSelected(item.isCompleted());
             task.getStyleClass().add("task");
             mUserTaskList.add(task);
             this.getChildren().add(this.getChildren().size() - 1, task);
-            wireDeleteOnCheck(task, item.getId());
+            wireDeleteOnCheck(task, item.getID());
         }
 
         mDailyNewTaskButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -69,7 +68,7 @@ public class TaskPanel extends VBox {
         mUserTaskList.add(task);
         this.getChildren().add(this.getChildren().size() - 1, task);
         mDailyNewTaskField.setText("");
-        wireDeleteOnCheck(task, item.getId());
+        wireDeleteOnCheck(task, item.getID());
         mSaveManager.save();
     }
 
@@ -77,7 +76,7 @@ public class TaskPanel extends VBox {
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (task.isSelected()) {
-                    mTodoList.deleteTodo(id);
+                    mTodoList.remove(id);
                     mUserTaskList.remove(task);
                     TaskPanel.this.getChildren().remove(task);
                     mSaveManager.save();

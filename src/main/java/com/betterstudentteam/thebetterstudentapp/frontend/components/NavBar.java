@@ -1,5 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+
 public class NavBar extends HBox {
 
     private Button mHomeButton;
@@ -21,7 +24,7 @@ public class NavBar extends HBox {
     private TodoList mBacklogTodos;
     private TodoList mAllTodos;
 
-    public NavBar(BorderPane wrapper, CourseManager courseManager, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos, UserSetupManager setupManager, SaveManager saveManager) {
+    public NavBar(BorderPane wrapper, ArrayList<Course> courseList, TodoList dailyTodos, TodoList backlogTodos, TodoList allTodos, SaveManager saveManager) {
         mHomeButton = new Button("Home");
         mTaskButton = new Button("Tasks");
         mSetupButton = new Button("Setup");
@@ -36,7 +39,7 @@ public class NavBar extends HBox {
 
         mHomeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new HomePageView(wrapper, courseManager, dailyTodos, saveManager));
+                wrapper.setCenter(new HomePageView(wrapper, courseList, dailyTodos, saveManager));
             }
         });
 
@@ -48,7 +51,7 @@ public class NavBar extends HBox {
 
         mSetupButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                wrapper.setCenter(new SetupView(wrapper, courseManager, dailyTodos, setupManager, saveManager));
+                wrapper.setCenter(new SetupView(wrapper, courseList, dailyTodos, saveManager));
             }
         });
 

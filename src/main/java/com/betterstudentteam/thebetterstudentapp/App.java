@@ -1,17 +1,19 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
-import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
-import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
+import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
-import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.frontend.components.NavBar;
+import com.betterstudentteam.thebetterstudentapp.frontend.view.HomePageView;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class App extends Application {
     private static final String APP_NAME = "The Better Student App";
@@ -24,21 +26,19 @@ public class App extends Application {
         primaryStage.setTitle(APP_NAME);
 
         // Create backend
-        AssignmentList assignmentList = new AssignmentList();
-        CourseManager courseManager = new CourseManager(assignmentList);
-        UserSetupManager setupManager = new UserSetupManager(courseManager);
+        ArrayList<Course> courseList = new ArrayList<>();
         TodoList dailyTodos = new TodoList();
         TodoList backlogTodos = new TodoList();
         TodoList allTodos = new TodoList();
-        SaveManager saveManager = new SaveManager(courseManager, assignmentList, dailyTodos, backlogTodos, allTodos);
+        SaveManager saveManager = new SaveManager(courseList, dailyTodos, backlogTodos, allTodos);
 
         // Load saved data
         saveManager.load();
 
         // Build wrapper
         BorderPane wrapper = new BorderPane();
-        NavBar navBar = new NavBar(wrapper, courseManager, dailyTodos, backlogTodos, allTodos, setupManager, saveManager);
-        wrapper.setCenter(new HomePageView(wrapper, courseManager, dailyTodos, saveManager));
+        NavBar navBar = new NavBar(wrapper, courseList, dailyTodos, backlogTodos, allTodos, saveManager);
+        wrapper.setCenter(new HomePageView(wrapper, courseList, dailyTodos, saveManager));
         wrapper.setTop(navBar);
 
         Scene scene = new Scene(wrapper);

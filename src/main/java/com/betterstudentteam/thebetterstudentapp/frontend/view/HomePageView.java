@@ -11,8 +11,7 @@ import com.betterstudentteam.thebetterstudentapp.frontend.panels.TaskPanel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import java.util.List;
+import java.util.ArrayList;
 
 public class HomePageView extends BorderPane {
 
@@ -21,21 +20,20 @@ public class HomePageView extends BorderPane {
     private CourseViewPanel mCourseViewPanel;
     private TaskPanel mTaskPanel;
 
-    public HomePageView(BorderPane wrapper, CourseManager courseManager, TodoList todoList, SaveManager saveManager) {
+    public HomePageView(BorderPane wrapper, ArrayList<Course> courseList, TodoList todoList, SaveManager saveManager) {
         mQuotePanel = new QuotePanel();
-        mCourseViewPanel = new CourseViewPanel(wrapper, courseManager, saveManager);
+        mCourseViewPanel = new CourseViewPanel(wrapper, courseList, saveManager);
 
-        for (Course course : courseManager.getAllCourses()) {
+        for (Course course : courseList) {
             String nextAssignment = "No upcoming assignments";
-            List<Assignment> assignments = courseManager.getAssignmentForCourse(course.getId());
-            if (!assignments.isEmpty()) {
-                nextAssignment = "Next: " + assignments.getFirst().getTitle()
-                        + " - " + assignments.getFirst().getDueDate();
+            if (!course.getAssignmentList().getList().isEmpty()) {
+                Assignment first = course.getAssignmentList().getList().getFirst();
+                nextAssignment = "Next: " + first.getName() + " - " + first.getDueDate();
             }
             mCourseViewPanel.addCourseCard(
                     course,
                     nextAssignment,
-                    "Grade: " + course.getmGrade() + "%"
+                    "Grade: " + course.getGrade() + "%"
             );
         }
 

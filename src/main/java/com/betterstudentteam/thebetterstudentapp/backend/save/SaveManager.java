@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.backend.save;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
-import com.betterstudentteam.thebetterstudentapp.backend.assignment.AssignmentList;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.Todo;
 import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
@@ -14,7 +13,8 @@ import java.util.List;
 
 public class SaveManager {
 
-    private static final String SAVE_FILE = System.getProperty("user.home") + "/betterstudent_data.txt";
+    private static final String SAVE_FILE_PATH = System.getProperty("user.home") + "/save.txt";
+    private static final String REGEX = "|";
 
     private ArrayList<Course> mCourseList;
 
@@ -30,31 +30,37 @@ public class SaveManager {
     }
 
     public void save() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE_PATH))) {
+            // Use BufferedWriter to write to txt file
 
             // Write courses and their relevant assignments to save file
             for (Course course : mCourseList) {
-                StringBuilder days = new StringBuilder();
+
+                // Get course meeting days
+                StringBuilder meetingDays = new StringBuilder();
                 for (DayOfWeek day : course.getMeetingDays()) {
-                    if (!days.isEmpty()) days.append(",");
-                    days.append(day.name());
+                    if (!meetingDays.isEmpty())  {
+                        meetingDays.append(",");
+                    }
+                    meetingDays.append(day.name());
                 }
 
-                writer.write("COURSE|" +
-                        course.getID() + "|" +
-                        course.getName() + "|" +
-                        course.getInstructor() + "|" +
-                        days + "|" +
-                        course.getStartTime() + "|" +
-                        course.getEndTime() + "|" +
+                // Write course data to file
+                writer.write("COURSE" + REGEX +
+                        course.getID() + REGEX +
+                        course.getName() + REGEX +
+                        course.getInstructor() + REGEX +
+                        meetingDays + REGEX +
+                        course.getStartTime() + REGEX +
+                        course.getEndTime() + REGEX +
                         course.getGrade());
                 writer.newLine();
 
+                // Write assignments data to file
                 for (Assignment assignment : course.getAssignmentList().getList()) {
-                    writer.write("ASSIGNMENT|" +
-                            assignment.getID() + "|" +
-                            assignment.getName() + "|" +
-                            assignment.getType() + "|" +
+                    writer.write("ASSIGNMENT" + REGEX +
+                            assignment.getID() + REGEX +
+                            assignment.getName() + REGEX +
                             assignment.getDueDate());
                     writer.newLine();
                 }
@@ -62,88 +68,105 @@ public class SaveManager {
 
             // Write daily tasks to save file
             for (Todo todo : mDailyTodos.getList()) {
-                writer.write("TASK_DAILY" + "|" + todo.getID() + "|" + todo.getTitle() + "|" + todo.getDueDate());
+                writer.write("TASK_DAILY" + REGEX +
+                        todo.getID() + REGEX +
+                        todo.getTitle() + REGEX +
+                        todo.getDueDate());
                 writer.newLine();
             }
 
             // Write backlog tasks to save file
             for (Todo todo : mBacklogTodos.getList()) {
-                writer.write("TASK_BACKLOG" + "|" + todo.getID() + "|" + todo.getTitle() + "|" + todo.getDueDate());
+                writer.write("TASK_BACKLOG" + REGEX +
+                        todo.getID() + REGEX +
+                        todo.getTitle() + REGEX +
+                        todo.getDueDate());
                 writer.newLine();
             }
 
             // Write all tasks to save file
             for (Todo todo : mAllTodos.getList()) {
-                writer.write("TASK_ALL" + "|" + todo.getID() + "|" + todo.getTitle() + "|" + todo.getDueDate());
+                writer.write("TASK_ALL" + REGEX +
+                        todo.getID() + REGEX +
+                        todo.getTitle() + REGEX +
+                        todo.getDueDate());
                 writer.newLine();
             }
-
         } catch (IOException e) {
-            System.err.println("Failed to save data: " + e.getMessage());
+            System.out.println("Failed to save data.");
         }
     }
 
     public void load() {
-        File file = new File(SAVE_FILE);
-        if (!file.exists()) return;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
+            // Use BufferedReader to read txt file
             Course currentCourse = null;
 
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
+            while (true) {
+                String currentLine = reader.readLine();
 
-                if (parts[0].equals("COURSE")) {
-                    List<DayOfWeek> days = new ArrayList<>();
-                    for (String day : parts[4].split(",")) {
-                        days.add(DayOfWeek.valueOf(day));
+                // Stop when reached end of file
+                if (currentLine == null) {
+                    break;
+                }
+
+                /*    '//' escapes the '|' character here   */
+                String[] currentLineParts = currentLine.split("\\" + REGEX);
+
+                /* Read data based on the first part of each line */
+
+                // COURSE|ID|NAME|INSTRUCTOR|MEETING_DAYS|START_TIME|END_TIME|GRADE
+                if (currentLineParts[0].equals("COURSE")) {
+                    List<DayOfWeek> meetingDays = new ArrayList<>();
+                    for (String day : currentLineParts[4].split(",")) {
+                        meetingDays.add(DayOfWeek.valueOf(day));
                     }
 
                     currentCourse = new Course(
-                            parts[1],
-                            parts[2],
-                            parts[3],
-                            days,
-                            LocalTime.parse(parts[5]),
-                            LocalTime.parse(parts[6]),
-                            Double.parseDouble(parts[7])
+                            currentLineParts[1],
+                            currentLineParts[2],
+                            currentLineParts[3],
+                            meetingDays,
+                            LocalTime.parse(currentLineParts[5]),
+                            LocalTime.parse(currentLineParts[6]),
+                            Double.parseDouble(currentLineParts[7])
                     );
                     mCourseList.add(currentCourse);
 
-                } else if (parts[0].equals("ASSIGNMENT")) {
-                    if (currentCourse != null) {
-                        currentCourse.getAssignmentList().add(new Assignment(
-                                parts[1],
-                                parts[2],
-                                parts[3],
-                                LocalDate.parse(parts[4])
-                        ));
-                    }
+                // ASSIGNMENT|ID|NAME|DUE_DATE
+                } else if (currentLineParts[0].equals("ASSIGNMENT")) {
+                    // Could cause nullpointerexception... but shouldn't *hoping*
+                    currentCourse.getAssignmentList().add(new Assignment(
+                            currentLineParts[1],
+                            currentLineParts[2],
+                            LocalDate.parse(currentLineParts[3])
+                    ));
 
-                } else if (parts[0].equals("TASK_DAILY")) {
+                // TASK_DAILY|ID|NAME|DUE_DATE
+                } else if (currentLineParts[0].equals("TASK_DAILY")) {
                     mDailyTodos.add(new Todo(
-                            parts[1],
-                            parts[2],
-                            LocalDate.parse(parts[3])
+                            currentLineParts[1],
+                            currentLineParts[2],
+                            LocalDate.parse(currentLineParts[3])
                     ));
 
-                } else if (parts[0].equals("TASK_BACKLOG")) {
+                // TASK_BACKLOG|ID|NAME|DUE_DATE
+                } else if (currentLineParts[0].equals("TASK_BACKLOG")) {
                     mBacklogTodos.add(new Todo(
-                            parts[1],
-                            parts[2],
-                            LocalDate.parse(parts[3])
+                            currentLineParts[1],
+                            currentLineParts[2],
+                            LocalDate.parse(currentLineParts[3])
                     ));
 
-                } else if (parts[0].equals("TASK_ALL")) {
+                // TASK_ALL|ID|NAME|DUE_DATE
+                } else if (currentLineParts[0].equals("TASK_ALL")) {
                     mAllTodos.add(new Todo(
-                            parts[1],
-                            parts[2],
-                            LocalDate.parse(parts[3])
+                            currentLineParts[1],
+                            currentLineParts[2],
+                            LocalDate.parse(currentLineParts[3])
                     ));
                 }
             }
-
         } catch (IOException e) {
             System.err.println("Failed to load data: " + e.getMessage());
         }

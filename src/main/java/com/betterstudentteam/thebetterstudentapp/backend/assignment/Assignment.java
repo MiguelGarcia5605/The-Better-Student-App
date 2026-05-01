@@ -8,23 +8,17 @@ import java.time.LocalDate;
 public class Assignment {
 
     private String mID; // the assignment identifier
-    private String mType;
     private String mName;
     private LocalDate mDueDate;
 
-    public Assignment(String ID, String type, String name, LocalDate dueDate) {
+    public Assignment(String ID, String name, LocalDate dueDate) {
         mID = ID;
-        mType = type;
         mName = name;
         mDueDate = dueDate;
     }
 
     public String getID() {
         return mID;
-    }
-
-    public String getType() {
-        return mType;
     }
 
     public String getName() {
@@ -37,10 +31,6 @@ public class Assignment {
 
     public void setID(String ID) {
         mID = ID;
-    }
-
-    public void setType(String type){
-        mType = type;
     }
 
     public void setName(String title) {

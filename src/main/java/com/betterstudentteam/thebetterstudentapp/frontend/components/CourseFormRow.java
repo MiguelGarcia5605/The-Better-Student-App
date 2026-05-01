@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
-import com.betterstudentteam.thebetterstudentapp.backend.user_setup.CourseSetupRequest;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CourseFormRow extends HBox {
 
@@ -110,14 +110,12 @@ public class CourseFormRow extends HBox {
         mInstructor.setText(course.getInstructor());
         mStartTime.setText(course.getStartTime().format(TIME_FORMATTER));
         mEndTime.setText(course.getEndTime().format(TIME_FORMATTER));
-
         for (DayOfWeek day : course.getMeetingDays()) {
-            int index = day.ordinal();
-            mMeetingDays.getSelectionModel().select(index);
+            mMeetingDays.getSelectionModel().select(day.ordinal());
         }
     }
 
-    public CourseSetupRequest getRequest() {
+    public Course getCourse() {
         if (mCourseName.getText().isEmpty() ||
                 mInstructor.getText().isEmpty() ||
                 mMeetingDays.getSelectionModel().getSelectedItems().isEmpty() ||
@@ -135,16 +133,14 @@ public class CourseFormRow extends HBox {
             return null;
         }
 
-        List<DayOfWeek> selectedDays = new ArrayList<>(
-                mMeetingDays.getSelectionModel().getSelectedItems()
-        );
-
-        return new CourseSetupRequest(
+        return new Course(
+                UUID.randomUUID().toString(),
                 mCourseName.getText(),
                 mInstructor.getText(),
-                selectedDays,
+                new ArrayList<>(mMeetingDays.getSelectionModel().getSelectedItems()),
                 startTime,
-                endTime
+                endTime,
+                0.0
         );
     }
 }

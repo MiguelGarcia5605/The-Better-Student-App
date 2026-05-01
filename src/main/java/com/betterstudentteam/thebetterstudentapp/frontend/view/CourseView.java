@@ -2,6 +2,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.view;
 
 import com.betterstudentteam.thebetterstudentapp.backend.assignment.Assignment;
 import com.betterstudentteam.thebetterstudentapp.backend.course.Course;
+import com.betterstudentteam.thebetterstudentapp.backend.todo.TodoList;
 import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.save.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.panels.AssignmentListPanel;
@@ -12,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class CourseView extends BorderPane {
     VBox mLeftContainer;
     VBox mRightContainer;
@@ -21,7 +24,7 @@ public class CourseView extends BorderPane {
     AssignmentListPanel mAssignmentListPanel;
     GradePanel mGradePanel;
 
-    public CourseView(Course course, CourseManager courseManager, SaveManager saveManager) {
+    public CourseView(BorderPane wrapper, Course course, ArrayList<Course> courseList, SaveManager saveManager) {
         mImportantDatePanel = new ImportantDatePanel(
                 course.getMeetingDays().toString() + " " +
                         course.getStartTime() + " - " + course.getEndTime()
@@ -32,13 +35,13 @@ public class CourseView extends BorderPane {
         );
 
         mGradePanel = new GradePanel(
-                "Grade: " + course.getmGrade() + "%"
+                "Grade: " + course.getGrade() + "%"
         );
 
-        mAssignmentListPanel = new AssignmentListPanel(course.getId(), courseManager, saveManager);
+        mAssignmentListPanel = new AssignmentListPanel(course, saveManager);
 
-        for (Assignment assignment : courseManager.getAssignmentForCourse(course.getId())) {
-            mAssignmentListPanel.displayAssignment(assignment.getTitle(), assignment.getDueDate().toString());
+        for (Assignment assignment : course.getAssignmentList().getList()) {
+            mAssignmentListPanel.displayAssignment(assignment);
         }
 
         mLeftContainer = new VBox();
