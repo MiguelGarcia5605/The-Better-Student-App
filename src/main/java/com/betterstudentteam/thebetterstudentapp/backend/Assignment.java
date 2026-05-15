@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.frontend;
+package com.betterstudentteam.thebetterstudentapp.backend;
 
 import java.time.LocalDateTime;
 
