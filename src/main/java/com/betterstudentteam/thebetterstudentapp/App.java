@@ -2,9 +2,10 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
+import com.betterstudentteam.thebetterstudentapp.frontend.SetupPane;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -15,7 +16,9 @@ public class App extends Application {
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         primaryStage.setTitle(APP_NAME);
 
-        Group rootNode = new Group();
+        SetupPane setupPane = new SetupPane();
+
+        BorderPane rootNode = new BorderPane(setupPane);
 
         Scene scene = new Scene(rootNode);
         scene.getStylesheets().add("StyleSheet.css");

@@ -7,7 +7,8 @@ public class SetupPane extends VBox {
 
     private Label mHeader;
 
-    SetupPane() {
+    public SetupPane() {
         mHeader = new Label("Setup Course");
+        this.getChildren().add(mHeader);
     }
 }
