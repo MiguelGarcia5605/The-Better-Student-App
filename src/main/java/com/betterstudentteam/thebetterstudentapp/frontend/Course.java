@@ -5,11 +5,11 @@ public class Course {
     private String mName;
 
     Course(String name) {
-        mName = name;
+        setName(name);
     }
 
-    public void setName() {
-        mName = mName;
+    public void setName(String name) {
+        mName = name;
     }
 
     public String getName() {
