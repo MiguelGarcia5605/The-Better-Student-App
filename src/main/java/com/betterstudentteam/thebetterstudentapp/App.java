@@ -1,7 +1,7 @@
 package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
-import com.betterstudentteam.thebetterstudentapp.backend.util.Display;
+import com.betterstudentteam.thebetterstudentapp.backend.Display;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +20,7 @@ public class App extends Application {
         Scene scene = new Scene(rootNode);
         scene.getStylesheets().add("StyleSheet.css");
 
+        // Set Fullscreen
         primaryStage.setScene(scene);
         primaryStage.setX(Display.SCREEN_BOUNDS.getMinX());
         primaryStage.setY(Display.SCREEN_BOUNDS.getMinY());

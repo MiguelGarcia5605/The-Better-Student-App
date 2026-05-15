@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.backend.util;
+package com.betterstudentteam.thebetterstudentapp.backend;
 
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
