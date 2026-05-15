@@ -35,4 +35,15 @@ public class Assignment {
     public String getName() {
         return mName;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Assignment) {
+            Assignment assignment = (Assignment) obj;
+            boolean equivalentCondition = mName.equals(assignment.getName()) && mDescription.equals(assignment.getDescription()) && mDueDate.equals(assignment.getDueDate());
+
+            return equivalentCondition;
+        }
+        return false;
+    }
 }
