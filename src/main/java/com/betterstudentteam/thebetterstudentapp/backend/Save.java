@@ -1,11 +1,14 @@
 package com.betterstudentteam.thebetterstudentapp.backend;
 
+import tools.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 
 public class Save {
 
     private File mSaveFile;
+    private ObjectMapper objectMapper;
 
     public Save() {
         mSaveFile = new File("save.json");
