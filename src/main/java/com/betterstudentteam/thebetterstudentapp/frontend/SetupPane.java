@@ -11,6 +11,7 @@ public class SetupPane extends VBox {
         this.getStyleClass().add("pane_setup");
 
         mHeader = new Label("Setup Course");
+        mHeader.getStyleClass().add("label_setup_header");
         this.getChildren().add(mHeader);
     }
 }
