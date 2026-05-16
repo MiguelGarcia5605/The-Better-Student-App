@@ -10,8 +10,6 @@ import java.io.IOException;
 public class Save {
 
     private File mSaveFile;
-    private ObjectMapper mSaveMapper;
-    private ObjectNode mRootNode;
 
     public Save() {
         mSaveFile = new File("save.json");
@@ -25,22 +23,6 @@ public class Save {
                 System.exit(1);
             }
         }
-        open();
-
-        // FUTURE WARNING: if the root node is updated in the future the save mapper instance will not change.
-        mRootNode = mSaveMapper.createObjectNode();
-
-        close();
-    }
-
-    public void open() {
-        mSaveMapper = new ObjectMapper();
-        JsonNode node = mSaveMapper.readTree(mSaveFile);
-        System.out.println(node.toPrettyString());
-    }
-
-    public void close() {
-        mSaveMapper.writeValue(mSaveFile, mRootNode);
     }
 
 }
