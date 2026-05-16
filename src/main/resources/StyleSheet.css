@@ -1,3 +1,8 @@
+.pane_background
+{
+    -fx-background-color: -color-dark;
+}
+
 .pane_setup
 {
     -fx-background-color: -color-neutral-subtle;

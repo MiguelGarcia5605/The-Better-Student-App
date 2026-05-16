@@ -19,6 +19,7 @@ public class App extends Application {
         SetupPane setupPane = new SetupPane();
 
         BorderPane rootNode = new BorderPane(setupPane);
+        rootNode.getStyleClass().add("pane_background");
 
         Scene scene = new Scene(rootNode);
         scene.getStylesheets().add("StyleSheet.css");
