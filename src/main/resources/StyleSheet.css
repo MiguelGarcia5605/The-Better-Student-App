@@ -38,6 +38,9 @@
     -fx-text-fill: -color-fg-emphasis;
     -fx-background-color: -color-accent-emphasis;
     -fx-font-size: 12px;
+    -fx-padding: 5px;
+    -fx-border-insets: 3px;
+    -fx-background-insets: 3px;
 }
 
 .button_setup_save-course
@@ -45,4 +48,7 @@
     -fx-text-fill: -color-fg-emphasis;
     -fx-background-color: -color-accent-emphasis;
     -fx-font-size: 12px;
+    -fx-padding: 5px;
+    -fx-border-insets: 3px;
+    -fx-background-insets: 3px;
 }
