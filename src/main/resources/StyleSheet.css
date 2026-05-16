@@ -9,6 +9,7 @@
     -fx-border-color: -color-border-default;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
+    -fx-border-width: 5px;
     -fx-padding: 10px;
     -fx-border-insets: 20px;
     -fx-background-insets: 20px;
@@ -21,6 +22,13 @@
 }
 
 .button_setup_add-course
+{
+    -fx-text-fill: -color-fg-emphasis;
+    -fx-background-color: -color-accent-emphasis;
+    -fx-font-size: 12px;
+}
+
+.button_setup_save-course
 {
     -fx-text-fill: -color-fg-emphasis;
     -fx-background-color: -color-accent-emphasis;

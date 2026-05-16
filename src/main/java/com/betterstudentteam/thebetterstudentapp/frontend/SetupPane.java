@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 public class SetupPane extends VBox {
 
     private Label mHeader;
-    private Button mAddCourseButton;
+    private SaveSetupRow mSaveSetupRow;
 
     public SetupPane() {
         this.getStyleClass().add("pane_setup");
@@ -16,9 +16,7 @@ public class SetupPane extends VBox {
         mHeader.getStyleClass().add("label_setup_header");
         this.getChildren().add(mHeader);
 
-        mAddCourseButton = new Button("Add Course");
-        mAddCourseButton.getStyleClass().add("button_setup_add-course");
-        this.getChildren().add(mAddCourseButton);
-
+        mSaveSetupRow = new SaveSetupRow();
+        this.getChildren().add(mSaveSetupRow);
     }
 }
