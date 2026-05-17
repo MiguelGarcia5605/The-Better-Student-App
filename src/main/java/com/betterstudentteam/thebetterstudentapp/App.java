@@ -2,7 +2,7 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.Save;
+import com.betterstudentteam.thebetterstudentapp.backend.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.SetupPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Save save = new Save();
+        SaveManager saveManager = new SaveManager();
 
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         primaryStage.setTitle(APP_NAME);

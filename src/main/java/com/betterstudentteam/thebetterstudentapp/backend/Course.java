@@ -5,18 +5,18 @@ import java.util.ArrayList;
 public class Course {
 
     private String mName;
-    private ArrayList<Assignment> mAssignmentList = new ArrayList<Assignment>();
+    private ArrayList<Assignment> mAssignmentArrayList = new ArrayList<Assignment>();
 
     Course(String name) {
         setName(name);
     }
 
     public void addAssignment(Assignment assignment) {
-        mAssignmentList.add(assignment);
+        mAssignmentArrayList.add(assignment);
     }
 
     public void removeAssignment(Assignment assignment) {
-        mAssignmentList.remove(assignment);
+        mAssignmentArrayList.remove(assignment);
     }
 
     public void setName(String name) {
@@ -25,5 +25,9 @@ public class Course {
 
     public String getName() {
         return mName;
+    }
+
+    public ArrayList<Assignment> getAssignmentArrayList() {
+        return mAssignmentArrayList;
     }
 }
