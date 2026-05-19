@@ -2,21 +2,17 @@ package com.betterstudentteam.thebetterstudentapp.backend;
 
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class SaveManager {
 
-    private File mSaveFile;
-    private ObjectMapper mObjectMapper;
+    private static final String SAVE_FILE_PATH = "save.json";
+    private static final File mSaveFile = new File("save.json") ;
+    private static final ObjectMapper mObjectMapper = new ObjectMapper();
 
     public SaveManager() {
-        mSaveFile = new File("save.json");
-        mObjectMapper = new ObjectMapper();
-
         // Create new save file if no current save file exists
         if (!mSaveFile.exists()) {
             try {
@@ -28,7 +24,8 @@ public class SaveManager {
         }
     }
 
-    public void writeSave(ArrayList<Course> courseArrayList) {
+    static public void writeSave(ArrayList<Course> courseArrayList) {
+        System.out.println("breadcrumb");
         JsonNode rootNode = mObjectMapper.createObjectNode();
 
         if (!courseArrayList.isEmpty()) {

@@ -1,14 +1,19 @@
 package com.betterstudentteam.thebetterstudentapp.frontend;
 
+import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class SetupCourseRow extends HBox {
+public class CourseSetupRow extends HBox {
 
     private TextField mNameTextField;
 
-    public SetupCourseRow() {
+    public CourseSetupRow() {
         mNameTextField = new TextField();
         this.getChildren().add(mNameTextField);
+    }
+
+    public Course getCourse() {
+        return new Course(mNameTextField.getText());
     }
 }

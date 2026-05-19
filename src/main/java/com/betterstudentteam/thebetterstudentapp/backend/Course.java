@@ -7,7 +7,7 @@ public class Course {
     private String mName;
     private ArrayList<Assignment> mAssignmentArrayList = new ArrayList<Assignment>();
 
-    Course(String name) {
+    public Course(String name) {
         setName(name);
     }
 

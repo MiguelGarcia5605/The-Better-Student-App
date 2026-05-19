@@ -3,12 +3,12 @@ package com.betterstudentteam.thebetterstudentapp.frontend;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-public class SaveSetupRow extends HBox {
+public class SetupActionRow extends HBox {
 
     private Button mAddCourseButton;
     private Button mSaveCourseButton;
 
-    public SaveSetupRow() {
+    public SetupActionRow() {
         mAddCourseButton = new Button("Add Course");
         mAddCourseButton.getStyleClass().add("button_setup_add-course");
         this.getChildren().add(mAddCourseButton);
@@ -16,6 +16,13 @@ public class SaveSetupRow extends HBox {
         mSaveCourseButton = new Button("Save Course");
         mSaveCourseButton.getStyleClass().add("button_setup_save-course");
         this.getChildren().add(mSaveCourseButton);
+    }
 
+    public Button getAddCourseButton() {
+        return mAddCourseButton;
+    }
+
+    public Button getSaveCourseButton() {
+        return mSaveCourseButton;
     }
 }
