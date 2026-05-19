@@ -1,5 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend;
 
+import atlantafx.base.theme.Styles;
 import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.SaveManager;
 import javafx.scene.control.Label;
@@ -22,7 +23,7 @@ public class SetupPane extends VBox {
         this.getStyleClass().add("pane_setup");
 
         mHeader = new Label("Setup Course");
-        mHeader.getStyleClass().add("label_setup_header");
+        mHeader.getStyleClass().add(Styles.TITLE_1);
         this.getChildren().add(mHeader);
 
         mSetupActionRow = new SetupActionRow();

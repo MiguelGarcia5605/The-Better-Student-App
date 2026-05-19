@@ -9,7 +9,7 @@
     -fx-border-color: -color-border-default;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
-    -fx-border-width: 3px;
+    -fx-border-width: 5px;
     -fx-padding: 10px;
     -fx-border-insets: 20px;
     -fx-background-insets: 20px;
@@ -18,37 +18,23 @@
 .pane_setup_course-row
 {
     -fx-background-color: -color-neutral-subtle;
-    -fx-border-color: -color-border-default;
+    -fx-border-color: -color-accent-muted;
     -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
     -fx-padding: 10px;
     -fx-border-insets: 20px;
     -fx-background-insets: 20px;
 }
 
-.label_setup_header
-{
-    -fx-text-fill: -color-fg-default;
-    -fx-font-size: 24px;
-}
-
 .button_setup_add-course
 {
-    -fx-text-fill: -color-fg-emphasis;
-    -fx-background-color: -color-accent-emphasis;
-    -fx-font-size: 12px;
-    -fx-padding: 5px;
     -fx-border-insets: 3px;
     -fx-background-insets: 3px;
 }
 
 .button_setup_save-course
 {
-    -fx-text-fill: -color-fg-emphasis;
-    -fx-background-color: -color-accent-emphasis;
-    -fx-font-size: 12px;
-    -fx-padding: 5px;
     -fx-border-insets: 3px;
     -fx-background-insets: 3px;
 }
