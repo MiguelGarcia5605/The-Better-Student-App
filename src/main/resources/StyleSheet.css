@@ -23,8 +23,8 @@
     -fx-border-radius: 5px;
     -fx-border-width: 2px;
     -fx-padding: 10px;
-    -fx-border-insets: 20px;
-    -fx-background-insets: 20px;
+    -fx-border-insets: 10px, 20px, 10px, 20px;
+    -fx-background-insets: 10px, 20px, 10px, 20px;
 }
 
 .button_setup_add-course

@@ -16,4 +16,8 @@ public class CourseSetupRow extends HBox {
     public Course getCourse() {
         return new Course(mNameTextField.getText());
     }
+
+    public TextField getNameTextField() {
+        return mNameTextField;
+    }
 }
