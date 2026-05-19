@@ -10,11 +10,12 @@ public class SetupActionRow extends HBox {
 
     public SetupActionRow() {
         mAddCourseButton = new Button("Add Course");
-        mAddCourseButton.getStyleClass().add("button_setup_add-course");
+        //mAddCourseButton.getStyleClass().add("button_setup_add-course");
         this.getChildren().add(mAddCourseButton);
 
         mSaveCourseButton = new Button("Save Course");
-        mSaveCourseButton.getStyleClass().add("button_setup_save-course");
+        mSaveCourseButton.setDefaultButton(true);
+        //mSaveCourseButton.getStyleClass().add("button_setup_save-course");
         this.getChildren().add(mSaveCourseButton);
     }
 

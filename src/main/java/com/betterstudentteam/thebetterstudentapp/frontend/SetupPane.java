@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class SetupPane extends VBox {
 
+    private static final int COURSE_SETUP_ROW_MAX = 8;
+
     private Label mHeader;
     private SetupActionRow mSetupActionRow;
 
@@ -31,6 +33,8 @@ public class SetupPane extends VBox {
     }
 
     public void addCourseSetupRow() {
+        if (mCourseSetupRowArrayList.size() >= COURSE_SETUP_ROW_MAX) return;
+
         CourseSetupRow newRow = new CourseSetupRow();
         newRow.getStyleClass().add("pane_setup_course-row");
         mCourseSetupRowArrayList.add(newRow);
