@@ -34,7 +34,8 @@ public class SetupPane extends VBox {
         CourseSetupRow newRow = new CourseSetupRow();
         newRow.getStyleClass().add("pane_setup_course-row");
         mCourseSetupRowArrayList.add(newRow);
-        this.getChildren().add(newRow);
+        int size = this.getChildren().size();
+        this.getChildren().add(size - 1, newRow);
     }
 
     private ArrayList<Course> getCourseArrayList() {
