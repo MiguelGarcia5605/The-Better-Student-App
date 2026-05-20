@@ -15,6 +15,18 @@
     -fx-background-insets: 20px;
 }
 
+.pane_toolbar
+{
+    -fx-background-color: -color-neutral-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 5px;
+    -fx-padding: 10px;
+    -fx-border-insets: 20px;
+    -fx-background-insets: 20px;
+}
+
 .pane_setup_course-row
 {
     -fx-background-color: -color-neutral-subtle;

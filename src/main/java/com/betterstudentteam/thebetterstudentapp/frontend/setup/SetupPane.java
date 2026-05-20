@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.frontend;
+package com.betterstudentteam.thebetterstudentapp.frontend.setup;
 
 import atlantafx.base.theme.Styles;
 import com.betterstudentteam.thebetterstudentapp.backend.Course;

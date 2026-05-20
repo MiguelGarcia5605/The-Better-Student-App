@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.frontend;
+package com.betterstudentteam.thebetterstudentapp.frontend.setup;
 
 import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import javafx.scene.control.TextField;

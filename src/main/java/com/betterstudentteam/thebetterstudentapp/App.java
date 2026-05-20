@@ -3,7 +3,8 @@ package com.betterstudentteam.thebetterstudentapp;
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.SaveManager;
-import com.betterstudentteam.thebetterstudentapp.frontend.SetupPane;
+import com.betterstudentteam.thebetterstudentapp.frontend.ViewToolBar;
+import com.betterstudentteam.thebetterstudentapp.frontend.setup.SetupPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -14,14 +15,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        SaveManager saveManager = new SaveManager();
-
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         primaryStage.setTitle(APP_NAME);
 
         SetupPane setupPane = new SetupPane();
+        ViewToolBar viewToolBar = new ViewToolBar();
 
         BorderPane rootNode = new BorderPane(setupPane);
+        rootNode.setTop(viewToolBar);
         rootNode.getStyleClass().add("pane_background");
 
         Scene scene = new Scene(rootNode);
