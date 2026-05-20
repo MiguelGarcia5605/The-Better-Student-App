@@ -2,9 +2,10 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
-import com.betterstudentteam.thebetterstudentapp.backend.SaveManager;
+import com.betterstudentteam.thebetterstudentapp.frontend.home.HomePane;
 import com.betterstudentteam.thebetterstudentapp.frontend.ViewToolBar;
 import com.betterstudentteam.thebetterstudentapp.frontend.setup.SetupPane;
+import com.betterstudentteam.thebetterstudentapp.frontend.todo.TodoPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -18,10 +19,12 @@ public class App extends Application {
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         primaryStage.setTitle(APP_NAME);
 
+        HomePane homePane = new HomePane();
+        TodoPane todoPane = new TodoPane();
         SetupPane setupPane = new SetupPane();
-        ViewToolBar viewToolBar = new ViewToolBar();
 
         BorderPane rootNode = new BorderPane(setupPane);
+        ViewToolBar viewToolBar = new ViewToolBar(rootNode, homePane, todoPane, setupPane);
         rootNode.setTop(viewToolBar);
         rootNode.getStyleClass().add("pane_background");
 
