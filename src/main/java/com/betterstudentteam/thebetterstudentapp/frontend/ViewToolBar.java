@@ -13,18 +13,18 @@ public class ViewToolBar extends ToolBar {
 
     private BorderPane mRootNode;
     private HomePane mHomePaneInstance;
-    private TodoPane mTodoPane;
+    private TodoPane mTodoPaneInstance;
     private SetupPane mSetupPaneInstance;
 
-    public ViewToolBar(BorderPane rootNode, HomePane homePaneInstance, TodoPane todoPane, SetupPane setupPaneInstance) {
+    public ViewToolBar(BorderPane rootNode, HomePane homePaneInstance, TodoPane todoPaneInstance, SetupPane setupPaneInstance) {
         super(new Button("Home"), new Separator(Orientation.VERTICAL), new Button("Todo"), new Separator(Orientation.VERTICAL), new Button("Setup"));
         mRootNode = rootNode;
         mHomePaneInstance = homePaneInstance;
-        mTodoPane = todoPane;
+        mTodoPaneInstance = todoPaneInstance;
         mSetupPaneInstance = setupPaneInstance;
 
         getHomeButton().setOnAction(event -> getRootNode().setCenter(mHomePaneInstance));
-        getTodoButton().setOnAction(event -> getRootNode().setCenter(mTodoPane));
+        getTodoButton().setOnAction(event -> getRootNode().setCenter(mTodoPaneInstance));
         getSetupButton().setOnAction(event -> getRootNode().setCenter(mSetupPaneInstance));
     }
 
