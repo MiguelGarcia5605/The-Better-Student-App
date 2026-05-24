@@ -8,12 +8,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class TaskVBox extends VBox {
 
     private Label mHeader;
     private Separator mSeperator;
+    private ArrayList<Task> mTaskArrayList;
+
+    private final int MAX_TASK_AMOUNT = 12;
 
     public TaskVBox(String name) {
+        mTaskArrayList = new ArrayList<Task>();
+
         mHeader = new Label(name);
         mHeader.getStyleClass().add(Styles.TITLE_1);
         this.getChildren().add(mHeader);
@@ -27,7 +34,11 @@ public class TaskVBox extends VBox {
     }
 
     private void addTask() {
-        this.getChildren().add(new Task());
+        if (mTaskArrayList.size() < MAX_TASK_AMOUNT) {
+            Task task = new Task();
+            mTaskArrayList.add(task);
+            this.getChildren().add(task);
+        }
     }
 
     private void changeCursor() {

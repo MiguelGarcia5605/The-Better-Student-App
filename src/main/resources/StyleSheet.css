@@ -86,3 +86,30 @@
     -fx-border-insets: 3px;
     -fx-background-insets: 3px;
 }
+
+.task
+{
+    -fx-padding: 5px;
+}
+
+.task_text-field
+{
+    -fx-padding: 20px;
+    -fx-max-width: infinity;
+    -fx-pref-width: 500px;
+}
+
+.task_check-box
+{
+    -fx-padding: 10px;
+}
+
+.task_check-box > .box
+{
+    -fx-padding: 10px;
+}
+
+.task_check-box > .box > .mark
+{
+    -fx-padding: 10px;
+}

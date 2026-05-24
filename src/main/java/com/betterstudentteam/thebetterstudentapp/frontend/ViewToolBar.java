@@ -4,6 +4,7 @@ import com.betterstudentteam.thebetterstudentapp.frontend.home.HomePane;
 import com.betterstudentteam.thebetterstudentapp.frontend.setup.SetupPane;
 import com.betterstudentteam.thebetterstudentapp.frontend.todo.TodoPane;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;

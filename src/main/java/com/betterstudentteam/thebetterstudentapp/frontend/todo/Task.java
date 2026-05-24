@@ -12,11 +12,13 @@ public class Task extends HBox {
 
     public Task() {
         mCheckBox = new CheckBox();
-        mCheckBox.getStyleClass().add(Styles.LARGE);
+        mCheckBox.getStyleClass().add("task_check-box");
         this.getChildren().add(mCheckBox);
 
         mTextField = new TextField();
-        mTextField.getStyleClass().addAll(Styles.SMALL, Styles.ROUNDED);
+        mTextField.getStyleClass().addAll(Styles.ROUNDED, "task_text-field");
         this.getChildren().add(mTextField);
+
+        this.getStyleClass().add("task");
     }
 }

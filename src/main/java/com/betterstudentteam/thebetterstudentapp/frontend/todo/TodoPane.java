@@ -11,7 +11,6 @@ public class TodoPane extends BorderPane {
     public TodoPane() {
         mAllTodoPanel = new TaskVBox("All Todo");
         mAllTodoPanel.getStyleClass().add("panel_all-todo");
-        mAllTodoPanel.getChildren().add(new Task());
         this.setLeft(mAllTodoPanel);
 
         mBacklogTodoPanel = new TaskVBox("Backlog Todo");
