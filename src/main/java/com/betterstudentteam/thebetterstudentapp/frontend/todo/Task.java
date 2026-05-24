@@ -21,4 +21,21 @@ public class Task extends HBox {
 
         this.getStyleClass().add("task");
     }
+
+    public TextField getTextField() {
+        return mTextField;
+    }
+
+    public CheckBox getCheckBox() {
+        return mCheckBox;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task task = (Task) obj;
+            if (task.getTextField().getText().equals(this.getTextField().getText())) return true;
+        }
+        return false;
+    }
 }

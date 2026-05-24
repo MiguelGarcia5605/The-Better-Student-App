@@ -29,13 +29,14 @@ public class TaskVBox extends VBox {
         this.getChildren().add(mSeperator);
 
         this.setMinWidth(Display.SCREEN_BOUNDS.getWidth() / 3.0);
-        this.setOnMouseClicked(event -> addTask());
+        this.setOnMouseClicked(event -> addNewTask());
         this.setOnMouseEntered(event -> changeCursor());
     }
 
-    private void addTask() {
+    private void addNewTask() {
         if (mTaskArrayList.size() < MAX_TASK_AMOUNT) {
             Task task = new Task();
+            task.getCheckBox().setOnMouseClicked(event -> moveTaskToTop(task));
             mTaskArrayList.add(task);
             this.getChildren().add(task);
         }
@@ -43,5 +44,14 @@ public class TaskVBox extends VBox {
 
     private void changeCursor() {
         getScene().setCursor(Cursor.HAND);
+    }
+
+    public void moveTaskToTop(Task task) {
+        // remove task from arrays
+        mTaskArrayList.remove(task);
+        this.getChildren().remove(task);
+
+        mTaskArrayList.addFirst(task);
+        this.getChildren().add(2, task);
     }
 }
