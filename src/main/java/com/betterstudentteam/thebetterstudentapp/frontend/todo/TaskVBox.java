@@ -33,12 +33,13 @@ public class TaskVBox extends VBox {
         this.setOnMouseEntered(event -> changeCursor());
     }
 
+    // Something in this set on mouse click logic is causing an error !!
     private void addNewTask() {
         if (mTaskArrayList.size() < MAX_TASK_AMOUNT) {
             Task task = new Task();
-            task.getCheckBox().setOnMouseClicked(event -> moveTaskToTop(task));
             mTaskArrayList.add(task);
             this.getChildren().add(task);
+            task.getCheckBox().setOnMouseClicked(event -> moveTaskToTop(task));
         }
     }
 
@@ -47,11 +48,35 @@ public class TaskVBox extends VBox {
     }
 
     public void moveTaskToTop(Task task) {
-        // remove task from arrays
-        mTaskArrayList.remove(task);
-        this.getChildren().remove(task);
+        if (task.getTextField().getText().isBlank() || hasDuplicateTasks(mTaskArrayList, task)) {
+            task.getCheckBox().setSelected(false);
+            return;
+        }
 
+        // remove task from arrays
+        this.getChildren().remove(task);
+        mTaskArrayList.remove(task);
+
+        // disable and move to top
+        task.setDisable(true);
         mTaskArrayList.addFirst(task);
+
+        // value shouldnt be hard coded
         this.getChildren().add(2, task);
+
+    }
+
+    private boolean hasDuplicateTasks(ArrayList<Task> arrayList, Task task) {
+        int count = 0;
+        for (Task currentTask : arrayList) {
+            if (task.equals(currentTask)) {
+                count++;
+            }
+        }
+
+        if (count > 1) {
+            return true;
+        }
+        return false;
     }
 }

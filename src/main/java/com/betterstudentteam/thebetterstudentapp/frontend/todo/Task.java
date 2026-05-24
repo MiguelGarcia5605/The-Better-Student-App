@@ -34,7 +34,11 @@ public class Task extends HBox {
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
             Task task = (Task) obj;
-            if (task.getTextField().getText().equals(this.getTextField().getText())) return true;
+            if (task.getTextField().getText() == null && this.getTextField().getText() == null)  {
+                return true;
+            } else if (task.getTextField().getText().equals(this.getTextField().getText())) {
+                return true;
+            }
         }
         return false;
     }
