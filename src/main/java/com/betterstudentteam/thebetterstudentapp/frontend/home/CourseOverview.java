@@ -1,5 +1,9 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.home;
 
+import atlantafx.base.controls.Card;
+import atlantafx.base.controls.Tile;
+import atlantafx.base.theme.Styles;
+import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
 import javafx.scene.layout.VBox;
 
@@ -11,5 +15,16 @@ public class CourseOverview extends VBox {
         this.setPrefWidth((Display.SCREEN_BOUNDS.getWidth() / 3.0) * 2.0);
         this.setPrefHeight((Display.SCREEN_BOUNDS.getWidth() / 10.0) * 9.0);
         this.getStyleClass().add("course_overview_panel");
+        addCourse(new Course("ENG 110"));
+    }
+
+    public void addCourse(Course course) {
+        Card card = new Card();
+        card.getStyleClass().add(Styles.INTERACTIVE);
+        card.setHeader(new Tile(
+                course.getName(),
+                "description..."
+        ));
+        this.getChildren().add(card);
     }
 }
