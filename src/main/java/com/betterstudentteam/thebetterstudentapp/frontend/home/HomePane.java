@@ -1,16 +1,19 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.home;
 
-import atlantafx.base.theme.Styles;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import com.betterstudentteam.thebetterstudentapp.frontend.todo.TaskVBox;
+import javafx.scene.layout.BorderPane;
 
-public class HomePane extends VBox {
+public class HomePane extends BorderPane {
 
-    private Label mHeader;
+    private QuoteDisplay mQuoteDisplay;
+    private TaskVBox mDailyTodoPanel;
 
     public HomePane() {
-        mHeader = new Label("HOME");
-        mHeader.getStyleClass().add(Styles.TITLE_1);
-        this.getChildren().add(mHeader);
+        mQuoteDisplay = new QuoteDisplay();
+        this.setLeft(mQuoteDisplay);
+
+        mDailyTodoPanel = new TaskVBox("Daily Todo");
+        mDailyTodoPanel.getStyleClass().add("panel_daily-todo");
+        this.setRight(mDailyTodoPanel);
     }
 }

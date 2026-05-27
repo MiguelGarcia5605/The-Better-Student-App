@@ -29,6 +29,7 @@ public class TaskVBox extends VBox {
         this.getChildren().add(mSeperator);
 
         this.setMinWidth(Display.SCREEN_BOUNDS.getWidth() / 3.0);
+        this.setMinHeight(Display.SCREEN_BOUNDS.getHeight());
         this.setOnMouseClicked(event -> addNewTask());
         this.setOnMouseEntered(event -> changeCursor());
     }

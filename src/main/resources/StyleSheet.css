@@ -34,6 +34,17 @@
     -fx-background-insets: 5px;
 }
 
+.quote_label
+{
+    -fx-background-color: -color-neutral-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 5px;
+    -fx-alignment: center;
+    -fx-font-size: 50;
+}
+
 .pane_background
 {
     -fx-background-color: -color-dark;

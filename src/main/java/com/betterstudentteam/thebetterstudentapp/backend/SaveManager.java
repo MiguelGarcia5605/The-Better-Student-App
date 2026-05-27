@@ -25,7 +25,6 @@ public class SaveManager {
     }
 
     static public void writeSave(ArrayList<Course> courseArrayList) {
-        System.out.println("breadcrumb");
         JsonNode rootNode = mObjectMapper.createObjectNode();
 
         if (!courseArrayList.isEmpty()) {
