@@ -1,5 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.home;
 
+import com.betterstudentteam.thebetterstudentapp.frontend.course.CourseOverview;
 import com.betterstudentteam.thebetterstudentapp.frontend.todo.TaskVBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;

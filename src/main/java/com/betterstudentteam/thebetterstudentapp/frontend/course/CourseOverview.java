@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.frontend.home;
+package com.betterstudentteam.thebetterstudentapp.frontend.course;
 
 import atlantafx.base.controls.Card;
 import atlantafx.base.controls.Tile;
