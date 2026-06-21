@@ -57,6 +57,7 @@
     -fx-border-width: 5px;
     -fx-border-insets: 15px;
     -fx-background-insets: 15px;
+    -fx-padding: 10px;
 }
 
 .pane_background
