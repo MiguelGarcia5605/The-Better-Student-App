@@ -9,15 +9,12 @@ public class TodoScene extends Scene {
 
     private static final BorderPane mBorderPane = new BorderPane();
 
-    private AppToolbar mAppToolbar;
     private TodoPane mTodoPane;
 
     public TodoScene() {
         super(mBorderPane);
-        mAppToolbar = new AppToolbar();
         mTodoPane = new TodoPane();
 
-        mBorderPane.setTop(mAppToolbar);
         mBorderPane.setCenter(mTodoPane);
         this.getStylesheets().add("StyleSheet.css");
     }
