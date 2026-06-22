@@ -139,3 +139,7 @@
 {
     -fx-padding: 10px;
 }
+
+.course_card_text_field {
+    -fx-background-color: transparent;
+}

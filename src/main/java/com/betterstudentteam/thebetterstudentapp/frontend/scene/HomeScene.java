@@ -1,7 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.frontend.scene;
 
-import com.betterstudentteam.thebetterstudentapp.frontend.AppToolbar;
-import com.betterstudentteam.thebetterstudentapp.frontend.home.HomePane;
+import com.betterstudentteam.thebetterstudentapp.frontend.components.HomePane;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 

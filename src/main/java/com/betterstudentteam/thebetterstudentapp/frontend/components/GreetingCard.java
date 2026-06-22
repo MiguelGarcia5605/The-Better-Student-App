@@ -1,13 +1,13 @@
-package com.betterstudentteam.thebetterstudentapp.frontend.home;
+package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
 import atlantafx.base.theme.Styles;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
 import com.betterstudentteam.thebetterstudentapp.backend.QuoteManager;
 import javafx.scene.control.Label;
 
-public class QuoteDisplay extends Label {
+public class GreetingCard extends Label {
 
-    public QuoteDisplay() {
+    public GreetingCard() {
         this.setText(QuoteManager.getTimeRelativeGreeting() + ", " + "Miguel");
         this.getStyleClass().addAll(Styles.TITLE_1, Styles.TEXT_BOLDER, Styles.TEXT_ITALIC);
         this.getStyleClass().add("quote_label");

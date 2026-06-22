@@ -5,13 +5,11 @@ import com.betterstudentteam.thebetterstudentapp.App;
 public class SceneManager {
 
     private HomeScene mHomeScene;
-    private TodoScene mTodoScene;
-    private SetupScene mSetupScene;
+    private AssignmentScene mAssignmentScene;
 
     public SceneManager() {
         mHomeScene = new HomeScene();
-        mTodoScene = new TodoScene();
-        mSetupScene = new SetupScene();
+        mAssignmentScene = new AssignmentScene();
     }
 
     public void setScene(Scenes scenes) {
@@ -19,11 +17,8 @@ public class SceneManager {
             case HOME:
                 App.getStage().setScene(mHomeScene);
                 break;
-            case TODO:
-                App.getStage().setScene(mTodoScene);
-                break;
-            case SETUP:
-                App.getStage().setScene(mSetupScene);
+            case ASSIGNMENT:
+                App.getStage().setScene(mAssignmentScene);
                 break;
         }
     }

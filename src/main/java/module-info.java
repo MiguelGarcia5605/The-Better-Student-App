@@ -4,6 +4,7 @@ module com.betterstudentteam.thebetterstudentapp {
     requires atlantafx.base;
     requires java.sql;
     requires tools.jackson.databind;
+    requires java.desktop;
 
     opens com.betterstudentteam.thebetterstudentapp to javafx.fxml;
     exports com.betterstudentteam.thebetterstudentapp;

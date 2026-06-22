@@ -1,4 +1,4 @@
-package com.betterstudentteam.thebetterstudentapp.frontend.course;
+package com.betterstudentteam.thebetterstudentapp.frontend.components;
 
 import atlantafx.base.controls.Card;
 import atlantafx.base.controls.Tile;
@@ -7,9 +7,9 @@ import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
 import javafx.scene.layout.VBox;
 
-public class CourseOverview extends VBox {
+public class CourseList extends VBox {
 
-    public CourseOverview() {
+    public CourseList() {
         this.setMaxWidth((Display.SCREEN_BOUNDS.getWidth() / 3.0) * 2.0);
         this.setMaxHeight((Display.SCREEN_BOUNDS.getWidth() / 10.0) * 9.0);
         this.setPrefWidth((Display.SCREEN_BOUNDS.getWidth() / 3.0) * 2.0);
@@ -17,16 +17,6 @@ public class CourseOverview extends VBox {
         this.setSpacing(15);
         this.getStyleClass().add("course_overview_panel");
 
-        this.setOnMouseClicked(event -> addCourse(new Course("...")));
-    }
-
-    public void addCourse(Course course) {
-        Card card = new Card();
-        card.getStyleClass().add(Styles.INTERACTIVE);
-        card.setHeader(new Tile(
-                course.getName(),
-                "MWF"
-        ));
-        this.getChildren().add(card);
+        this.setOnMouseClicked(event -> this.getChildren().add(new CourseCard()));
     }
 }
