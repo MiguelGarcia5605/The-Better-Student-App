@@ -1,1 +1,20 @@
-{"course 0":{"assignmentArrayList":[],"name":"fdsadfasdfas"},"course 1":{"assignmentArrayList":[],"name":"asdf"}}
+{
+  "course 0": {
+    "assignmentArrayList": [],
+    "meetingDays": "MWF",
+    "name": "EAFSDF",
+    "professorName": "asdf"
+  },
+  "course 1": {
+    "assignmentArrayList": [],
+    "meetingDays": "MWF",
+    "name": "ASDF",
+    "professorName": "asdf"
+  },
+  "course 2": {
+    "assignmentArrayList": [],
+    "meetingDays": "MWF",
+    "name": "ASDF",
+    "professorName": "asdf"
+  }
+}

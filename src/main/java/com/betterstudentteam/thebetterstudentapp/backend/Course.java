@@ -5,10 +5,28 @@ import java.util.ArrayList;
 public class Course {
 
     private String mName;
+    private String mProfessorName;
+    private String mMeetingDays;
     private ArrayList<Assignment> mAssignmentArrayList = new ArrayList<Assignment>();
 
     public Course(String name) {
         setName(name);
+    }
+
+    public String getProfessorName() {
+        return mProfessorName;
+    }
+
+    public void setProfessorName(String professorName) {
+        mProfessorName = professorName;
+    }
+
+    public String getMeetingDays() {
+        return mMeetingDays;
+    }
+
+    public void setMeetingDays(String meetingDays) {
+        mMeetingDays = meetingDays;
     }
 
     public void addAssignment(Assignment assignment) {

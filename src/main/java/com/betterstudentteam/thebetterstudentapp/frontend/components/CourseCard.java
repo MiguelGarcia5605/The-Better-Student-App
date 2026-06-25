@@ -3,6 +3,7 @@ package com.betterstudentteam.thebetterstudentapp.frontend.components;
 import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
 import atlantafx.base.theme.Tweaks;
+import com.betterstudentteam.thebetterstudentapp.backend.Course;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.MenuButton;
@@ -54,5 +55,12 @@ public class CourseCard extends Card {
 
         this.setHeader(mCapsule);
         this.setSubHeader(mProfessorTextField);
+    }
+
+    public Course getCourse() {
+        Course course = new Course(mClassTextField.getText());
+        course.setProfessorName(mProfessorTextField.getText());
+        course.setMeetingDays(mMenuButton.getText());
+        return course;
     }
 }

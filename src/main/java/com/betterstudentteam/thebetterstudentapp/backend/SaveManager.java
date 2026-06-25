@@ -1,5 +1,6 @@
 package com.betterstudentteam.thebetterstudentapp.backend;
 
+import com.betterstudentteam.thebetterstudentapp.frontend.components.CourseList;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class SaveManager {
 
     private static final String SAVE_FILE_PATH = "save.json";
-    private static final File mSaveFile = new File("save.json") ;
+    private static final File mSaveFile = new File("save.json");
     private static final ObjectMapper mObjectMapper = new ObjectMapper();
 
     public SaveManager() {
@@ -24,8 +25,10 @@ public class SaveManager {
         }
     }
 
-    static public void writeSave(ArrayList<Course> courseArrayList) {
+     public void writeSave() {
         JsonNode rootNode = mObjectMapper.createObjectNode();
+        
+        ArrayList<Course> courseArrayList = CourseList.getCourseArrayList();
 
         if (!courseArrayList.isEmpty()) {
             for (int i = 0; courseArrayList.size() > i; i++) {

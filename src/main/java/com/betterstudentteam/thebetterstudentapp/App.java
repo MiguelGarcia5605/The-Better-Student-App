@@ -2,6 +2,7 @@ package com.betterstudentteam.thebetterstudentapp;
 
 import atlantafx.base.theme.PrimerDark;
 import com.betterstudentteam.thebetterstudentapp.backend.Display;
+import com.betterstudentteam.thebetterstudentapp.backend.SaveManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.scene.SceneManager;
 import com.betterstudentteam.thebetterstudentapp.frontend.scene.Scenes;
 import javafx.application.Application;
@@ -11,6 +12,7 @@ public class App extends Application {
 
     private static Stage mStage;
     private static SceneManager mSceneManager;
+    private static SaveManager mSaveManager;
 
     private static final String APP_NAME = "The Better Student App";
 
@@ -18,9 +20,12 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         mStage = stage;
         mSceneManager = new SceneManager();
+        mSaveManager = new SaveManager();
 
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         mStage.setTitle(APP_NAME);
+
+        mStage.setOnCloseRequest(event -> mSaveManager.writeSave());
 
         //rootNode.getStyleClass().add("pane_background");
 
@@ -39,5 +44,9 @@ public class App extends Application {
 
     public static SceneManager getSceneManager() {
         return mSceneManager;
+    }
+
+    public static SaveManager getSaveManager() {
+        return mSaveManager;
     }
 }
