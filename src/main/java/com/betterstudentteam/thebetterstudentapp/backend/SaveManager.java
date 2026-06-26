@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SaveManager {
 
     private static final String SAVE_FILE_PATH = "save.json";
-    private static final File mSaveFile = new File("save.json");
+    private static final File mSaveFile = new File(SAVE_FILE_PATH);
     private static final ObjectMapper mObjectMapper = new ObjectMapper();
 
     public SaveManager() {

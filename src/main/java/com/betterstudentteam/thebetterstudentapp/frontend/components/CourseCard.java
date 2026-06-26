@@ -3,13 +3,16 @@ package com.betterstudentteam.thebetterstudentapp.frontend.components;
 import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
 import atlantafx.base.theme.Tweaks;
+import com.betterstudentteam.thebetterstudentapp.App;
 import com.betterstudentteam.thebetterstudentapp.backend.Course;
+import com.betterstudentteam.thebetterstudentapp.frontend.scene.Scenes;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -32,6 +35,7 @@ public class CourseCard extends Card {
         mClassTextField.getStyleClass().add("course_card_text_field");
         mClassTextField.setPromptText("Class...");
         mClassTextField.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 30));
+        mClassTextField.setMaxWidth(400);
         mClassTextField.setTextFormatter(new TextFormatter<>((change) -> {
             change.setText(change.getText().toUpperCase());
             return change;
@@ -40,12 +44,23 @@ public class CourseCard extends Card {
         mProfessorTextField.getStyleClass().add("course_card_text_field");
         mProfessorTextField.setPromptText("Professor...");
         mProfessorTextField.setFont(Font.font("Verdana", FontWeight.EXTRA_LIGHT, 15));
+        mProfessorTextField.setMaxWidth(400);
 
-        mCapsule.setCenter(mClassTextField);
+        mCapsule.setLeft(mClassTextField);
         mCapsule.setRight(mMenuButton);
 
         mMenuButton.setText("MWF");
-        mMenuButton.getItems().addAll(new MenuItem("MWF"), new MenuItem("TuTH"), new MenuItem("MW"));
+
+        // Menu Items
+        MenuItem MWF = new MenuItem("MWF");
+        MenuItem TuTH = new MenuItem("TuTH");
+        MenuItem MW = new MenuItem("MW");
+
+        MWF.setOnAction(event-> mMenuButton.setText(MWF.getText()));
+        TuTH.setOnAction(event-> mMenuButton.setText(TuTH.getText()));
+        MW.setOnAction(event-> mMenuButton.setText(MW.getText()));
+
+        mMenuButton.getItems().addAll(MWF, TuTH, MW);
         mMenuButton.setPopupSide(Side.LEFT);
         mMenuButton.setPadding(new Insets(0));
         mMenuButton.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
